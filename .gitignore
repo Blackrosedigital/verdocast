@@ -25,6 +25,8 @@ next-env.d.ts
 .env.development.local
 .env.test.local
 .env.production.local
+# editor "save-old" backups of env files leak secrets too
+.env*.old
 
 # misc
 .DS_Store
