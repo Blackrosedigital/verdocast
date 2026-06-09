@@ -1,0 +1,83 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import { joinLeague } from "@/lib/invitations";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+
+export function JoinForm({
+  code,
+  email,
+  sig,
+  leagueName,
+}: {
+  code: string;
+  email: string;
+  sig: string;
+  leagueName: string;
+}) {
+  const [displayName, setDisplayName] = useState("");
+  const [joined, setJoined] = useState(false);
+  const [pending, startTransition] = useTransition();
+  const { toast } = useToast();
+
+  function submit() {
+    if (!displayName.trim()) {
+      toast({ title: "Enter your name to join." });
+      return;
+    }
+    startTransition(async () => {
+      const res = await joinLeague({ code, email, sig, displayName: displayName.trim() });
+      if (!res.ok) {
+        toast({
+          title: "Couldn’t join",
+          description: res.error,
+          variant: "destructive",
+        });
+        return;
+      }
+      setJoined(true);
+    });
+  }
+
+  if (joined) {
+    return (
+      <div className="text-center">
+        <h2 className="font-display text-4xl tracking-wide text-foreground">
+          You&rsquo;re in! 🎉
+        </h2>
+        <p className="mt-3 text-muted-foreground">
+          You&rsquo;ve joined <span className="text-foreground">{leagueName}</span>.
+          Predictions open when the tournament schedule goes live — we&rsquo;ll
+          email you.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Email</label>
+        <Input value={email} readOnly className="font-mono text-sm" />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="displayName" className="text-sm font-medium text-foreground">
+          Display name
+        </label>
+        <Input
+          id="displayName"
+          autoFocus
+          value={displayName}
+          placeholder="Alex Morgan"
+          onChange={(e) => setDisplayName(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && submit()}
+        />
+      </div>
+      <Button className="w-full" onClick={submit} disabled={pending}>
+        {pending ? "Joining…" : `Join ${leagueName}`}
+      </Button>
+    </div>
+  );
+}

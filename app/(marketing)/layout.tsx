@@ -28,6 +28,12 @@ function SiteHeader() {
           >
             Pricing
           </Link>
+          <Link
+            href="/login"
+            className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Sign in
+          </Link>
           <Button asChild size="sm">
             <Link href="/pricing">Get started</Link>
           </Button>

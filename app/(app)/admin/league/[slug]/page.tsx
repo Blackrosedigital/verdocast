@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { JoinLink } from "@/components/admin/join-link";
+import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 
@@ -60,6 +62,13 @@ export default async function AdminLeaguePage({
         </p>
         <div className="mt-4">
           <JoinLink joinUrl={joinUrl} />
+        </div>
+        <div className="mt-4">
+          <Button asChild>
+            <Link href={`/admin/league/${slug}/invite`}>
+              Invite your team by email
+            </Link>
+          </Button>
         </div>
       </div>
 
