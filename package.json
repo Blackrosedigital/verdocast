@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "gen-types": "supabase gen types typescript --local > types/db.ts",
-    "db:push": "node --env-file=.env.local scripts/db-push.mjs"
+    "db:push": "node --env-file=.env.local scripts/db-push.mjs",
+    "seed": "node --env-file=.env.local --import tsx scripts/seed.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.16",
@@ -40,6 +41,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/coverage-v8": "^4.1.8",
     "autoprefixer": "^10.5.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.19",
@@ -48,6 +50,7 @@
     "postcss": "^8.5.15",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.3",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"
