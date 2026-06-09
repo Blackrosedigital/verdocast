@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Verdocast design tokens.
+ *
+ * Layer 1 — brand palette (CLAUDE.md "Brand tokens"). Single source of truth.
+ * Layer 2 — shadcn/ui semantic tokens, mapped onto the brand palette so the
+ *           whole component library re-themes when a brand token changes.
+ *
+ * Tailwind references these via `var(--token)` (see tailwind.config.ts), so the
+ * values here are full CSS colours (hex), not HSL channel triplets.
+ */
+:root {
+  /* ---- Layer 1: brand palette ---- */
+  --bg: #0a0b0d;
+  --surface: #14161a;
+  --surface-2: #1c1f24;
+  --border: #2a2d33;
+  --text: #f5f3ee;
+  --text-muted: #8a8d93;
+  --accent: #e6ff3d; /* lime — primary CTA */
+  --accent-2: #ff3b6a; /* hot pink — live / urgent */
+  --gold: #d4a045; /* knockout / final */
+
+  /* ---- Layer 2: shadcn/ui semantic tokens ---- */
+  --background: var(--bg);
+  --foreground: var(--text);
+
+  --card: var(--surface);
+  --card-foreground: var(--text);
+
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+
+  --primary: var(--accent);
+  --primary-foreground: #0a0b0d; /* dark text on lime */
+
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text);
+
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-muted);
+
+  --destructive: var(--accent-2);
+  --destructive-foreground: #0a0b0d;
+
+  --input: var(--border);
+  --ring: var(--accent);
+
+  --radius: 0.625rem;
+}
+
+/*
+ * The app is dark-first; `.dark` mirrors `:root` so shadcn's dark-mode toggle
+ * (and prefers-color-scheme) resolves to the same brand palette.
+ */
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}

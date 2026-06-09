@@ -1,0 +1,5 @@
+# pnpm v11 reads build-script approvals from here, not package.json.
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+  esbuild: true
