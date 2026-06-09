@@ -24,6 +24,13 @@
   --accent-2: #ff3b6a; /* hot pink — live / urgent */
   --gold: #d4a045; /* knockout / final */
 
+  /* extended surface/text scale (carried from reference/wc2026.html) */
+  --surface-3: #262a30;
+  --border-strong: #3a3d44;
+  --text-faint: #5a5d63;
+  --green: #4ade80;
+  --amber: #fbbf24;
+
   /* ---- Layer 2: shadcn/ui semantic tokens ---- */
   --background: var(--bg);
   --foreground: var(--text);
@@ -66,5 +73,10 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* subtle editorial glow, mirroring the reference HTML */
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(230, 255, 61, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(255, 59, 106, 0.03) 0%, transparent 40%);
+    background-attachment: fixed;
   }
 }

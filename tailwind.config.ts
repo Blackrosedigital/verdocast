@@ -24,8 +24,17 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         border: "var(--border)",
+        "border-strong": "var(--border-strong)",
         input: "var(--input)",
         ring: "var(--ring)",
+        // editorial surface scale + faint text (ergonomic aliases of the tokens)
+        surface: {
+          DEFAULT: "var(--surface)",
+          2: "var(--surface-2)",
+          3: "var(--surface-3)",
+        },
+        faint: "var(--text-faint)",
+        gold: "var(--gold)",
         card: {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
