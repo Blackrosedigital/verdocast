@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { joinLeague } from "@/lib/invitations";
 import { Button } from "@/components/ui/button";
@@ -49,9 +50,11 @@ export function JoinForm({
         </h2>
         <p className="mt-3 text-muted-foreground">
           You&rsquo;ve joined <span className="text-foreground">{leagueName}</span>.
-          Predictions open when the tournament schedule goes live — we&rsquo;ll
-          email you.
+          Make your predictions before each match kicks off.
         </p>
+        <Button asChild className="mt-6">
+          <Link href={`/league/${code}/predict`}>Make your predictions</Link>
+        </Button>
       </div>
     );
   }
