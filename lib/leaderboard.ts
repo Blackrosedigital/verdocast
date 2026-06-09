@@ -37,6 +37,7 @@ async function resolveAccess(code: string) {
     .from("leagues")
     .select("id, name, organization_id")
     .eq("join_code", code)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) return null;
 

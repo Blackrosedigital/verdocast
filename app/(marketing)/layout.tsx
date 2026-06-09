@@ -23,6 +23,12 @@ function SiteHeader() {
             How it works
           </Link>
           <Link
+            href="/demo"
+            className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Demo
+          </Link>
+          <Link
             href="/pricing"
             className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >

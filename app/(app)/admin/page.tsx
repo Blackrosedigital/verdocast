@@ -23,6 +23,7 @@ export default async function AdminIndexPage() {
       .from("leagues")
       .select("slug")
       .eq("organization_id", org.id)
+      .is("deleted_at", null)
       .order("created_at", { ascending: true })
       .limit(1)
       .maybeSingle();

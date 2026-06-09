@@ -20,6 +20,7 @@ export default async function LeaderboardPage({
     .from("leagues")
     .select("name")
     .eq("join_code", code)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 

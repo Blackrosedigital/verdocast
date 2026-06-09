@@ -120,25 +120,15 @@ export async function resolveOnboarding(
 
   if (session.payment_status !== "paid") return { status: "unpaid" };
 
-  const email = session.customer_details?.email ?? session.customer_email ?? null;
-  const customerId =
-    typeof session.customer === "string"
-      ? session.customer
-      : (session.customer?.id ?? null);
-  if (!email || !customerId) return { status: "error" };
+  const provisioned = await ensureOrgAndLicense(session);
+  if (!provisioned) return { status: "error" };
+  const { org, license, email } = provisioned;
 
-  const admin = createAdminClient();
-
-  const org = await getOrCreateOrg(admin, { customerId, email });
-  if (!org) return { status: "error" };
-
-  const license = await getOrCreateLicense(admin, { session, orgId: org.id });
-  if (!license) return { status: "error" };
-
-  const { data: leagues } = await admin
+  const { data: leagues } = await createAdminClient()
     .from("leagues")
     .select("*")
     .eq("organization_id", org.id)
+    .is("deleted_at", null)
     .order("created_at", { ascending: true })
     .limit(1);
 
@@ -149,4 +139,31 @@ export async function resolveOnboarding(
     email,
     existingLeague: leagues?.[0] ?? null,
   };
+}
+
+/**
+ * Idempotently provision the org + license for a paid Checkout Session. Shared
+ * by onboarding (the page) and the Stripe webhook (source of truth for license
+ * state). Returns null if the session lacks a customer/email.
+ */
+export async function ensureOrgAndLicense(
+  session: Stripe.Checkout.Session,
+): Promise<{
+  org: Tables<"organizations">;
+  license: Tables<"licenses">;
+  email: string;
+} | null> {
+  const email = session.customer_details?.email ?? session.customer_email ?? null;
+  const customerId =
+    typeof session.customer === "string"
+      ? session.customer
+      : (session.customer?.id ?? null);
+  if (!email || !customerId) return null;
+
+  const admin = createAdminClient();
+  const org = await getOrCreateOrg(admin, { customerId, email });
+  if (!org) return null;
+  const license = await getOrCreateLicense(admin, { session, orgId: org.id });
+  if (!license) return null;
+  return { org, license, email };
 }

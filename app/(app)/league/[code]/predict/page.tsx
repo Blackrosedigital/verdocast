@@ -22,6 +22,7 @@ export default async function PredictPage({
     .from("leagues")
     .select("id, name")
     .eq("join_code", code)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 

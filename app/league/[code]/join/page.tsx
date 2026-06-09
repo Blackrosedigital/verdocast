@@ -24,6 +24,7 @@ export default async function JoinPage({
     .from("leagues")
     .select("name, join_code")
     .eq("join_code", code)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 

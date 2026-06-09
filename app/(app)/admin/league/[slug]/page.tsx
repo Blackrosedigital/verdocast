@@ -34,6 +34,7 @@ export default async function AdminLeaguePage({
     .from("leagues")
     .select("*")
     .eq("slug", slug)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 
@@ -86,9 +87,17 @@ export default async function AdminLeaguePage({
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
         {org?.name ?? "Your organization"} · Admin
       </p>
-      <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
-        {league.name}
-      </h1>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
+          {league.name}
+        </h1>
+        <Link
+          href="/admin/billing"
+          className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
+        >
+          Manage billing
+        </Link>
+      </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Stat

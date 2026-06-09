@@ -19,6 +19,7 @@ export default async function InvitePage({
     .from("leagues")
     .select("*")
     .eq("slug", slug)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 

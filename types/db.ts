@@ -106,6 +106,7 @@ export type Database = {
           brand_logo_url: string | null;
           scoring_rules: Json;
           is_demo: boolean;
+          deleted_at: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -121,6 +122,7 @@ export type Database = {
           brand_logo_url?: string | null;
           scoring_rules?: Json;
           is_demo?: boolean;
+          deleted_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -136,6 +138,7 @@ export type Database = {
           brand_logo_url?: string | null;
           scoring_rules?: Json;
           is_demo?: boolean;
+          deleted_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
