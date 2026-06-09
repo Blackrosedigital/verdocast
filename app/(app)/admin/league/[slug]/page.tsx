@@ -9,11 +9,18 @@ export const dynamic = "force-dynamic";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-/**
- * Admin dashboard for a league (placeholder). PR 9 builds the real dashboard
- * (member count, completion %, top scorers). For now it confirms the league is
- * live and surfaces the shareable join link.
- */
+function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-surface p-5">
+      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-2 font-display text-4xl text-foreground">{value}</p>
+      {sub && <p className="mt-1 text-xs text-muted-foreground">{sub}</p>}
+    </div>
+  );
+}
+
 export default async function AdminLeaguePage({
   params,
 }: {
@@ -30,7 +37,6 @@ export default async function AdminLeaguePage({
     .maybeSingle();
   if (!league) notFound();
 
-  // v1 authorization: only the org owner may view (RLS hardening in PR 9).
   const { data: org } = await admin
     .from("organizations")
     .select("name, owner_email")
@@ -40,10 +46,43 @@ export default async function AdminLeaguePage({
     redirect("/");
   }
 
+  const [licenseRes, membersRes, groupCountRes, topRes] = await Promise.all([
+    admin.from("licenses").select("max_members").eq("id", league.license_id).maybeSingle(),
+    admin.from("members").select("id").eq("league_id", league.id),
+    admin
+      .from("matches")
+      .select("*", { count: "exact", head: true })
+      .eq("stage", "group"),
+    admin
+      .from("leaderboard")
+      .select("member_id, display_name, total_points, exact_scores")
+      .eq("league_id", league.id)
+      .order("total_points", { ascending: false })
+      .order("exact_scores", { ascending: false })
+      .limit(5),
+  ]);
+
+  const cap = licenseRes.data?.max_members ?? 0;
+  const memberIds = (membersRes.data ?? []).map((m) => m.id);
+  const memberCount = memberIds.length;
+  const groupCount = groupCountRes.count ?? 0;
+
+  let predictionsMade = 0;
+  if (memberIds.length > 0) {
+    const { count } = await admin
+      .from("predictions")
+      .select("*", { count: "exact", head: true })
+      .in("member_id", memberIds);
+    predictionsMade = count ?? 0;
+  }
+  const possible = memberCount * groupCount;
+  const completion = possible > 0 ? Math.round((predictionsMade / possible) * 100) : 0;
+
   const joinUrl = `${SITE_URL}/league/${league.join_code}/join`;
+  const top = topRes.data ?? [];
 
   return (
-    <main className="mx-auto max-w-2xl px-6 py-16">
+    <main className="mx-auto max-w-3xl px-6 py-12">
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
         {org?.name ?? "Your organization"} · Admin
       </p>
@@ -51,14 +90,65 @@ export default async function AdminLeaguePage({
         {league.name}
       </h1>
 
-      <div className="mt-8 rounded-2xl border border-border bg-surface p-6">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+        <Stat
+          label="Members"
+          value={`${memberCount} / ${cap}`}
+          sub={`${Math.max(0, cap - memberCount)} seats left`}
+        />
+        <Stat
+          label="Predictions"
+          value={`${completion}%`}
+          sub={`${predictionsMade} of ${possible} made`}
+        />
+        <Stat label="Group matches" value={String(groupCount)} sub="to predict" />
+      </div>
+
+      {/* Top 5 */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-2xl tracking-wide text-foreground">
+            Top scorers
+          </h2>
+          <Link
+            href={`/league/${league.join_code}/leaderboard`}
+            className="text-sm text-primary underline"
+          >
+            Full leaderboard
+          </Link>
+        </div>
+        {top.length === 0 ? (
+          <p className="mt-3 text-sm text-muted-foreground">
+            No members yet — invite your team to get started.
+          </p>
+        ) : (
+          <ol className="mt-4 space-y-2">
+            {top.map((r, i) => (
+              <li
+                key={r.member_id}
+                className="flex items-center gap-3 text-sm"
+              >
+                <span className="w-5 font-mono text-muted-foreground">
+                  {i + 1}
+                </span>
+                <span className="flex-1 text-foreground">{r.display_name}</span>
+                <span className="font-mono text-primary">
+                  {r.total_points ?? 0} pts
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+
+      {/* Invite */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
         <h2 className="font-display text-2xl tracking-wide text-foreground">
           Invite your team
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Share this link or the join code{" "}
           <span className="font-mono text-foreground">{league.join_code}</span>.
-          Anyone who opens it can join and start predicting.
         </p>
         <div className="mt-4">
           <JoinLink joinUrl={joinUrl} />
@@ -71,11 +161,6 @@ export default async function AdminLeaguePage({
           </Button>
         </div>
       </div>
-
-      <p className="mt-8 text-sm text-muted-foreground">
-        Email invitations, the predictions grid, and the live leaderboard land in
-        the next updates.
-      </p>
     </main>
   );
 }
