@@ -66,6 +66,8 @@ export async function startCheckout(
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [lineItem],
+      // Always create a Customer so onboarding can key the org off its id.
+      customer_creation: "always",
       // Stripe substitutes {CHECKOUT_SESSION_ID} into the success URL.
       success_url: `${siteUrl()}/onboarding/{CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl()}/pricing?canceled=1`,

@@ -1,11 +1,14 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+import { OnboardingWizard } from "@/components/onboarding/onboarding-wizard";
+import { resolveOnboarding } from "@/lib/onboarding";
+
+// Hits Stripe + the DB per request; never cache.
+export const dynamic = "force-dynamic";
 
 /**
- * Placeholder post-checkout landing (PR 4). Stripe's success_url redirects here
- * with the Checkout Session id. PR 5 turns this into the real onboarding wizard
- * (create org + license, name the first league). For now it just confirms the
- * session id so the payment round-trip is verifiable end to end.
+ * Post-checkout onboarding. Verifies the Checkout Session, idempotently
+ * provisions the org + license, then renders the 2-step wizard. If the buyer
+ * already finished (a league exists), jump straight to its admin page.
  */
 export default async function OnboardingPage({
   params,
@@ -13,24 +16,30 @@ export default async function OnboardingPage({
   params: Promise<{ session_id: string }>;
 }) {
   const { session_id } = await params;
+  const result = await resolveOnboarding(session_id);
+
+  if (result.status === "unpaid" || result.status === "error") {
+    redirect("/pricing");
+  }
+
+  if (result.existingLeague) {
+    redirect(`/admin/league/${result.existingLeague.slug}`);
+  }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-xl flex-col items-center justify-center gap-6 px-6 text-center">
-      <span className="rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-        Payment received
-      </span>
-      <h1 className="font-display text-5xl tracking-wide text-foreground">
-        You&rsquo;re in.
-      </h1>
-      <p className="text-muted-foreground">
-        Onboarding is coming next. Your Stripe Checkout session:
-      </p>
-      <code className="block w-full break-all rounded-lg border border-border bg-surface-2 px-4 py-3 font-mono text-sm text-foreground">
-        {session_id}
-      </code>
-      <Button asChild variant="secondary">
-        <Link href="/">Back to home</Link>
-      </Button>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-6 py-16">
+      <div className="text-center">
+        <span className="rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          Payment received
+        </span>
+        <h1 className="mt-5 font-display text-5xl tracking-wide text-foreground">
+          Let&rsquo;s set up your league
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Two quick steps and you&rsquo;ll have a shareable link.
+        </p>
+      </div>
+      <OnboardingWizard sessionId={session_id} defaultOrgName={result.org.name} />
     </main>
   );
 }
