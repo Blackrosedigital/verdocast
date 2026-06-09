@@ -143,6 +143,14 @@ returns trigger as $$
 declare
   v_kickoff timestamptz;
 begin
+  -- Allow post-kickoff updates that don't change the predicted scoreline
+  -- (e.g. the scoring engine writing points_earned). See migration 0002.
+  if tg_op = 'UPDATE'
+     and new.home_score = old.home_score
+     and new.away_score = old.away_score then
+    new.updated_at := now();
+    return new;
+  end if;
   select kickoff_utc into v_kickoff from matches where id = new.match_id;
   if v_kickoff is null then
     raise exception 'Match % not found', new.match_id;
