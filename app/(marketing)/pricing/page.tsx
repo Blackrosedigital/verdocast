@@ -8,7 +8,7 @@ import { ENTERPRISE, PRICING_TIERS } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Pricing - Verdocast Office World Cup 2026 Predictor",
   description:
-    "One-time pricing for your office World Cup 2026 prediction league. Starter £199, Pro £499, Team £999, or Enterprise for 5,000+ employees.",
+    "Free for the group stage. Run a World Cup 2026 prediction league for your office or group - no card needed. Knockout pricing announced later.",
   alternates: { canonical: "/pricing" },
 };
 

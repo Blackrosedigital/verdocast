@@ -48,10 +48,10 @@ function StructuredData() {
       brand: { "@type": "Brand", name: "Verdocast" },
       offers: PRICING_TIERS.map((tier) => ({
         "@type": "Offer",
-        name: tier.name,
-        price: (tier.price_pence / 100).toFixed(2),
+        name: `${tier.name} (free for the group stage)`,
+        price: "0.00",
         priceCurrency: "GBP",
-        url: `${SITE_URL}/pricing`,
+        url: `${SITE_URL}/start`,
         availability: "https://schema.org/InStock",
       })),
     },
