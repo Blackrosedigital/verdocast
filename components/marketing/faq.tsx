@@ -23,11 +23,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "What if I have more than 1,000 people?",
-    a: "Our Enterprise tier covers 5,000+ employees with custom scoring and league branding. Get in touch and we’ll set you up.",
-  },
-  {
-    q: "Can I get a refund?",
-    a: "Yes. If it’s not right for your team, contact us before the tournament starts for a full refund.",
+    a: "Get in touch and we’ll set you up — larger groups are welcome.",
   },
 ];
 

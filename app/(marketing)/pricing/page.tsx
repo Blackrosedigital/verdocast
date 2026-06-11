@@ -47,9 +47,7 @@ export default function PricingPage() {
               <h2 className="font-display text-3xl tracking-wide text-foreground">
                 {ENTERPRISE.name}
               </h2>
-              <span className="font-mono text-sm text-gold">
-                {ENTERPRISE.price_label}
-              </span>
+              <span className="font-mono text-sm text-gold">Free for now</span>
             </div>
             <p className="mt-1 text-sm text-muted-foreground">
               {ENTERPRISE.tagline}
@@ -76,8 +74,8 @@ export default function PricingPage() {
       </div>
 
       <p className="mt-10 text-center text-sm text-muted-foreground">
-        Prices in GBP and exclude VAT. Includes the full World Cup 2026 group
-        stage. Knockout predictions coming in a later update.
+        Free for the whole World Cup 2026 group stage — no card needed. Knockout
+        pricing announced later.
       </p>
     </div>
   );
