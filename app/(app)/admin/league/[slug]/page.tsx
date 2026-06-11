@@ -133,7 +133,7 @@ export default async function AdminLeaguePage({
         </div>
         {top.length === 0 ? (
           <p className="mt-3 text-sm text-muted-foreground">
-            No members yet — invite your team to get started.
+            No members yet - invite your team to get started.
           </p>
         ) : (
           <ol className="mt-4 space-y-2">

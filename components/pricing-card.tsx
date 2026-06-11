@@ -33,11 +33,13 @@ export function PricingCard({
       </h3>
       <p className="mt-1 text-sm text-muted-foreground">{tier.tagline}</p>
 
-      <div className="mt-6 flex items-baseline gap-1">
+      <div className="mt-6 flex items-baseline gap-2">
         <span className="font-display text-5xl text-foreground">
-          {formatGBP(tier.price_pence)}
+          {ctaHref ? "Free" : formatGBP(tier.price_pence)}
         </span>
-        <span className="text-sm text-muted-foreground">one-time</span>
+        <span className="text-sm text-muted-foreground">
+          {ctaHref ? "group stage" : "one-time"}
+        </span>
       </div>
       <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         Up to {tier.max_members.toLocaleString("en-GB")} members

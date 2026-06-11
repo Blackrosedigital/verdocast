@@ -19,7 +19,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Do employees need to create an account?",
-    a: "No passwords. Members join with a magic link sent to their email — one click and they’re predicting.",
+    a: "No passwords. Members join with a magic link sent to their email - one click and they’re predicting.",
   },
   {
     q: "What if I have more than 1,000 people?",

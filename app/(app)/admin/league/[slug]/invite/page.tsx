@@ -57,7 +57,7 @@ export default async function InvitePage({
         Invite your team
       </h1>
       <p className="mt-2 text-muted-foreground">
-        Paste employee emails — one per line, or a comma/CSV paste. Each person
+        Paste employee emails - one per line, or a comma/CSV paste. Each person
         gets a secure one-click join link.
       </p>
 

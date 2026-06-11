@@ -168,7 +168,7 @@ function MemberDrawer({
                 <span className="font-mono text-muted-foreground">
                   {r.predicted
                     ? `${r.predicted.home}–${r.predicted.away}`
-                    : "—"}
+                    : "-"}
                 </span>
                 <span className="flex-1 truncate text-left text-foreground">
                   {r.awayTeam}

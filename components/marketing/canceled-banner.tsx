@@ -11,7 +11,7 @@ function Banner() {
       role="status"
       className="mb-8 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted-foreground"
     >
-      Checkout canceled — no charge was made. Pick a plan whenever you’re ready.
+      Checkout canceled - no charge was made. Pick a plan whenever you’re ready.
     </div>
   );
 }

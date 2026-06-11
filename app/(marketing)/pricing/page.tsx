@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ENTERPRISE, PRICING_TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing — Verdocast Office World Cup 2026 Predictor",
+  title: "Pricing - Verdocast Office World Cup 2026 Predictor",
   description:
     "One-time pricing for your office World Cup 2026 prediction league. Starter £199, Pro £499, Team £999, or Enterprise for 5,000+ employees.",
   alternates: { canonical: "/pricing" },
@@ -24,7 +24,7 @@ export default function PricingPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           The whole group stage is free for every company and group. The tiers
-          below are what we&rsquo;ll offer for the knockout rounds — no card
+          below are what we&rsquo;ll offer for the knockout rounds - no card
           needed today.
         </p>
       </div>

@@ -25,7 +25,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Verdocast — Run your office World Cup 2026 predictor",
+  title: "Verdocast - Run your office World Cup 2026 predictor",
   description:
     "Forecast every match. Settle every debate. Verdocast lets companies run World Cup 2026 prediction leagues for their employees.",
   metadataBase: new URL(

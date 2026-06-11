@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-  title: "Sign in — Verdocast",
+  title: "Sign in - Verdocast",
   description: "Sign in to your Verdocast admin or league.",
 };
 

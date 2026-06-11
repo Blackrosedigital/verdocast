@@ -3,12 +3,12 @@ import Link from "next/link";
 import { Faq, FAQ_ITEMS } from "@/components/marketing/faq";
 import { Button } from "@/components/ui/button";
 import { GROUP_COLOR_LIST, TOURNAMENT } from "@/lib/brand";
-import { formatGBP, PRICING_TIERS } from "@/lib/pricing";
+import { PRICING_TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Verdocast — Run your office World Cup 2026 predictor in 5 minutes",
+  title: "Verdocast - Run your office World Cup 2026 predictor in 5 minutes",
   description:
-    "Buy a license, share a link, and let your employees predict every World Cup 2026 match. Automatic scoring and a live leaderboard. Set up in five minutes.",
+    "Free for the group stage: share a link and let your employees predict every World Cup 2026 match. Automatic scoring and a live leaderboard. Set up in five minutes.",
   alternates: { canonical: "/" },
 };
 
@@ -21,7 +21,7 @@ const STEPS = [
   },
   {
     title: "Share link",
-    body: "Name your league and share the join link. Employees join with a magic link — no passwords.",
+    body: "Name your league and share the join link. Employees join with a magic link - no passwords.",
   },
   {
     title: "Watch leaderboard",
@@ -89,7 +89,7 @@ export default function LandingPage() {
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-muted-foreground">
           Verdocast turns the tournament into an office-wide competition. Buy
-          once, share a link, and watch the banter — and the leaderboard — take
+          once, share a link, and watch the banter - and the leaderboard - take
           over.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -140,11 +140,11 @@ export default function LandingPage() {
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-col items-center gap-2 text-center">
           <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">
-            One-time pricing, no surprises
+            Free for the group stage
           </h2>
           <p className="max-w-xl text-muted-foreground">
-            Pay once for the whole tournament. Pick the size that fits your
-            company.
+            Every company and group plays free through the group stage. Pick the
+            size that fits you.
           </p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -156,9 +156,7 @@ export default function LandingPage() {
               <h3 className="font-display text-2xl tracking-wide text-foreground">
                 {tier.name}
               </h3>
-              <p className="mt-3 font-display text-4xl text-foreground">
-                {formatGBP(tier.price_pence)}
-              </p>
+              <p className="mt-3 font-display text-4xl text-primary">Free</p>
               <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 Up to {tier.max_members.toLocaleString("en-GB")} members
               </p>
@@ -167,7 +165,7 @@ export default function LandingPage() {
         </div>
         <div className="mt-8 text-center">
           <Button asChild size="lg">
-            <Link href="/pricing">View full pricing</Link>
+            <Link href="/start">Start free</Link>
           </Button>
         </div>
       </section>

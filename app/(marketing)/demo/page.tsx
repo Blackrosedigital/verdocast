@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getMatchesByStage } from "@/lib/tournament";
 
 export const metadata: Metadata = {
-  title: "Try the predictor — Verdocast demo",
+  title: "Try the predictor - Verdocast demo",
   description:
     "Predict four real World Cup 2026 group matches and see how Verdocast scoring works. No signup.",
   alternates: { canonical: "/demo" },

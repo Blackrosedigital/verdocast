@@ -28,7 +28,7 @@ export function InvitationEmail({ leagueName, joinUrl }: InvitationEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>You&rsquo;re invited to {leagueName} — predict every World Cup 2026 match</Preview>
+      <Preview>You&rsquo;re invited to {leagueName} - predict every World Cup 2026 match</Preview>
       <Body style={{ backgroundColor: bg, fontFamily: "Arial, sans-serif", margin: 0, padding: "24px" }}>
         <Container
           style={{
@@ -48,7 +48,7 @@ export function InvitationEmail({ leagueName, joinUrl }: InvitationEmailProps) {
           </Heading>
           <Text style={{ color: text, fontSize: "15px", lineHeight: "1.6", margin: "0 0 24px" }}>
             Predict the score of every group-stage match, climb the leaderboard,
-            and settle the office debate once and for all. No password needed —
+            and settle the office debate once and for all. No password needed -
             just tap below to join.
           </Text>
           <Section style={{ textAlign: "center", margin: "0 0 24px" }}>

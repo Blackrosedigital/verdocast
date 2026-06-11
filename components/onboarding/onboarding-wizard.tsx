@@ -68,7 +68,7 @@ export function OnboardingWizard({
         <CardDescription>
           {step === 1
             ? "This is how your league will be branded for employees."
-            : "Pick something fun — you can run more leagues later."}
+            : "Pick something fun - you can run more leagues later."}
         </CardDescription>
       </CardHeader>
 

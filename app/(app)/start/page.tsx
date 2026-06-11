@@ -7,7 +7,7 @@ import { getUser } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Start free — Verdocast",
+  title: "Start free - Verdocast",
   description:
     "Create a free World Cup 2026 prediction league for your office or group. Free for the group stage.",
 };
