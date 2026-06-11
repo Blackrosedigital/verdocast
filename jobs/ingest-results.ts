@@ -6,9 +6,10 @@ import type { Enums } from "@/types/db";
  * Polls API-Football for World Cup 2026 fixtures and updates our matches:
  * status, scores, and (on first transition to finished) prediction scoring.
  *
- * Matching: pin by external_id once known; otherwise match by UTC date + team
- * names (normalised, with a small alias map). Team-name matching should be
- * re-verified against live API data before the tournament.
+ * Matching is resilient: pin by external_id once known; otherwise match by the
+ * unordered team pair (+ date when available). Scores are oriented to OUR
+ * home/away (the API's home/away can differ from our seed) so a swapped fixture
+ * never records reversed scores.
  */
 
 const API_BASE = "https://v3.football.api-sports.io";
@@ -22,6 +23,7 @@ export interface IngestSummary {
   updated: number;
   finished: number;
   scored: number;
+  unmatched: number;
 }
 
 function mapStatus(short: string): Enums<"match_status"> {
@@ -32,16 +34,17 @@ function mapStatus(short: string): Enums<"match_status"> {
   return "scheduled";
 }
 
-// API team name -> our canonical team name, for known spelling differences.
+// API team name -> our canonical (normalised) team name, for spelling diffs.
 const NAME_ALIASES: Record<string, string> = {
   usa: "unitedstates",
   turkey: "turkiye",
-  "ivorycoast": "ivorycoast",
-  "cotedivoire": "ivorycoast",
-  "republicofireland": "ireland",
-  "korearepublic": "southkorea",
-  "drcongo": "drcongo",
-  "congodr": "drcongo",
+  cotedivoire: "ivorycoast",
+  republicofireland: "ireland",
+  korearepublic: "southkorea",
+  congodr: "drcongo",
+  czechrepublic: "czechia",
+  bosniaherzegovina: "bosniaandherzegovina",
+  capeverdeislands: "capeverde",
 };
 
 function normalizeTeam(name: string): string {
@@ -53,14 +56,23 @@ function normalizeTeam(name: string): string {
   return NAME_ALIASES[base] ?? base;
 }
 
+function pairKey(a: string, b: string): string {
+  return [a, b].sort().join("~");
+}
+
 interface ApiFixture {
   fixture: { id: number; date: string; status: { short: string } };
   teams: { home: { name: string }; away: { name: string } };
   goals: { home: number | null; away: number | null };
 }
 
+interface Target {
+  id: string;
+  homeNorm: string | null;
+}
+
 export async function ingestResults(): Promise<IngestSummary> {
-  const empty = { fixtures: 0, updated: 0, finished: 0, scored: 0 };
+  const empty = { fixtures: 0, updated: 0, finished: 0, scored: 0, unmatched: 0 };
   const key = process.env.API_FOOTBALL_KEY;
   if (!key) return { ok: false, reason: "API_FOOTBALL_KEY not set", ...empty };
 
@@ -81,36 +93,52 @@ export async function ingestResults(): Promise<IngestSummary> {
     .from("matches")
     .select("id, kickoff_utc, home_team, away_team, external_id");
 
-  const byExternalId = new Map<string, string>();
-  const byDateTeams = new Map<string, string>();
+  const byExternalId = new Map<string, Target>();
+  const byDatePair = new Map<string, Target>();
+  const byPair = new Map<string, Target>();
   for (const m of matches ?? []) {
-    if (m.external_id) byExternalId.set(m.external_id, m.id);
-    if (m.home_team && m.away_team) {
-      const date = m.kickoff_utc.slice(0, 10);
-      const key = `${date}|${normalizeTeam(m.home_team)}|${normalizeTeam(m.away_team)}`;
-      byDateTeams.set(key, m.id);
+    const homeNorm = m.home_team ? normalizeTeam(m.home_team) : null;
+    const awayNorm = m.away_team ? normalizeTeam(m.away_team) : null;
+    const target: Target = { id: m.id, homeNorm };
+    if (m.external_id) byExternalId.set(m.external_id, target);
+    if (homeNorm && awayNorm) {
+      const pair = pairKey(homeNorm, awayNorm);
+      byDatePair.set(`${m.kickoff_utc.slice(0, 10)}|${pair}`, target);
+      byPair.set(pair, target);
     }
   }
 
   let updated = 0;
   let finished = 0;
   let scored = 0;
+  let unmatched = 0;
 
   for (const fx of fixtures) {
     const extId = String(fx.fixture.id);
-    let matchId = byExternalId.get(extId);
-    if (!matchId) {
-      const date = fx.fixture.date.slice(0, 10);
-      const key = `${date}|${normalizeTeam(fx.teams.home.name)}|${normalizeTeam(fx.teams.away.name)}`;
-      matchId = byDateTeams.get(key);
+    const apiHomeNorm = normalizeTeam(fx.teams.home.name);
+    const apiAwayNorm = normalizeTeam(fx.teams.away.name);
+    const pair = pairKey(apiHomeNorm, apiAwayNorm);
+
+    const target =
+      byExternalId.get(extId) ??
+      byDatePair.get(`${fx.fixture.date.slice(0, 10)}|${pair}`) ??
+      byPair.get(pair);
+    if (!target) {
+      unmatched += 1;
+      continue;
     }
-    if (!matchId) continue;
+
+    // Orient API goals to our home/away.
+    const swapped =
+      target.homeNorm !== null && target.homeNorm !== apiHomeNorm;
+    const homeScore = swapped ? fx.goals.away : fx.goals.home;
+    const awayScore = swapped ? fx.goals.home : fx.goals.away;
 
     const outcome = await applyMatchResult(admin, {
-      matchId,
+      matchId: target.id,
       status: mapStatus(fx.fixture.status.short),
-      homeScore: fx.goals.home,
-      awayScore: fx.goals.away,
+      homeScore,
+      awayScore,
       externalId: extId,
     });
     if (outcome.updated) updated += 1;
@@ -120,5 +148,5 @@ export async function ingestResults(): Promise<IngestSummary> {
     }
   }
 
-  return { ok: true, fixtures: fixtures.length, updated, finished, scored };
+  return { ok: true, fixtures: fixtures.length, updated, finished, scored, unmatched };
 }
