@@ -94,12 +94,15 @@ export default function LandingPage() {
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
-            <Link href="/pricing">See plans &amp; pricing</Link>
+            <Link href="/start">Start free</Link>
           </Button>
           <Button asChild size="lg" variant="secondary">
-            <Link href="#how-it-works">How it works</Link>
+            <Link href="/demo">Try the demo</Link>
           </Button>
         </div>
+        <p className="mt-3 font-mono text-xs uppercase tracking-widest text-primary">
+          Free for the group stage · no card needed
+        </p>
       </section>
 
       {/* How it works */}
@@ -184,11 +187,11 @@ export default function LandingPage() {
             Ready before the first whistle?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Set up your league today and have it waiting in everyone&rsquo;s
+            Set up your free league today and have it waiting in everyone&rsquo;s
             inbox before {TOURNAMENT.startLabel}.
           </p>
           <Button asChild size="lg" className="mt-8">
-            <Link href="/pricing">Get started</Link>
+            <Link href="/start">Start free</Link>
           </Button>
         </div>
       </section>

@@ -41,7 +41,7 @@ function SiteHeader() {
             Sign in
           </Link>
           <Button asChild size="sm">
-            <Link href="/pricing">Get started</Link>
+            <Link href="/start">Start free</Link>
           </Button>
         </nav>
       </div>

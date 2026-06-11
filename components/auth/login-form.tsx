@@ -6,7 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
-export function LoginForm() {
+export function LoginForm({
+  next = "/admin",
+  allowSignup = false,
+  cta = "Email me a sign-in link",
+}: {
+  next?: string;
+  allowSignup?: boolean;
+  cta?: string;
+} = {}) {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -22,9 +30,9 @@ export function LoginForm() {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=/admin`,
-          // Only existing admins/members can sign in here; no new accounts.
-          shouldCreateUser: false,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
+          // Signup flows allow new accounts; re-auth (login) does not.
+          shouldCreateUser: allowSignup,
         },
       });
       if (error) {
@@ -71,7 +79,7 @@ export function LoginForm() {
         />
       </div>
       <Button className="w-full" onClick={submit} disabled={pending}>
-        {pending ? "Sending…" : "Email me a sign-in link"}
+        {pending ? "Sending…" : cta}
       </Button>
       <p className="text-center text-xs text-muted-foreground">
         No passwords. We&rsquo;ll email you a magic link.

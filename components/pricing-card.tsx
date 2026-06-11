@@ -1,9 +1,18 @@
+import Link from "next/link";
 import { Check } from "lucide-react";
 import { CheckoutButton } from "@/components/marketing/checkout-button";
+import { Button } from "@/components/ui/button";
 import { formatGBP, type PricingTier } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 
-export function PricingCard({ tier }: { tier: PricingTier }) {
+export function PricingCard({
+  tier,
+  ctaHref,
+}: {
+  tier: PricingTier;
+  /** When set, the card links here (free launch) instead of Stripe checkout. */
+  ctaHref?: string;
+}) {
   return (
     <div
       className={cn(
@@ -44,12 +53,22 @@ export function PricingCard({ tier }: { tier: PricingTier }) {
       </ul>
 
       <div className="mt-8">
-        <CheckoutButton
-          tierId={tier.id}
-          variant={tier.highlighted ? "default" : "secondary"}
-        >
-          Buy {tier.name}
-        </CheckoutButton>
+        {ctaHref ? (
+          <Button
+            asChild
+            variant={tier.highlighted ? "default" : "secondary"}
+            className="w-full"
+          >
+            <Link href={ctaHref}>Start free</Link>
+          </Button>
+        ) : (
+          <CheckoutButton
+            tierId={tier.id}
+            variant={tier.highlighted ? "default" : "secondary"}
+          >
+            Buy {tier.name}
+          </CheckoutButton>
+        )}
       </div>
     </div>
   );

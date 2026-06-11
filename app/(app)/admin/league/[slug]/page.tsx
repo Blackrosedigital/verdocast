@@ -9,6 +9,9 @@ export const dynamic = "force-dynamic";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+// Group stage is free; billing (knockout tiers) surfaces from R32 onward.
+const BILLING_VISIBLE_FROM = new Date("2026-06-28T00:00:00Z");
+
 function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="rounded-xl border border-border bg-surface p-5">
@@ -91,13 +94,15 @@ export default async function AdminLeaguePage({
         <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
           {league.name}
         </h1>
-        <Link
-          href="/admin/billing"
-          className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
-        >
-          Manage billing
-        </Link>
-      </div>
+        {new Date() >= BILLING_VISIBLE_FROM && (
+          <Link
+            href="/admin/billing"
+            className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
+          >
+            Manage billing
+          </Link>
+        )}
+      </div>{/* billing link hidden during the free group stage */}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Stat

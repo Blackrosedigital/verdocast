@@ -7,7 +7,15 @@ export const metadata: Metadata = {
   description: "Sign in to your Verdocast admin or league.",
 };
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const { next } = await searchParams;
+  // Only allow internal redirect targets.
+  const safeNext = next && next.startsWith("/") ? next : "/admin";
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-6 py-16">
       <Link href="/" className="leading-none">
@@ -15,7 +23,7 @@ export default function LoginPage() {
           Verdo<span className="text-primary">cast</span>
         </span>
       </Link>
-      <LoginForm />
+      <LoginForm next={safeNext} />
     </main>
   );
 }

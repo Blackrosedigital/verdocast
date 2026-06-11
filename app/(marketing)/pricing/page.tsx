@@ -16,12 +16,16 @@ export default function PricingPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
       <div className="mx-auto max-w-2xl text-center">
-        <h1 className="font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-          Simple, one-time pricing
+        <span className="inline-block rounded-full border border-primary bg-surface px-3 py-1 font-mono text-xs uppercase tracking-widest text-primary">
+          🎉 Free for the group stage
+        </span>
+        <h1 className="mt-5 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+          Start free. Pay later, if you love it.
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Pay once for the whole tournament. No subscriptions, no per-seat fees.
-          Pick the cap that fits your company.
+          The whole group stage is free for every company and group. The tiers
+          below are what we&rsquo;ll offer for the knockout rounds — no card
+          needed today.
         </p>
       </div>
 
@@ -31,7 +35,7 @@ export default function PricingPage() {
 
       <div className="mt-4 grid gap-6 lg:grid-cols-3">
         {PRICING_TIERS.map((tier) => (
-          <PricingCard key={tier.id} tier={tier} />
+          <PricingCard key={tier.id} tier={tier} ctaHref="/start" />
         ))}
       </div>
 
