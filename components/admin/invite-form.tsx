@@ -17,9 +17,9 @@ function parseEmails(raw: string): string[] {
 }
 
 const STATUS_LABEL: Record<InviteResult["status"], string> = {
-  sent: "Sent",
-  link_only: "Link ready (email not configured)",
-  failed: "Failed",
+  sent: "Emailed",
+  link_only: "Copy link to share",
+  failed: "Email failed — copy link",
   already_member: "Already a member",
 };
 
@@ -37,6 +37,29 @@ export function InviteForm({
 
   const parsed = useMemo(() => parseEmails(raw), [raw]);
 
+  const shareable = (results ?? []).filter(
+    (r) => r.joinUrl && (r.status === "failed" || r.status === "link_only"),
+  );
+
+  async function copyOne(url: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast({ title: "Link copied" });
+    } catch {
+      toast({ title: "Couldn’t copy", description: url });
+    }
+  }
+
+  async function copyAll() {
+    const text = shareable.map((r) => `${r.email}: ${r.joinUrl}`).join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({ title: `Copied ${shareable.length} link(s)` });
+    } catch {
+      toast({ title: "Couldn’t copy" });
+    }
+  }
+
   function submit() {
     if (parsed.length === 0) {
       toast({ title: "Add at least one email address." });
@@ -53,12 +76,13 @@ export function InviteForm({
         return;
       }
       setResults(res.data.results);
-      const sent = res.data.results.filter(
-        (r) => r.status === "sent" || r.status === "link_only",
+      const emailed = res.data.results.filter((r) => r.status === "sent").length;
+      const links = res.data.results.filter(
+        (r) => r.joinUrl && r.status !== "sent" && r.status !== "already_member",
       ).length;
       toast({
         title: `Processed ${res.data.results.length} invite(s)`,
-        description: `${sent} ready · ${res.data.seatsRemaining} seat(s) left`,
+        description: `${emailed} emailed · ${links} link(s) to copy · ${res.data.seatsRemaining} seat(s) left`,
       });
     });
   }
@@ -83,29 +107,35 @@ export function InviteForm({
         </p>
       </div>
 
-      <Button onClick={submit} disabled={pending}>
-        {pending ? "Sending…" : `Send ${parsed.length || ""} invitation${parsed.length === 1 ? "" : "s"}`}
-      </Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button onClick={submit} disabled={pending}>
+          {pending ? "Sending…" : `Send ${parsed.length || ""} invitation${parsed.length === 1 ? "" : "s"}`}
+        </Button>
+        {shareable.length > 0 && (
+          <Button variant="secondary" onClick={copyAll}>
+            Copy all {shareable.length} link{shareable.length === 1 ? "" : "s"}
+          </Button>
+        )}
+      </div>
 
       {results && (
         <ul className="divide-y divide-border rounded-lg border border-border bg-surface">
           {results.map((r) => (
             <li
               key={r.email}
-              className="flex flex-col gap-1 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between"
+              className="flex flex-col gap-2 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between"
             >
               <span className="font-mono text-foreground">{r.email}</span>
-              <span className="text-muted-foreground">
+              <span className="flex items-center gap-2 text-muted-foreground">
                 {STATUS_LABEL[r.status]}
-                {r.status === "link_only" && r.joinUrl && (
-                  <a
-                    href={r.joinUrl}
-                    className="ml-2 text-primary underline"
-                    target="_blank"
-                    rel="noreferrer"
+                {r.joinUrl && r.status !== "sent" && r.status !== "already_member" && (
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => copyOne(r.joinUrl!)}
                   >
-                    open link
-                  </a>
+                    Copy link
+                  </Button>
                 )}
               </span>
             </li>
