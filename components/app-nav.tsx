@@ -25,8 +25,7 @@ export function AppNav({ links }: { links: NavLink[] }) {
 
         <nav className="flex items-center gap-1 text-sm sm:gap-2">
           {links.map((l) => {
-            const active =
-              pathname === l.href || pathname.startsWith(`${l.href}/`);
+            const active = pathname === l.href;
             return (
               <Link
                 key={l.href}
