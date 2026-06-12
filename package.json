@@ -12,7 +12,8 @@
     "e2e": "playwright test",
     "gen-types": "supabase gen types typescript --local > types/db.ts",
     "db:push": "node --env-file=.env.local scripts/db-push.mjs",
-    "seed": "node --env-file=.env.local --import tsx scripts/seed.ts"
+    "seed": "node --env-file=.env.local --import tsx scripts/seed.ts",
+    "stats": "node --env-file=.env.local scripts/stats.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.16",
