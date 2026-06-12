@@ -129,7 +129,8 @@ export async function sendInvitations(
 const JoinSchema = z.object({
   code: z.string().min(1),
   email: z.string().email(),
-  sig: z.string().min(1),
+  // Optional: present for signed email invites, empty for general shared links.
+  sig: z.string().optional().default(""),
   displayName: z.string().trim().min(1, "Enter your name").max(80),
 });
 
@@ -154,7 +155,8 @@ export async function joinLeague(input: {
   const { code, sig, displayName } = parsed.data;
   const email = normalizeEmail(parsed.data.email);
 
-  if (!verifyJoin(code, email, sig)) {
+  // Signed email invites must verify; general (unsigned) links are code-gated.
+  if (sig && !verifyJoin(code, email, sig)) {
     return {
       ok: false,
       error: "This invite link is invalid or has been tampered with.",
@@ -167,6 +169,7 @@ export async function joinLeague(input: {
     .from("leagues")
     .select("*")
     .eq("join_code", code)
+    .is("deleted_at", null)
     .maybeSingle();
   if (!league) {
     return { ok: false, error: "League not found.", code: "not_found" };

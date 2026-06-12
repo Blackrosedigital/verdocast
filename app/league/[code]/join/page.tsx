@@ -6,8 +6,11 @@ import { normalizeEmail, verifyJoin } from "@/lib/sign-url";
 export const dynamic = "force-dynamic";
 
 /**
- * Signed invite landing. Validates the HMAC signature server-side; only renders
- * the join form when the email+signature are intact. The action re-verifies.
+ * Join landing. Two ways in:
+ *  - Signed email invite (?email=&sig=): email is verified + locked.
+ *  - General shared link (no sig): anyone with the league code self-joins by
+ *    entering their email.
+ * A signature that's PRESENT but wrong is treated as tampering (shown invalid).
  */
 export default async function JoinPage({
   params,
@@ -29,7 +32,9 @@ export default async function JoinPage({
   if (!league) notFound();
 
   const email = rawEmail ? normalizeEmail(rawEmail) : "";
-  const valid = Boolean(email && sig && verifyJoin(code, email, sig));
+  // A signed link must verify; a missing signature is fine (general join).
+  const signedValid = Boolean(email && sig && verifyJoin(code, email, sig));
+  const tampered = Boolean(sig) && !signedValid;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-6 py-16">
@@ -42,9 +47,7 @@ export default async function JoinPage({
         </h1>
       </div>
 
-      {valid ? (
-        <JoinForm code={code} email={email} sig={sig!} leagueName={league.name} />
-      ) : (
+      {tampered ? (
         <div className="max-w-sm rounded-xl border border-border bg-surface p-6 text-center">
           <h2 className="font-display text-2xl tracking-wide text-foreground">
             This invite link isn&rsquo;t valid
@@ -54,6 +57,14 @@ export default async function JoinPage({
             admin to resend your invitation.
           </p>
         </div>
+      ) : (
+        <JoinForm
+          code={code}
+          email={email}
+          sig={sig ?? ""}
+          emailLocked={signedValid}
+          leagueName={league.name}
+        />
       )}
     </main>
   );

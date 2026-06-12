@@ -9,27 +9,39 @@ import { useToast } from "@/hooks/use-toast";
 
 export function JoinForm({
   code,
-  email,
+  email: initialEmail,
   sig,
+  emailLocked,
   leagueName,
 }: {
   code: string;
   email: string;
   sig: string;
+  emailLocked: boolean;
   leagueName: string;
 }) {
+  const [email, setEmail] = useState(initialEmail);
   const [displayName, setDisplayName] = useState("");
   const [joined, setJoined] = useState(false);
   const [pending, startTransition] = useTransition();
   const { toast } = useToast();
 
   function submit() {
+    if (!emailLocked && !email.trim()) {
+      toast({ title: "Enter your email to join." });
+      return;
+    }
     if (!displayName.trim()) {
       toast({ title: "Enter your name to join." });
       return;
     }
     startTransition(async () => {
-      const res = await joinLeague({ code, email, sig, displayName: displayName.trim() });
+      const res = await joinLeague({
+        code,
+        email: email.trim(),
+        sig,
+        displayName: displayName.trim(),
+      });
       if (!res.ok) {
         toast({
           title: "Couldn’t join",
@@ -62,8 +74,19 @@ export function JoinForm({
   return (
     <div className="w-full max-w-sm space-y-4">
       <div className="space-y-2">
-        <label className="text-sm font-medium text-foreground">Email</label>
-        <Input value={email} readOnly className="font-mono text-sm" />
+        <label htmlFor="email" className="text-sm font-medium text-foreground">
+          Email
+        </label>
+        <Input
+          id="email"
+          type="email"
+          value={email}
+          readOnly={emailLocked}
+          autoFocus={!emailLocked}
+          placeholder="you@company.com"
+          onChange={(e) => setEmail(e.target.value)}
+          className="font-mono text-sm"
+        />
       </div>
       <div className="space-y-2">
         <label htmlFor="displayName" className="text-sm font-medium text-foreground">
@@ -71,7 +94,7 @@ export function JoinForm({
         </label>
         <Input
           id="displayName"
-          autoFocus
+          autoFocus={emailLocked}
           value={displayName}
           placeholder="Alex Morgan"
           onChange={(e) => setDisplayName(e.target.value)}
