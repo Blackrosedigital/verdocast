@@ -81,9 +81,16 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        sans: ["var(--font-body)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        // "Twemoji Country Flags" (loaded by the flag polyfill) renders flag
+        // emoji on platforms like Windows; it only affects flag glyphs.
+        display: ["var(--font-display)", "Twemoji Country Flags", "sans-serif"],
+        sans: [
+          "var(--font-body)",
+          "Twemoji Country Flags",
+          "system-ui",
+          "sans-serif",
+        ],
+        mono: ["var(--font-mono)", "Twemoji Country Flags", "monospace"],
       },
     },
   },

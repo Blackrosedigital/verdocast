@@ -24,6 +24,7 @@
     "@supabase/supabase-js": "^2.107.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "country-flag-emoji-polyfill": "^0.1.8",
     "lucide-react": "^1.17.0",
     "next": "^15.5.19",
     "posthog-js": "^1.383.1",

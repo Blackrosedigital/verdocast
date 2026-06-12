@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Bebas_Neue, JetBrains_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/analytics/cookie-consent";
+import { FlagPolyfill } from "@/components/flag-polyfill";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
@@ -66,6 +67,7 @@ export default function RootLayout({
         {children}
         <Toaster />
         <CookieConsent />
+        <FlagPolyfill />
       </body>
     </html>
   );
