@@ -68,7 +68,10 @@ function SiteFooter() {
           <Link href="/#faq" className="hover:text-foreground">
             FAQ
           </Link>
-          <a href="mailto:hello@verdocast.com" className="hover:text-foreground">
+          <Link href="/privacy" className="hover:text-foreground">
+            Privacy
+          </Link>
+          <a href="mailto:support@verdocast.com" className="hover:text-foreground">
             Contact
           </a>
         </div>
