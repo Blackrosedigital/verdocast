@@ -42,10 +42,9 @@ export default async function StartPage() {
             Start your league
           </h1>
           <p className="mt-2 mb-6 text-sm text-muted-foreground">
-            Enter your email and we&rsquo;ll send a magic link. No password, no
-            payment.
+            Sign in to create your league. No password, no payment.
           </p>
-          <LoginForm next="/start" allowSignup cta="Send my magic link" />
+          <LoginForm next="/start" allowSignup />
         </div>
       )}
     </main>
