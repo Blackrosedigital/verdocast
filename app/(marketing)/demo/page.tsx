@@ -5,7 +5,7 @@ import {
   type DemoMatch,
 } from "@/components/marketing/demo-predictor";
 import { Button } from "@/components/ui/button";
-import { getMatchesByStage } from "@/lib/tournament";
+import { getMatchesByStage, getTeam } from "@/lib/tournament";
 
 export const metadata: Metadata = {
   title: "Try the predictor - Verdocast demo",
@@ -21,6 +21,9 @@ export default function DemoPage() {
       matchCode: m.match_code,
       homeTeam: m.home_team ?? "TBD",
       awayTeam: m.away_team ?? "TBD",
+      homeFlag: getTeam(m.home_team)?.flag ?? "",
+      awayFlag: getTeam(m.away_team)?.flag ?? "",
+      groupLetter: m.group_letter,
       venueCity: m.venue_city,
     }));
 

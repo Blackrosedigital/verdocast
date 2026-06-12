@@ -3,12 +3,16 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { GroupPill } from "@/components/group-pill";
 import { DEFAULT_RULES, scorePrediction } from "@/lib/scoring";
 
 export interface DemoMatch {
   matchCode: string;
   homeTeam: string;
   awayTeam: string;
+  homeFlag: string;
+  awayFlag: string;
+  groupLetter: string | null;
   venueCity: string;
 }
 
@@ -55,9 +59,11 @@ export function DemoPredictor({ matches }: { matches: DemoMatch[] }) {
           const pts = revealed ? pointsFor(i, m.matchCode) : null;
           const actual = SAMPLE_RESULTS[i]!;
           return (
-            <div key={m.matchCode} className="flex items-center gap-3">
-              <span className="flex-1 truncate text-right text-sm text-foreground">
-                {m.homeTeam}
+            <div key={m.matchCode} className="flex items-center gap-2 sm:gap-3">
+              <GroupPill letter={m.groupLetter} />
+              <span className="flex min-w-0 flex-1 items-center justify-end gap-1.5 text-sm text-foreground">
+                <span className="truncate text-right">{m.homeTeam}</span>
+                <span className="text-lg leading-none">{m.homeFlag}</span>
               </span>
               <Input
                 type="number"
@@ -66,10 +72,10 @@ export function DemoPredictor({ matches }: { matches: DemoMatch[] }) {
                 aria-label={`${m.homeTeam} score`}
                 value={scores[m.matchCode]?.h ?? ""}
                 onChange={(e) => setScore(m.matchCode, "h", e.target.value)}
-                className="h-10 w-12 text-center font-mono"
+                className="h-10 w-11 shrink-0 text-center font-mono sm:w-12"
                 disabled={revealed}
               />
-              <span className="text-muted-foreground">–</span>
+              <span className="text-muted-foreground">-</span>
               <Input
                 type="number"
                 min={0}
@@ -77,16 +83,15 @@ export function DemoPredictor({ matches }: { matches: DemoMatch[] }) {
                 aria-label={`${m.awayTeam} score`}
                 value={scores[m.matchCode]?.a ?? ""}
                 onChange={(e) => setScore(m.matchCode, "a", e.target.value)}
-                className="h-10 w-12 text-center font-mono"
+                className="h-10 w-11 shrink-0 text-center font-mono sm:w-12"
                 disabled={revealed}
               />
-              <span className="flex-1 truncate text-left text-sm text-foreground">
-                {m.awayTeam}
+              <span className="flex min-w-0 flex-1 items-center gap-1.5 text-sm text-foreground">
+                <span className="text-lg leading-none">{m.awayFlag}</span>
+                <span className="truncate text-left">{m.awayTeam}</span>
               </span>
-              <span className="w-28 text-right font-mono text-xs text-muted-foreground">
-                {revealed
-                  ? `result ${actual.h}–${actual.a} · ${pts ?? 0}pt`
-                  : ""}
+              <span className="hidden w-28 text-right font-mono text-xs text-muted-foreground sm:block">
+                {revealed ? `result ${actual.h}-${actual.a} · ${pts ?? 0}pt` : ""}
               </span>
             </div>
           );

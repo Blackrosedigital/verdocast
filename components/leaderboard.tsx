@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { GroupPill } from "@/components/group-pill";
 
 const LIVE_INTERVAL = 30_000;
 const IDLE_INTERVAL = 300_000;
@@ -160,23 +161,31 @@ function MemberDrawer({
             {rows.map((r) => (
               <li
                 key={r.matchId}
-                className="flex items-center gap-3 py-2 text-sm"
+                className="flex items-center gap-2 py-2 text-sm"
               >
-                <span className="flex-1 truncate text-right text-foreground">
-                  {r.homeTeam}
+                <GroupPill
+                  letter={r.groupLetter}
+                  className="size-5 text-[10px] sm:size-5 sm:text-[10px]"
+                />
+                <span className="flex min-w-0 flex-1 items-center justify-end gap-1.5">
+                  <span className="truncate text-right text-foreground">
+                    {r.homeTeam}
+                  </span>
+                  <span className="leading-none">{r.homeFlag}</span>
                 </span>
-                <span className="font-mono text-muted-foreground">
+                <span className="w-12 text-center font-mono text-foreground">
                   {r.predicted
-                    ? `${r.predicted.home}–${r.predicted.away}`
+                    ? `${r.predicted.home}-${r.predicted.away}`
                     : "-"}
                 </span>
-                <span className="flex-1 truncate text-left text-foreground">
-                  {r.awayTeam}
+                <span className="flex min-w-0 flex-1 items-center gap-1.5">
+                  <span className="leading-none">{r.awayFlag}</span>
+                  <span className="truncate text-left text-foreground">
+                    {r.awayTeam}
+                  </span>
                 </span>
-                <span className="w-24 text-right font-mono text-xs text-muted-foreground">
-                  {r.actual
-                    ? `(${r.actual.home}–${r.actual.away})`
-                    : ""}
+                <span className="w-20 shrink-0 text-right font-mono text-xs text-muted-foreground">
+                  {r.actual ? `(${r.actual.home}-${r.actual.away})` : ""}
                   {r.pointsEarned != null ? ` ${r.pointsEarned}pt` : ""}
                 </span>
               </li>

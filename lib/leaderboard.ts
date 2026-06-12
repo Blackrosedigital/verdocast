@@ -2,6 +2,7 @@
 
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
+import { getTeam } from "@/lib/tournament";
 
 export type ActionResult<T> =
   | { ok: true; data: T }
@@ -22,6 +23,9 @@ export interface MemberPredictionRow {
   kickoffUtc: string;
   homeTeam: string;
   awayTeam: string;
+  homeFlag: string;
+  awayFlag: string;
+  groupLetter: string | null;
   status: string;
   actual: { home: number; away: number } | null;
   predicted: { home: number; away: number } | null;
@@ -120,7 +124,7 @@ export async function getMemberPredictions(
     admin
       .from("matches")
       .select(
-        "id, match_code, kickoff_utc, home_team, away_team, status, home_score, away_score",
+        "id, match_code, kickoff_utc, home_team, away_team, group_letter, status, home_score, away_score",
       )
       .eq("stage", "group")
       .order("kickoff_utc", { ascending: true }),
@@ -142,6 +146,9 @@ export async function getMemberPredictions(
       kickoffUtc: m.kickoff_utc,
       homeTeam: m.home_team ?? "TBD",
       awayTeam: m.away_team ?? "TBD",
+      homeFlag: getTeam(m.home_team)?.flag ?? "",
+      awayFlag: getTeam(m.away_team)?.flag ?? "",
+      groupLetter: m.group_letter,
       status: m.status,
       actual:
         m.home_score != null && m.away_score != null

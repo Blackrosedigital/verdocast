@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { submitPrediction } from "@/lib/predictions";
 import { useToast } from "@/hooks/use-toast";
-import { GROUP_COLORS } from "@/lib/brand";
+import { GroupPill } from "@/components/group-pill";
 import type { PredictMatch } from "@/components/predictions-grid";
 
 type SaveState = "idle" | "saving" | "saved" | "error";
@@ -14,19 +14,6 @@ const DOT: Record<SaveState, { color: string; label: string } | null> = {
   saved: { color: "var(--green)", label: "Saved" },
   error: { color: "var(--accent-2)", label: "Retry" },
 };
-
-function GroupPill({ letter }: { letter: string | null }) {
-  const color = (letter && GROUP_COLORS[letter]) || "var(--border-strong)";
-  return (
-    <span
-      title={letter ? `Group ${letter}` : undefined}
-      className="flex size-6 shrink-0 items-center justify-center rounded font-display text-xs text-black sm:size-7 sm:text-sm"
-      style={{ backgroundColor: color }}
-    >
-      {letter ?? "?"}
-    </span>
-  );
-}
 
 function ScoreInput({
   value,
