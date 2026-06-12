@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8a8d93"/>
+    </marker>
+    <radialGradient id="glow" cx="20%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#e6ff3d" stop-opacity="0.05"/>
+      <stop offset="55%" stop-color="#e6ff3d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#0a0b0d"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+
+  <!-- title -->
+  <text x="64" y="58" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#f5f3ee">Verdo<tspan fill="#e6ff3d">cast</tspan></text>
+  <text x="64" y="86" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#8a8d93" letter-spacing="2">SYSTEM ARCHITECTURE</text>
+
+  <!-- users -->
+  
+    <rect x="600" y="120" width="400" height="70" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="600" y="134" width="6" height="42" rx="3" fill="#e6ff3d"/>
+    <text x="620" y="153" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">Users — Web browser</text>
+    <text x="620" y="180" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Visitors · League admins · Members</text>
+
+  <!-- vercel / next.js container -->
+  <rect x="64" y="236" width="1472" height="372" rx="18" fill="#1c1f24" stroke="#2a2d33" stroke-width="1.5"/>
+  <text x="88" y="270" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#f5f3ee">Vercel  ·  Next.js 15 (App Router) + Cron</text>
+
+  
+    <rect x="88" y="300" width="332" height="286" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="88" y="314" width="6" height="258" rx="3" fill="#e6ff3d"/>
+    <text x="108" y="333" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">Marketing (static)</text>
+    <text x="108" y="360" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/  landing</text><text x="108" y="384" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/pricing</text><text x="108" y="408" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/demo</text><text x="108" y="432" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/privacy · /terms</text><text x="108" y="456" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">OG + Twitter cards</text>
+  
+    <rect x="444" y="300" width="332" height="286" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="444" y="314" width="6" height="258" rx="3" fill="#2563EB"/>
+    <text x="464" y="333" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">App pages (RSC)</text>
+    <text x="464" y="360" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/start  (free signup)</text><text x="464" y="384" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/onboarding/[session]</text><text x="464" y="408" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/admin · /admin/league/[slug]</text><text x="464" y="432" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/league/[code]/predict</text><text x="464" y="456" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/league/[code]/leaderboard</text><text x="464" y="480" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/login</text>
+  
+    <rect x="800" y="300" width="350" height="286" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="800" y="314" width="6" height="258" rx="3" fill="#7C3AED"/>
+    <text x="820" y="333" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">Server Actions</text>
+    <text x="820" y="360" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">createFreeLeague</text><text x="820" y="384" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">startCheckout · completeOnboarding</text><text x="820" y="408" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">sendInvitations · joinLeague</text><text x="820" y="432" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">submitPrediction</text><text x="820" y="456" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">getLeaderboard</text><text x="820" y="480" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">(Zod-validated, service role)</text>
+  
+    <rect x="1174" y="300" width="338" height="286" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="1174" y="314" width="6" height="258" rx="3" fill="#ff3b6a"/>
+    <text x="1194" y="333" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">Route handlers + Cron</text>
+    <text x="1194" y="360" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/api/stripe/webhook</text><text x="1194" y="384" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/api/ingest/results</text><text x="1194" y="408" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">/auth/callback · /auth/signout</text><text x="1194" y="432" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93"></text><text x="1194" y="456" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Vercel Cron  */5  -&gt;</text><text x="1194" y="480" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">ingest-results job</text>
+
+  <!-- supabase -->
+  
+    <rect x="64" y="668" width="760" height="256" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="64" y="682" width="6" height="228" rx="3" fill="#059669"/>
+    <text x="84" y="701" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">Supabase</text>
+    <text x="84" y="728" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Postgres — organizations, licenses, leagues,</text><text x="84" y="752" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">members, matches, predictions (+ leaderboard view)</text><text x="84" y="776" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Row-Level Security (email-based) · triggers</text><text x="84" y="800" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93"></text><text x="84" y="824" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Auth — magic link · email OTP · Google OAuth</text><text x="84" y="848" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Custom SMTP -&gt; Resend</text>
+
+  <!-- external services -->
+  
+    <rect x="856" y="668" width="680" height="256" rx="14" fill="#14161a" stroke="#2a2d33" stroke-width="1.5"/>
+    <rect x="856" y="682" width="6" height="228" rx="3" fill="#d4a045"/>
+    <text x="876" y="701" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#f5f3ee">External services</text>
+    <text x="876" y="728" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Stripe — Checkout + webhooks (payments)</text><text x="876" y="752" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Resend — transactional email + auth SMTP</text><text x="876" y="776" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">API-Football — live match results</text><text x="876" y="800" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">Google — OAuth sign-in</text><text x="876" y="824" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#8a8d93">PostHog — product analytics (consent-gated)</text>
+
+  <!-- arrows -->
+  <line x1="800" y1="192" x2="800" y2="234" stroke="#8a8d93" stroke-width="2" marker-end="url(#arrow)"/><rect x="770" y="199" width="60" height="22" rx="6" fill="#0a0b0d" stroke="#2a2d33" stroke-width="1"/>
+       <text x="800" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#e6ff3d">HTTPS</text>
+  <line x1="420" y1="608" x2="420" y2="666" stroke="#8a8d93" stroke-width="2" marker-end="url(#arrow)"/><rect x="332.8" y="623" width="174.4" height="22" rx="6" fill="#0a0b0d" stroke="#2a2d33" stroke-width="1"/>
+       <text x="420" y="638" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#e6ff3d">SQL · service role</text>
+  <line x1="1190" y1="608" x2="1190" y2="666" stroke="#8a8d93" stroke-width="2" marker-end="url(#arrow)"/><rect x="1142.4" y="623" width="95.2" height="22" rx="6" fill="#0a0b0d" stroke="#2a2d33" stroke-width="1"/>
+       <text x="1190" y="638" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#e6ff3d">API / SDK</text>
+
+  <!-- footer legend -->
+  <text x="64" y="958" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#8a8d93">Key flows:  Browser ⇄ Next.js (HTTPS)   ·   Actions/RSC ⇄ Postgres (RLS)   ·   Stripe webhook -> license state   ·   Cron */5 -> API-Football -> auto-scoring   ·   Auth (Google/OTP) -> Resend SMTP</text>
+  <text x="1536" y="86" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#8a8d93">verdocast.com</text>
+</svg>
