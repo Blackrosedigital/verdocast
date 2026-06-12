@@ -4,11 +4,14 @@ import {
   PredictionsGrid,
   type PredictMatch,
 } from "@/components/predictions-grid";
+import { ShareButton } from "@/components/share-button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 import { getTeam } from "@/lib/tournament";
 
 export const dynamic = "force-dynamic";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default async function PredictPage({
   params,
@@ -103,12 +106,24 @@ export default async function PredictPage({
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-        {league.name} · {member.display_name}
-      </p>
-      <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
-        Your predictions
-      </h1>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            {league.name} · {member.display_name}
+          </p>
+          <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
+            Your predictions
+          </h1>
+        </div>
+        <div className="mt-2">
+          <ShareButton
+            text={`Join my World Cup 2026 prediction league "${league.name}" on Verdocast 🏆 Free to play:`}
+            url={`${SITE_URL}/league/${code}/join`}
+            label="Invite"
+            variant="secondary"
+          />
+        </div>
+      </div>
       <p className="mt-2 text-muted-foreground">
         Predict the score of every group-stage match. Each one locks at kickoff.
       </p>

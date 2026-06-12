@@ -103,6 +103,12 @@ export default function LandingPage() {
         <p className="mt-3 font-mono text-xs uppercase tracking-widest text-primary">
           Free for the group stage · no card needed
         </p>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Not ready to set one up?{" "}
+          <Link href="/play" className="text-primary underline">
+            Join the Verdocast Global League →
+          </Link>
+        </p>
       </section>
 
       {/* How it works */}
