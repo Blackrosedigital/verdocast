@@ -98,17 +98,9 @@ export default async function PredictPage({
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
         {league.name} · {member.display_name}
       </p>
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
-          Your predictions
-        </h1>
-        <Link
-          href={`/league/${code}/leaderboard`}
-          className="shrink-0 text-sm text-primary underline"
-        >
-          Leaderboard
-        </Link>
-      </div>
+      <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
+        Your predictions
+      </h1>
       <p className="mt-2 text-muted-foreground">
         Predict the score of every group-stage match. Each one locks at kickoff.
       </p>

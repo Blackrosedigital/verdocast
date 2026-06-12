@@ -40,22 +40,12 @@ export default async function LeaderboardPage({
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {league.name}
-          </p>
-          <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
-            Leaderboard
-          </h1>
-        </div>
-        <Link
-          href={`/league/${code}/predict`}
-          className="shrink-0 text-sm text-primary underline"
-        >
-          Your predictions
-        </Link>
-      </div>
+      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        {league.name}
+      </p>
+      <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
+        Leaderboard
+      </h1>
 
       <div className="mt-8">
         <Leaderboard
