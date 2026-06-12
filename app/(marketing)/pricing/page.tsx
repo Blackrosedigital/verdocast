@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ENTERPRISE, PRICING_TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing - Verdocast Office World Cup 2026 Predictor",
+  title: "Pricing - Verdocast World Cup 2026 Predictor",
   description:
-    "Free for the group stage. Run a World Cup 2026 prediction league for your office or group - no card needed. Knockout pricing announced later.",
+    "Free for the group stage. Run a World Cup 2026 prediction league for your office, mates, or group - no card needed. Knockout pricing announced later.",
   alternates: { canonical: "/pricing" },
 };
 

@@ -11,7 +11,7 @@ function SiteHeader() {
             Verdo<span className="text-primary">cast</span>
           </span>
           <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            Office World Cup 2026
+            World Cup 2026 Predictor
           </span>
         </Link>
 

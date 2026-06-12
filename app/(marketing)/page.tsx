@@ -6,9 +6,9 @@ import { GROUP_COLOR_LIST, TOURNAMENT } from "@/lib/brand";
 import { PRICING_TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Verdocast - Run your office World Cup 2026 predictor in 5 minutes",
+  title: "Verdocast - Run a World Cup 2026 prediction league in 5 minutes",
   description:
-    "Free for the group stage: share a link and let your employees predict every World Cup 2026 match. Automatic scoring and a live leaderboard. Set up in five minutes.",
+    "Free for the group stage: share a link and let your office, mates, or group predict every World Cup 2026 match. Automatic scoring and a live leaderboard. Set up in five minutes.",
   alternates: { canonical: "/" },
 };
 
@@ -21,7 +21,7 @@ const STEPS = [
   },
   {
     title: "Share link",
-    body: "Name your league and share the join link. Employees join with a magic link - no passwords.",
+    body: "Name your league and share the join link. Everyone joins with a magic link - no passwords.",
   },
   {
     title: "Watch leaderboard",
@@ -37,14 +37,14 @@ function StructuredData() {
       name: "Verdocast",
       url: SITE_URL,
       description:
-        "B2B World Cup 2026 prediction leagues for companies and their employees.",
+        "World Cup 2026 prediction leagues for offices, friends, and groups.",
     },
     {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: "Verdocast Office World Cup 2026 Predictor",
+      name: "Verdocast World Cup 2026 Predictor",
       description:
-        "Run a World Cup 2026 prediction league for your employees. Automatic scoring and a live leaderboard.",
+        "Run a World Cup 2026 prediction league for your office, mates, or group. Automatic scoring and a live leaderboard.",
       brand: { "@type": "Brand", name: "Verdocast" },
       offers: PRICING_TIERS.map((tier) => ({
         "@type": "Offer",
@@ -85,12 +85,12 @@ export default function LandingPage() {
           {TOURNAMENT.name} · kicks off {TOURNAMENT.startLabel}
         </span>
         <h1 className="mx-auto mt-6 max-w-4xl font-display text-6xl leading-[0.95] tracking-wide text-foreground sm:text-8xl">
-          Run your office&rsquo;s World Cup 2026 predictor in 5 minutes
+          Run a World Cup 2026 prediction league in 5 minutes
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-muted-foreground">
-          Verdocast turns the tournament into an office-wide competition. Create
-          a free league, share a link, and watch the banter - and the
-          leaderboard - take over.
+          Verdocast turns the tournament into a competition for your office, your
+          mates, or the group chat. Create a free league, share a link, and watch
+          the banter - and the leaderboard - take over.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">

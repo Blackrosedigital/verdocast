@@ -38,7 +38,7 @@ export default function DemoPage() {
         </h1>
         <p className="mx-auto mt-3 max-w-md text-muted-foreground">
           Predict four real World Cup 2026 group matches, then see how you&rsquo;d
-          score. This is exactly what your employees get.
+          score. This is exactly what your players get.
         </p>
       </div>
 
@@ -48,7 +48,7 @@ export default function DemoPage() {
 
       <div className="mt-10 text-center">
         <p className="mb-4 text-muted-foreground">
-          Like it? Set your whole office up in five minutes.
+          Like it? Set your whole group up in five minutes.
         </p>
         <Button asChild size="lg">
           <Link href="/pricing">See pricing</Link>

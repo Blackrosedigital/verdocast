@@ -6,8 +6,8 @@ export interface FaqItem {
 /** Shared so the rendered FAQ and the FAQPage JSON-LD never drift apart. */
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    q: "How does it work for my employees?",
-    a: "Create a free league, name it, and share the join link. Employees predict the score of every group-stage match. When matches finish, points are scored automatically and the live leaderboard updates.",
+    q: "How does it work?",
+    a: "Create a free league, name it, and share the join link. Everyone predicts the score of every group-stage match. When matches finish, points are scored automatically and the live leaderboard updates.",
   },
   {
     q: "How are predictions scored?",
@@ -18,7 +18,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: "The FIFA World Cup 2026 runs from 11 June to 19 July 2026. Predictions for each match lock at kickoff.",
   },
   {
-    q: "Do employees need to create an account?",
+    q: "Does everyone need to create an account?",
     a: "No passwords. Members join with a magic link sent to their email - one click and they’re predicting.",
   },
   {
