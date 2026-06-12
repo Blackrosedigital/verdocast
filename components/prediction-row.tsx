@@ -3,16 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import { submitPrediction } from "@/lib/predictions";
 import { useToast } from "@/hooks/use-toast";
+import { GROUP_COLORS } from "@/lib/brand";
 import type { PredictMatch } from "@/components/predictions-grid";
 
 type SaveState = "idle" | "saving" | "saved" | "error";
 
 const DOT: Record<SaveState, { color: string; label: string } | null> = {
   idle: null,
-  saving: { color: "var(--amber)", label: "Saving…" },
+  saving: { color: "var(--amber)", label: "Saving" },
   saved: { color: "var(--green)", label: "Saved" },
   error: { color: "var(--accent-2)", label: "Retry" },
 };
+
+function GroupPill({ letter }: { letter: string | null }) {
+  const color = (letter && GROUP_COLORS[letter]) || "var(--border-strong)";
+  return (
+    <span
+      title={letter ? `Group ${letter}` : undefined}
+      className="flex size-6 shrink-0 items-center justify-center rounded font-display text-xs text-black sm:size-7 sm:text-sm"
+      style={{ backgroundColor: color }}
+    >
+      {letter ?? "?"}
+    </span>
+  );
+}
 
 function ScoreInput({
   value,
@@ -35,7 +49,7 @@ function ScoreInput({
       value={value}
       disabled={disabled}
       onChange={(e) => onChange(e.target.value)}
-      className="h-10 w-12 rounded-md border border-border bg-surface-2 text-center font-mono text-lg text-foreground outline-none focus:border-ring disabled:opacity-60"
+      className="h-10 w-11 rounded-md border border-border bg-surface-2 text-center font-mono text-lg text-foreground outline-none focus:border-ring disabled:opacity-60 sm:w-12"
     />
   );
 }
@@ -106,36 +120,73 @@ export function PredictionRow({
     }, 500);
   }
 
+  const TimeCol = (
+    <div className="w-12 shrink-0 sm:w-16">
+      <div className="font-mono text-[11px] text-foreground sm:text-xs">{time}</div>
+      <div className="hidden truncate font-mono text-[10px] text-muted-foreground sm:block">
+        {match.venueCity}
+      </div>
+    </div>
+  );
+
+  const HomeTeam = (
+    <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+      <span className="hidden font-mono text-[10px] text-muted-foreground sm:inline">
+        {match.homeCode}
+      </span>
+      <span className="truncate text-sm font-medium text-foreground">
+        {match.homeTeam}
+      </span>
+      <span className="text-lg leading-none">{match.homeFlag}</span>
+    </div>
+  );
+
+  const AwayTeam = (
+    <div className="flex min-w-0 flex-1 items-center gap-2">
+      <span className="text-lg leading-none">{match.awayFlag}</span>
+      <span className="truncate text-sm font-medium text-foreground">
+        {match.awayTeam}
+      </span>
+      <span className="hidden font-mono text-[10px] text-muted-foreground sm:inline">
+        {match.awayCode}
+      </span>
+    </div>
+  );
+
   // ---- Locked row (kickoff passed) ----
   if (match.locked) {
     const finished = match.status === "finished";
+    const live = match.status === "live";
     return (
-      <div className="flex items-center gap-3 px-4 py-3 opacity-80">
-        <span className="w-12 font-mono text-xs text-muted-foreground">
-          {time}
-        </span>
-        <span className="flex-1 truncate text-right text-sm text-foreground">
-          {match.homeTeam}
-        </span>
-        <div className="flex items-center gap-2">
-          {finished ? (
+      <div className="flex items-center gap-2 px-3 py-2.5 opacity-90 sm:gap-3 sm:px-4">
+        <GroupPill letter={match.groupLetter} />
+        {TimeCol}
+        {HomeTeam}
+        <div className="flex w-20 shrink-0 flex-col items-center">
+          {finished || live ? (
             <span className="font-mono text-lg text-foreground">
-              {match.homeScore}–{match.awayScore}
+              {match.homeScore}-{match.awayScore}
             </span>
           ) : (
-            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               Locked
             </span>
           )}
+          {live && (
+            <span
+              className="font-mono text-[9px] uppercase tracking-widest"
+              style={{ color: "var(--accent-2)" }}
+            >
+              Live
+            </span>
+          )}
         </div>
-        <span className="flex-1 truncate text-left text-sm text-foreground">
-          {match.awayTeam}
-        </span>
-        <span className="w-24 text-right font-mono text-xs text-muted-foreground">
+        {AwayTeam}
+        <span className="hidden w-20 shrink-0 text-right font-mono text-[10px] text-muted-foreground sm:block">
           {match.prediction
-            ? `you ${match.prediction.homeScore}–${match.prediction.awayScore}${
+            ? `you ${match.prediction.homeScore}-${match.prediction.awayScore}${
                 match.prediction.pointsEarned != null
-                  ? ` · ${match.prediction.pointsEarned} pt`
+                  ? ` · ${match.prediction.pointsEarned}pt`
                   : ""
               }`
             : "no pick"}
@@ -147,14 +198,11 @@ export function PredictionRow({
   // ---- Open row (editable) ----
   const dot = DOT[state];
   return (
-    <div className="flex items-center gap-3 px-4 py-3">
-      <span className="w-12 font-mono text-xs text-muted-foreground">
-        {time}
-      </span>
-      <span className="flex-1 truncate text-right text-sm font-medium text-foreground">
-        {match.homeTeam}
-      </span>
-      <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-4">
+      <GroupPill letter={match.groupLetter} />
+      {TimeCol}
+      {HomeTeam}
+      <div className="flex shrink-0 items-center gap-1.5">
         <ScoreInput
           value={home}
           label={`${match.homeTeam} score`}
@@ -163,7 +211,7 @@ export function PredictionRow({
             scheduleSave(v, away);
           }}
         />
-        <span className="text-muted-foreground">–</span>
+        <span className="text-muted-foreground">-</span>
         <ScoreInput
           value={away}
           label={`${match.awayTeam} score`}
@@ -173,17 +221,15 @@ export function PredictionRow({
           }}
         />
       </div>
-      <span className="flex-1 truncate text-left text-sm font-medium text-foreground">
-        {match.awayTeam}
-      </span>
-      <span className="flex w-24 items-center justify-end gap-1.5">
+      {AwayTeam}
+      <span className="flex w-6 shrink-0 items-center justify-end gap-1.5 sm:w-20">
         {dot && (
           <>
             <span
               className="inline-block size-2 rounded-full"
               style={{ backgroundColor: dot.color }}
             />
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="hidden font-mono text-xs text-muted-foreground sm:inline">
               {dot.label}
             </span>
           </>

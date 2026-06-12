@@ -4,6 +4,7 @@ import {
   getMatchByCode,
   getMatchesByGroup,
   getMatchesByStage,
+  getTeam,
   type Stage,
 } from "@/lib/tournament";
 
@@ -95,5 +96,24 @@ describe("getMatchByCode", () => {
 
   it("returns undefined for an unknown code", () => {
     expect(getMatchByCode("NOPE")).toBeUndefined();
+  });
+});
+
+describe("getTeam", () => {
+  it("returns metadata for a known team", () => {
+    const team = getTeam("Mexico");
+    expect(team).toBeDefined();
+    expect(team?.code).toBe("MEX");
+    expect(team?.flag).toBeTruthy();
+    expect(team?.group_letter).toBe("A");
+  });
+
+  it("returns undefined for an unknown team", () => {
+    expect(getTeam("Atlantis")).toBeUndefined();
+  });
+
+  it("returns undefined for null/undefined", () => {
+    expect(getTeam(null)).toBeUndefined();
+    expect(getTeam(undefined)).toBeUndefined();
   });
 });

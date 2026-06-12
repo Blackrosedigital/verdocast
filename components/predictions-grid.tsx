@@ -9,6 +9,11 @@ export interface PredictMatch {
   kickoffUtc: string;
   homeTeam: string;
   awayTeam: string;
+  homeFlag: string;
+  awayFlag: string;
+  homeCode: string;
+  awayCode: string;
+  venue: string;
   venueCity: string;
   groupLetter: string | null;
   status: string;

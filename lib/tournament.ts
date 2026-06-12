@@ -22,9 +22,21 @@ export interface TournamentMatch {
   matchup: string | null;
 }
 
+export interface TournamentTeam {
+  name: string;
+  code: string | null;
+  flag: string | null;
+  confederation: string | null;
+  route: string | null;
+  coach: string | null;
+  group_letter: string | null;
+}
+
 // The JSON shape is guaranteed by the generator's assertions and the seed's
 // Zod validation; narrow `stage` from string to the Stage union here.
 const matches = tournament.matches as TournamentMatch[];
+const teams = tournament.teams as TournamentTeam[];
+const teamByName = new Map(teams.map((t) => [t.name, t]));
 
 /** All 104 matches in canonical order (group stage first, then knockouts). */
 export function getAllMatches(): TournamentMatch[] {
@@ -45,4 +57,12 @@ export function getMatchesByGroup(letter: string): TournamentMatch[] {
 /** A single match by its unique code, e.g. "GROUP_A_1" or "FINAL". */
 export function getMatchByCode(code: string): TournamentMatch | undefined {
   return matches.find((m) => m.match_code === code);
+}
+
+/** Team metadata (flag, code, group) by team name. Undefined for unknown/null. */
+export function getTeam(
+  name: string | null | undefined,
+): TournamentTeam | undefined {
+  if (!name) return undefined;
+  return teamByName.get(name);
 }

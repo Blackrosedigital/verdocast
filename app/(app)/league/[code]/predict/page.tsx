@@ -6,6 +6,7 @@ import {
 } from "@/components/predictions-grid";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
+import { getTeam } from "@/lib/tournament";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +55,7 @@ export default async function PredictPage({
     admin
       .from("matches")
       .select(
-        "id, match_code, kickoff_utc, home_team, away_team, venue_city, group_letter, status, home_score, away_score",
+        "id, match_code, kickoff_utc, home_team, away_team, venue, venue_city, group_letter, status, home_score, away_score",
       )
       .eq("stage", "group")
       .order("kickoff_utc", { ascending: true }),
@@ -71,12 +72,19 @@ export default async function PredictPage({
 
   const matches: PredictMatch[] = (matchesRes.data ?? []).map((m) => {
     const pred = predByMatch.get(m.id);
+    const home = getTeam(m.home_team);
+    const away = getTeam(m.away_team);
     return {
       id: m.id,
       matchCode: m.match_code,
       kickoffUtc: m.kickoff_utc,
       homeTeam: m.home_team ?? "TBD",
       awayTeam: m.away_team ?? "TBD",
+      homeFlag: home?.flag ?? "",
+      awayFlag: away?.flag ?? "",
+      homeCode: home?.code ?? "",
+      awayCode: away?.code ?? "",
+      venue: m.venue,
       venueCity: m.venue_city,
       groupLetter: m.group_letter,
       status: m.status,
