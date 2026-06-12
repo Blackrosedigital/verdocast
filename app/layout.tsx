@@ -24,13 +24,35 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Verdocast - Run your office World Cup 2026 predictor",
+  metadataBase: new URL(SITE_URL),
+  title: "Verdocast - World Cup 2026 Predictor for Offices and Fans",
   description:
-    "Forecast every match. Settle every debate. Verdocast lets companies run World Cup 2026 prediction leagues for their employees.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+    "Forecast every match. Settle every debate. Free office predictor league, set up in 2 minutes.",
+  openGraph: {
+    title: "Verdocast - World Cup 2026 Predictor",
+    description: "Free office predictor league. Set up in 2 minutes.",
+    url: "https://verdocast.com",
+    siteName: "Verdocast",
+    images: [
+      {
+        url: "https://verdocast.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Verdocast - World Cup 2026 Predictor",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Verdocast - World Cup 2026 Predictor",
+    description: "Free office predictor league. Set up in 2 minutes.",
+    images: ["https://verdocast.com/og-image.png"],
+  },
 };
 
 export default function RootLayout({
