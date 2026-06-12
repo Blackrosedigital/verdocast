@@ -7,7 +7,7 @@ export interface FaqItem {
 export const FAQ_ITEMS: FaqItem[] = [
   {
     q: "How does it work for my employees?",
-    a: "You buy a license, name your league, and share a join link. Employees predict the score of every group-stage match. When matches finish, points are scored automatically and the live leaderboard updates.",
+    a: "Create a free league, name it, and share the join link. Employees predict the score of every group-stage match. When matches finish, points are scored automatically and the live leaderboard updates.",
   },
   {
     q: "How are predictions scored?",

@@ -16,8 +16,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const STEPS = [
   {
-    title: "Buy",
-    body: "Pick a plan and pay once with card. No subscriptions, no per-seat billing, no IT ticket.",
+    title: "Start free",
+    body: "Create your league in two minutes. Free for the group stage - no card, no subscription, no IT ticket.",
   },
   {
     title: "Share link",
@@ -88,9 +88,9 @@ export default function LandingPage() {
           Run your office&rsquo;s World Cup 2026 predictor in 5 minutes
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-muted-foreground">
-          Verdocast turns the tournament into an office-wide competition. Buy
-          once, share a link, and watch the banter - and the leaderboard - take
-          over.
+          Verdocast turns the tournament into an office-wide competition. Create
+          a free league, share a link, and watch the banter - and the
+          leaderboard - take over.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
