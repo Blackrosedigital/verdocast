@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Bebas_Neue, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { CookieConsent } from "@/components/analytics/cookie-consent";
 import { FlagPolyfill } from "@/components/flag-polyfill";
 import { Toaster } from "@/components/ui/toaster";
@@ -82,6 +83,7 @@ export default function RootLayout({
         <Toaster />
         <CookieConsent />
         <FlagPolyfill />
+        <Analytics />
       </body>
     </html>
   );
