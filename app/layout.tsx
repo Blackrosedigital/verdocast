@@ -29,9 +29,23 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Verdocast - World Cup 2026 Predictor for Offices and Fans",
+  title: {
+    default: "Verdocast - World Cup 2026 Predictor for Offices and Fans",
+    template: "%s",
+  },
   description:
-    "Forecast every match. Settle every debate. Free office predictor league, set up in 2 minutes.",
+    "Forecast every match. Settle every debate. Free World Cup 2026 prediction league for your office, mates, or group - set up in 2 minutes.",
+  keywords: [
+    "World Cup 2026 predictions",
+    "World Cup 2026 predictor",
+    "World Cup 2026 prediction league",
+    "World Cup 2026 sweepstake",
+    "office World Cup game",
+    "predict World Cup scores",
+    "free World Cup prediction game",
+    "World Cup 2026 fixtures",
+    "World Cup 2026 groups",
+  ],
   openGraph: {
     title: "Verdocast - World Cup 2026 Predictor",
     description: "Free office predictor league. Set up in 2 minutes.",

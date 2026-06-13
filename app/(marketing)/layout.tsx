@@ -29,6 +29,12 @@ function SiteHeader() {
             Demo
           </Link>
           <Link
+            href="/world-cup-2026"
+            className="hidden px-2 text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline"
+          >
+            Fixtures
+          </Link>
+          <Link
             href="/pricing"
             className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -64,6 +70,9 @@ function SiteFooter() {
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/pricing" className="hover:text-foreground">
             Pricing
+          </Link>
+          <Link href="/world-cup-2026" className="hover:text-foreground">
+            Fixtures
           </Link>
           <Link href="/#faq" className="hover:text-foreground">
             FAQ
