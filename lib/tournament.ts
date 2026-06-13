@@ -24,6 +24,7 @@ export interface TournamentMatch {
 
 export interface TournamentTeam {
   name: string;
+  slug: string;
   code: string | null;
   flag: string | null;
   confederation: string | null;
@@ -37,6 +38,7 @@ export interface TournamentTeam {
 const matches = tournament.matches as TournamentMatch[];
 const teams = tournament.teams as TournamentTeam[];
 const teamByName = new Map(teams.map((t) => [t.name, t]));
+const teamBySlug = new Map(teams.map((t) => [t.slug, t]));
 
 /** All 104 matches in canonical order (group stage first, then knockouts). */
 export function getAllMatches(): TournamentMatch[] {
@@ -65,4 +67,17 @@ export function getTeam(
 ): TournamentTeam | undefined {
   if (!name) return undefined;
   return teamByName.get(name);
+}
+
+/** Team metadata by URL slug, e.g. "south-korea". Undefined for unknown/null. */
+export function getTeamBySlug(
+  slug: string | null | undefined,
+): TournamentTeam | undefined {
+  if (!slug) return undefined;
+  return teamBySlug.get(slug);
+}
+
+/** All 48 teams in canonical group order. */
+export function getAllTeams(): TournamentTeam[] {
+  return teams;
 }

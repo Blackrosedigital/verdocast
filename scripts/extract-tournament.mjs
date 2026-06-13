@@ -49,6 +49,16 @@ const KNOCKOUT = {
 const html = readFileSync(join(root, "reference", "wc2026.html"), "utf8");
 const DATA = extractData(html);
 
+// URL-safe slug from a team name (e.g. "South Korea" -> "south-korea").
+function teamSlug(name) {
+  return name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 // ---- teams (48), in group order ----
 const teams = [];
 for (const letter of Object.keys(DATA.groups).sort()) {
@@ -56,6 +66,7 @@ for (const letter of Object.keys(DATA.groups).sort()) {
     const t = DATA.teams[name] ?? {};
     teams.push({
       name,
+      slug: teamSlug(name),
       code: t.code ?? null,
       confederation: t.confed ?? null,
       route: t.route ?? null,
@@ -64,6 +75,21 @@ for (const letter of Object.keys(DATA.groups).sort()) {
       group_letter: letter,
     });
   }
+}
+
+// ---- squads (separate file; large, only the team page needs it) ----
+const squads = {};
+for (const name of Object.keys(DATA.squads ?? {})) {
+  const s = DATA.squads[name] ?? {};
+  squads[name] = {
+    status: s.status ?? null,
+    confirmed: s.confirmed ?? false,
+    players: (s.players ?? []).map((p) => ({
+      name: p.name,
+      pos: p.pos ?? null,
+      club: p.club ?? null,
+    })),
+  };
 }
 
 // ---- venues (16) ----
@@ -146,7 +172,11 @@ mkdirSync(join(root, "data"), { recursive: true });
 const outPath = join(root, "data", "tournament-2026.json");
 writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n", "utf8");
 
+const squadsPath = join(root, "data", "squads-2026.json");
+writeFileSync(squadsPath, JSON.stringify(squads, null, 2) + "\n", "utf8");
+
 const byStage = matches.reduce((a, m) => ((a[m.stage] = (a[m.stage] ?? 0) + 1), a), {});
 console.log(`Wrote ${outPath}`);
 console.log(`  matches: ${matches.length}`, JSON.stringify(byStage));
 console.log(`  teams: ${teams.length}  venues: ${venues.length}`);
+console.log(`  squads: ${Object.keys(squads).length} -> ${squadsPath}`);

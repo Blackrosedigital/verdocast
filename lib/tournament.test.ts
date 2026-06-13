@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   getAllMatches,
+  getAllTeams,
   getMatchByCode,
   getMatchesByGroup,
   getMatchesByStage,
   getTeam,
+  getTeamBySlug,
   type Stage,
 } from "@/lib/tournament";
 
@@ -115,5 +117,44 @@ describe("getTeam", () => {
   it("returns undefined for null/undefined", () => {
     expect(getTeam(null)).toBeUndefined();
     expect(getTeam(undefined)).toBeUndefined();
+  });
+});
+
+describe("getTeamBySlug", () => {
+  it("returns metadata for a known slug", () => {
+    const team = getTeamBySlug("mexico");
+    expect(team).toBeDefined();
+    expect(team?.name).toBe("Mexico");
+    expect(team?.code).toBe("MEX");
+  });
+
+  it("returns undefined for an unknown slug", () => {
+    expect(getTeamBySlug("atlantis")).toBeUndefined();
+  });
+
+  it("returns undefined for null/undefined", () => {
+    expect(getTeamBySlug(null)).toBeUndefined();
+    expect(getTeamBySlug(undefined)).toBeUndefined();
+  });
+});
+
+describe("getAllTeams", () => {
+  it("returns all 48 teams", () => {
+    expect(getAllTeams()).toHaveLength(48);
+  });
+
+  it("every team has a unique, URL-safe slug", () => {
+    const teams = getAllTeams();
+    const slugs = teams.map((t) => t.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    for (const slug of slugs) {
+      expect(slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    }
+  });
+
+  it("every slug round-trips through getTeamBySlug", () => {
+    for (const t of getAllTeams()) {
+      expect(getTeamBySlug(t.slug)?.name).toBe(t.name);
+    }
   });
 });

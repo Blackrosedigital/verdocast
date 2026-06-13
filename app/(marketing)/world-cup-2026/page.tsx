@@ -4,6 +4,12 @@ import { GroupPill } from "@/components/group-pill";
 import { Button } from "@/components/ui/button";
 import { getMatchesByGroup, getTeam } from "@/lib/tournament";
 
+interface GroupTeam {
+  name: string;
+  slug: string;
+  flag: string;
+}
+
 export const metadata: Metadata = {
   title:
     "World Cup 2026 Predictor - Fixtures, Groups & Free Prediction League | Verdocast",
@@ -14,13 +20,18 @@ export const metadata: Metadata = {
 
 const GROUPS = "ABCDEFGHIJKL".split("");
 
-function teamsForGroup(letter: string): string[] {
+function teamsForGroup(letter: string): GroupTeam[] {
   const seen = new Set<string>();
   for (const m of getMatchesByGroup(letter)) {
     if (m.home_team) seen.add(m.home_team);
     if (m.away_team) seen.add(m.away_team);
   }
-  return [...seen].sort();
+  return [...seen]
+    .sort()
+    .map((name) => {
+      const t = getTeam(name);
+      return { name, slug: t?.slug ?? "", flag: t?.flag ?? "" };
+    });
 }
 
 export default function WorldCup2026Page() {
@@ -46,26 +57,33 @@ export default function WorldCup2026Page() {
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {GROUPS.map((g) => (
-          <Link
+          <div
             key={g}
-            href={`/world-cup-2026/group/${g.toLowerCase()}`}
             className="rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-border-strong"
           >
-            <div className="flex items-center gap-3">
+            <Link
+              href={`/world-cup-2026/group/${g.toLowerCase()}`}
+              className="flex items-center gap-3"
+            >
               <GroupPill letter={g} />
               <span className="font-display text-2xl tracking-wide text-foreground">
                 Group {g}
               </span>
-            </div>
+            </Link>
             <ul className="mt-4 space-y-1.5">
-              {teamsForGroup(g).map((name) => (
-                <li key={name} className="flex items-center gap-2 text-sm text-foreground">
-                  <span className="leading-none">{getTeam(name)?.flag ?? ""}</span>
-                  {name}
+              {teamsForGroup(g).map((t) => (
+                <li key={t.name}>
+                  <Link
+                    href={`/world-cup-2026/team/${t.slug}`}
+                    className="flex items-center gap-2 text-sm text-foreground hover:text-primary"
+                  >
+                    <span className="leading-none">{t.flag}</span>
+                    {t.name}
+                  </Link>
                 </li>
               ))}
             </ul>
-          </Link>
+          </div>
         ))}
       </div>
 

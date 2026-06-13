@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
     coverage: {
       provider: "v8",
       // CLAUDE.md requires 100% coverage on these pure modules once they exist.
-      include: ["lib/scoring.ts", "lib/tournament.ts"],
+      include: ["lib/scoring.ts", "lib/tournament.ts", "lib/standings.ts"],
     },
   },
 }));

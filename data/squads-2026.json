@@ -1,0 +1,4857 @@
+{
+  "Mexico": {
+    "status": "Preliminary squad (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Alex Padilla",
+        "pos": "GK",
+        "club": "Athletic Club"
+      },
+      {
+        "name": "Antonio Rodríguez",
+        "pos": "GK",
+        "club": "Tijuana"
+      },
+      {
+        "name": "Carlos Acevedo",
+        "pos": "GK",
+        "club": "Santos Laguna"
+      },
+      {
+        "name": "Carlos Moreno",
+        "pos": "GK",
+        "club": "Pachuca"
+      },
+      {
+        "name": "Guillermo Ochoa",
+        "pos": "GK",
+        "club": "AEL Limassol"
+      },
+      {
+        "name": "Raúl Rangel",
+        "pos": "GK",
+        "club": "Chivas"
+      },
+      {
+        "name": "Bryan González",
+        "pos": "DF",
+        "club": "Chivas"
+      },
+      {
+        "name": "César Montes",
+        "pos": "DF",
+        "club": "Lokomotiv Moscow"
+      },
+      {
+        "name": "Edson Álvarez",
+        "pos": "DF",
+        "club": "Fenerbahçe"
+      },
+      {
+        "name": "Eduardo Águila",
+        "pos": "DF",
+        "club": "Atlético de San Luis"
+      },
+      {
+        "name": "Everardo López",
+        "pos": "DF",
+        "club": "Toluca"
+      },
+      {
+        "name": "Israel Reyes",
+        "pos": "DF",
+        "club": "América"
+      },
+      {
+        "name": "Jesús Angulo",
+        "pos": "DF",
+        "club": "Tigres"
+      },
+      {
+        "name": "Jesús Gallardo",
+        "pos": "DF",
+        "club": "Toluca"
+      },
+      {
+        "name": "Jesús Gómez",
+        "pos": "DF",
+        "club": "Tijuana"
+      },
+      {
+        "name": "Johan Vásquez",
+        "pos": "DF",
+        "club": "Genoa"
+      },
+      {
+        "name": "Jorge Sánchez",
+        "pos": "DF",
+        "club": "PAOK"
+      },
+      {
+        "name": "Julián Araujo",
+        "pos": "DF",
+        "club": "Celtic"
+      },
+      {
+        "name": "Luis Rey",
+        "pos": "DF",
+        "club": "Puebla"
+      },
+      {
+        "name": "Mateo Chávez",
+        "pos": "DF",
+        "club": "AZ Alkmaar"
+      },
+      {
+        "name": "Ramón Juárez",
+        "pos": "DF",
+        "club": "América"
+      },
+      {
+        "name": "Richard Ledezma",
+        "pos": "DF",
+        "club": "Chivas"
+      },
+      {
+        "name": "Víctor Guzmán",
+        "pos": "DF",
+        "club": "Monterrey"
+      },
+      {
+        "name": "Alexei Domínguez",
+        "pos": "MF",
+        "club": "Pachuca"
+      },
+      {
+        "name": "Alexis Gutiérrez",
+        "pos": "MF",
+        "club": "América"
+      },
+      {
+        "name": "Álvaro Fidalgo",
+        "pos": "MF",
+        "club": "Real Betis"
+      },
+      {
+        "name": "Brian Gutiérrez",
+        "pos": "MF",
+        "club": "Chivas"
+      },
+      {
+        "name": "Carlos Rodríguez",
+        "pos": "MF",
+        "club": "Cruz Azul"
+      },
+      {
+        "name": "Denzell García",
+        "pos": "MF",
+        "club": "FC Juárez"
+      },
+      {
+        "name": "Diego Lainez",
+        "pos": "MF",
+        "club": "Tigres"
+      },
+      {
+        "name": "Efraín Álvarez",
+        "pos": "MF",
+        "club": "Chivas"
+      },
+      {
+        "name": "Elías Montiel",
+        "pos": "MF",
+        "club": "Pachuca"
+      },
+      {
+        "name": "Erick Sánchez",
+        "pos": "MF",
+        "club": "América"
+      },
+      {
+        "name": "Erik Lira",
+        "pos": "MF",
+        "club": "Cruz Azul"
+      },
+      {
+        "name": "Gilberto Mora",
+        "pos": "MF",
+        "club": "Tijuana"
+      },
+      {
+        "name": "Isaías Violante",
+        "pos": "MF",
+        "club": "América"
+      },
+      {
+        "name": "Jeremy Márquez",
+        "pos": "MF",
+        "club": "Cruz Azul"
+      },
+      {
+        "name": "Jordan Carrillo",
+        "pos": "MF",
+        "club": "Pumas"
+      },
+      {
+        "name": "Jorge Ruvalcaba",
+        "pos": "MF",
+        "club": "NY Red Bulls"
+      },
+      {
+        "name": "Kevin Castañeda",
+        "pos": "MF",
+        "club": "Tijuana"
+      },
+      {
+        "name": "Luis Chávez",
+        "pos": "MF",
+        "club": "Dinamo Moscow"
+      },
+      {
+        "name": "Luis Romo",
+        "pos": "MF",
+        "club": "Chivas"
+      },
+      {
+        "name": "Marcel Ruiz",
+        "pos": "MF",
+        "club": "Toluca"
+      },
+      {
+        "name": "Obed Vargas",
+        "pos": "MF",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Orbelín Pineda",
+        "pos": "MF",
+        "club": "AEK"
+      },
+      {
+        "name": "Alexis Vega",
+        "pos": "FW",
+        "club": "Toluca"
+      },
+      {
+        "name": "Armando González",
+        "pos": "FW",
+        "club": "Chivas"
+      },
+      {
+        "name": "César Huerta",
+        "pos": "FW",
+        "club": "Anderlecht"
+      },
+      {
+        "name": "Germán Berterame",
+        "pos": "FW",
+        "club": "Inter Miami"
+      },
+      {
+        "name": "Guillermo Martínez",
+        "pos": "FW",
+        "club": "Pumas"
+      },
+      {
+        "name": "Julián Quiñones",
+        "pos": "FW",
+        "club": "Al-Qadisiyah"
+      },
+      {
+        "name": "Raúl Jiménez",
+        "pos": "FW",
+        "club": "Fulham"
+      },
+      {
+        "name": "Roberto Alvarado",
+        "pos": "FW",
+        "club": "Chivas"
+      },
+      {
+        "name": "Santiago Giménez",
+        "pos": "FW",
+        "club": "Milan"
+      }
+    ]
+  },
+  "South Africa": {
+    "status": "TBA — announces 27 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "South Korea": {
+    "status": "Final 26-man squad (confirmed 16 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Jo Hyeon-woo",
+        "pos": "GK",
+        "club": "Ulsan HD"
+      },
+      {
+        "name": "Kim Seung-gyu",
+        "pos": "GK",
+        "club": "FC Tokyo"
+      },
+      {
+        "name": "Song Bum-keun",
+        "pos": "GK",
+        "club": "Jeonbuk Hyundai"
+      },
+      {
+        "name": "Kim Moon-hwan",
+        "pos": "DF",
+        "club": "Daejeon Hana"
+      },
+      {
+        "name": "Kim Min-jae",
+        "pos": "DF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Kim Tae-hyeon",
+        "pos": "DF",
+        "club": "Kashima Antlers"
+      },
+      {
+        "name": "Park Jin-seob",
+        "pos": "DF",
+        "club": "Zhejiang"
+      },
+      {
+        "name": "Seol Young-woo",
+        "pos": "DF",
+        "club": "Red Star Belgrade"
+      },
+      {
+        "name": "Jens Castrop",
+        "pos": "DF",
+        "club": "Borussia Mönchengladbach"
+      },
+      {
+        "name": "Lee Ki-hyuk",
+        "pos": "DF",
+        "club": "Gangwon FC"
+      },
+      {
+        "name": "Lee Tae-seok",
+        "pos": "DF",
+        "club": "Austria Wien"
+      },
+      {
+        "name": "Lee Han-beom",
+        "pos": "DF",
+        "club": "Midtjylland"
+      },
+      {
+        "name": "Cho Yu-min",
+        "pos": "DF",
+        "club": "Sharjah FC"
+      },
+      {
+        "name": "Kim Jin-gyu",
+        "pos": "MF",
+        "club": "Jeonbuk Hyundai"
+      },
+      {
+        "name": "Bae Jun-ho",
+        "pos": "MF",
+        "club": "Stoke City"
+      },
+      {
+        "name": "Paik Seung-ho",
+        "pos": "MF",
+        "club": "Birmingham City"
+      },
+      {
+        "name": "Yang Hyun-jun",
+        "pos": "MF",
+        "club": "Celtic"
+      },
+      {
+        "name": "Eom Ji-sung",
+        "pos": "MF",
+        "club": "Swansea City"
+      },
+      {
+        "name": "Lee Kang-in",
+        "pos": "MF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Lee Dong-gyeong",
+        "pos": "MF",
+        "club": "Ulsan HD"
+      },
+      {
+        "name": "Lee Jae-sung",
+        "pos": "MF",
+        "club": "Mainz"
+      },
+      {
+        "name": "Hwang In-beom",
+        "pos": "MF",
+        "club": "Feyenoord"
+      },
+      {
+        "name": "Hwang Hee-chan",
+        "pos": "MF",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Son Heung-min",
+        "pos": "FW",
+        "club": "Los Angeles FC"
+      },
+      {
+        "name": "Oh Hyeon-gyu",
+        "pos": "FW",
+        "club": "Beşiktaş"
+      },
+      {
+        "name": "Cho Gue-sung",
+        "pos": "FW",
+        "club": "Midtjylland"
+      }
+    ]
+  },
+  "Czechia": {
+    "status": "Provisional 54-man squad (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Lukáš Horníček",
+        "pos": "GK",
+        "club": "Braga"
+      },
+      {
+        "name": "Martin Jedlička",
+        "pos": "GK",
+        "club": "Baník Ostrava"
+      },
+      {
+        "name": "Antonín Kinský",
+        "pos": "GK",
+        "club": "Tottenham"
+      },
+      {
+        "name": "Jan Koutný",
+        "pos": "GK",
+        "club": "Sigma Olomouc"
+      },
+      {
+        "name": "Matěj Kovář",
+        "pos": "GK",
+        "club": "PSV Eindhoven"
+      },
+      {
+        "name": "Jakub Markovič",
+        "pos": "GK",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Jindřich Staněk",
+        "pos": "GK",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Vladimír Coufal",
+        "pos": "DF",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "David Douděra",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Matěj Hadaš",
+        "pos": "DF",
+        "club": "Sigma Olomouc"
+      },
+      {
+        "name": "Tomáš Holeš",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Robin Hranáč",
+        "pos": "DF",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Štěpán Chaloupek",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Václav Jemelka",
+        "pos": "DF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "David Jurásek",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Ladislav Krejčí",
+        "pos": "DF",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Karel Spáčil",
+        "pos": "DF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Adam Ševínský",
+        "pos": "DF",
+        "club": "Sparta Prague"
+      },
+      {
+        "name": "Martin Vitík",
+        "pos": "DF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Tomáš Vlček",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Jaroslav Zelený",
+        "pos": "DF",
+        "club": "Sparta Prague"
+      },
+      {
+        "name": "David Zima",
+        "pos": "DF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Lukáš Ambros",
+        "pos": "MF",
+        "club": "Górnik Zabrze"
+      },
+      {
+        "name": "Michal Beran",
+        "pos": "MF",
+        "club": "Sigma Olomouc"
+      },
+      {
+        "name": "Pavel Bucha",
+        "pos": "MF",
+        "club": "FC Cincinnati"
+      },
+      {
+        "name": "Lukáš Červ",
+        "pos": "MF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Kryštof Daněk",
+        "pos": "MF",
+        "club": "LASK Linz"
+      },
+      {
+        "name": "Vladimír Darida",
+        "pos": "MF",
+        "club": "Hradec Králové"
+      },
+      {
+        "name": "Patrik Hellebrand",
+        "pos": "MF",
+        "club": "Górnik Zabrze"
+      },
+      {
+        "name": "Adam Karabec",
+        "pos": "MF",
+        "club": "Lyon"
+      },
+      {
+        "name": "Ondřej Kričfaluši",
+        "pos": "MF",
+        "club": "Baník Ostrava"
+      },
+      {
+        "name": "Tomáš Ladra",
+        "pos": "MF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "David Planka",
+        "pos": "MF",
+        "club": "Baník Ostrava"
+      },
+      {
+        "name": "Lukáš Provod",
+        "pos": "MF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Matěj Ryneš",
+        "pos": "MF",
+        "club": "Sparta Prague"
+      },
+      {
+        "name": "Lukáš Sadílek",
+        "pos": "MF",
+        "club": "Górnik Zabrze"
+      },
+      {
+        "name": "Michal Sadílek",
+        "pos": "MF",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Hugo Sochůrek",
+        "pos": "MF",
+        "club": "Sparta Prague"
+      },
+      {
+        "name": "Alexandr Sojka",
+        "pos": "MF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Tomáš Souček",
+        "pos": "MF",
+        "club": "West Ham"
+      },
+      {
+        "name": "Pavel Šulc",
+        "pos": "MF",
+        "club": "Lyon"
+      },
+      {
+        "name": "Denis Višinský",
+        "pos": "MF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Adam Hložek",
+        "pos": "FW",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Tomáš Chorý",
+        "pos": "FW",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Mojmír Chytil",
+        "pos": "FW",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Christophe Kabongo",
+        "pos": "FW",
+        "club": "Mladá Boleslav"
+      },
+      {
+        "name": "Jan Kliment",
+        "pos": "FW",
+        "club": "Sigma Olomouc"
+      },
+      {
+        "name": "Jan Kuchta",
+        "pos": "FW",
+        "club": "Sparta Prague"
+      },
+      {
+        "name": "Vasil Kušej",
+        "pos": "FW",
+        "club": "Slavia Prague"
+      },
+      {
+        "name": "Ondřej Mihálik",
+        "pos": "FW",
+        "club": "Hradec Králové"
+      },
+      {
+        "name": "Vojtěch Patrák",
+        "pos": "FW",
+        "club": "Pardubice"
+      },
+      {
+        "name": "Václav Sejk",
+        "pos": "FW",
+        "club": "Sigma Olomouc"
+      },
+      {
+        "name": "Patrik Schick",
+        "pos": "FW",
+        "club": "Bayer Leverkusen"
+      },
+      {
+        "name": "Matěj Vydra",
+        "pos": "FW",
+        "club": "Viktoria Plzeň"
+      }
+    ]
+  },
+  "Canada": {
+    "status": "TBA — announces 29 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Bosnia and Herzegovina": {
+    "status": "Final 26-man squad (confirmed 11 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Nikola Vasilj",
+        "pos": "GK",
+        "club": "St. Pauli"
+      },
+      {
+        "name": "Martin Zlomislić",
+        "pos": "GK",
+        "club": "Rijeka"
+      },
+      {
+        "name": "Osman Hadžikić",
+        "pos": "GK",
+        "club": "Slaven Belupo"
+      },
+      {
+        "name": "Sead Kolašinac",
+        "pos": "DF",
+        "club": "Atalanta"
+      },
+      {
+        "name": "Amar Dedić",
+        "pos": "DF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Nihad Mujakić",
+        "pos": "DF",
+        "club": "Gaziantep"
+      },
+      {
+        "name": "Nikola Katić",
+        "pos": "DF",
+        "club": "Schalke 04"
+      },
+      {
+        "name": "Tarik Muharemović",
+        "pos": "DF",
+        "club": "Sassuolo"
+      },
+      {
+        "name": "Stjepan Radeljić",
+        "pos": "DF",
+        "club": "Rijeka"
+      },
+      {
+        "name": "Dennis Hadžikadunić",
+        "pos": "DF",
+        "club": "Sampdoria"
+      },
+      {
+        "name": "Nidal Čelik",
+        "pos": "DF",
+        "club": "Lens"
+      },
+      {
+        "name": "Amir Hadžiahmetović",
+        "pos": "MF",
+        "club": "Hull City"
+      },
+      {
+        "name": "Ivan Šunjić",
+        "pos": "MF",
+        "club": "Pafos"
+      },
+      {
+        "name": "Ivan Bašić",
+        "pos": "MF",
+        "club": "Astana"
+      },
+      {
+        "name": "Dženis Burnić",
+        "pos": "MF",
+        "club": "Karlsruher SC"
+      },
+      {
+        "name": "Ermin Mahmić",
+        "pos": "MF",
+        "club": "Slovan Liberec"
+      },
+      {
+        "name": "Benjamin Tahirović",
+        "pos": "MF",
+        "club": "Brøndby"
+      },
+      {
+        "name": "Amar Memić",
+        "pos": "MF",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Armin Gigović",
+        "pos": "MF",
+        "club": "Young Boys"
+      },
+      {
+        "name": "Kerim Alajbegović",
+        "pos": "MF",
+        "club": "RB Salzburg"
+      },
+      {
+        "name": "Esmir Bajraktarević",
+        "pos": "MF",
+        "club": "PSV Eindhoven"
+      },
+      {
+        "name": "Edin Džeko",
+        "pos": "FW",
+        "club": "Schalke 04"
+      },
+      {
+        "name": "Ermedin Demirović",
+        "pos": "FW",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Jovo Lukić",
+        "pos": "FW",
+        "club": "Universitatea Cluj"
+      },
+      {
+        "name": "Samed Baždar",
+        "pos": "FW",
+        "club": "Jagiellonia Białystok"
+      },
+      {
+        "name": "Haris Tabaković",
+        "pos": "FW",
+        "club": "Borussia Mönchengladbach"
+      }
+    ]
+  },
+  "Qatar": {
+    "status": "Preliminary squad (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Shehab Elleithy",
+        "pos": "GK",
+        "club": "Al Shahania"
+      },
+      {
+        "name": "Salah Zakaria",
+        "pos": "GK",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Meshaal Barsham",
+        "pos": "GK",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Mahmoud Abunada",
+        "pos": "GK",
+        "club": "Al Rayyan"
+      },
+      {
+        "name": "Boualem Khoukhi",
+        "pos": "DF",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Pedro Miguel",
+        "pos": "DF",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Sultan Al-Brake",
+        "pos": "DF",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Tarek Salman",
+        "pos": "DF",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Al-Hashmi Al-Hussain",
+        "pos": "DF",
+        "club": "Al Arabi"
+      },
+      {
+        "name": "Ayoub Al-Alawi",
+        "pos": "DF",
+        "club": "Al Gharafa"
+      },
+      {
+        "name": "Bassam Al-Rawi",
+        "pos": "DF",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Rayyan Al-Ali",
+        "pos": "DF",
+        "club": "Al Gharafa"
+      },
+      {
+        "name": "Issa Laye",
+        "pos": "DF",
+        "club": "Al Arabi"
+      },
+      {
+        "name": "Lucas Mendes",
+        "pos": "DF",
+        "club": "Al Wakrah"
+      },
+      {
+        "name": "Mohammed Waad",
+        "pos": "DF",
+        "club": "Al Shamal"
+      },
+      {
+        "name": "Niall Mason",
+        "pos": "DF",
+        "club": "Qatar SC"
+      },
+      {
+        "name": "Ahmed Fathi",
+        "pos": "MF",
+        "club": "Al Arabi"
+      },
+      {
+        "name": "Jassim Gaber",
+        "pos": "MF",
+        "club": "Al Rayyan"
+      },
+      {
+        "name": "Assim Madibo",
+        "pos": "MF",
+        "club": "Al Wakrah"
+      },
+      {
+        "name": "Abdulaziz Hatem",
+        "pos": "MF",
+        "club": "Al Rayyan"
+      },
+      {
+        "name": "Karim Boudiaf",
+        "pos": "MF",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Mohammed Mannai",
+        "pos": "MF",
+        "club": "Al Shamal"
+      },
+      {
+        "name": "Homam Al-Amin",
+        "pos": "MF",
+        "club": "Cultural Leonesa"
+      },
+      {
+        "name": "Almoez Ali",
+        "pos": "FW",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Akram Afif",
+        "pos": "FW",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Tahsin Mohammed",
+        "pos": "FW",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Edmílson Junior",
+        "pos": "FW",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Ahmed Al-Ganehi",
+        "pos": "FW",
+        "club": "Al Gharafa"
+      },
+      {
+        "name": "Ahmed Alaa",
+        "pos": "FW",
+        "club": "Al Rayyan"
+      },
+      {
+        "name": "Sebastián Soria",
+        "pos": "FW",
+        "club": "Qatar SC"
+      },
+      {
+        "name": "Hassan Al-Haydos",
+        "pos": "FW",
+        "club": "Al Sadd"
+      },
+      {
+        "name": "Mubarak Shannan",
+        "pos": "FW",
+        "club": "Al Duhail"
+      },
+      {
+        "name": "Mohammed Muntari",
+        "pos": "FW",
+        "club": "Al Gharafa"
+      },
+      {
+        "name": "Yusuf Abdurisag",
+        "pos": "FW",
+        "club": "Al Wakrah"
+      }
+    ]
+  },
+  "Switzerland": {
+    "status": "Final 26-man squad (confirmed 20 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Marvin Keller",
+        "pos": "GK",
+        "club": "Young Boys"
+      },
+      {
+        "name": "Gregor Kobel",
+        "pos": "GK",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Yvon Mvogo",
+        "pos": "GK",
+        "club": "Lorient"
+      },
+      {
+        "name": "Manuel Akanji",
+        "pos": "DF",
+        "club": "Inter Milan"
+      },
+      {
+        "name": "Aurèle Amenda",
+        "pos": "DF",
+        "club": "Eintracht Frankfurt"
+      },
+      {
+        "name": "Eray Cömert",
+        "pos": "DF",
+        "club": "Valencia"
+      },
+      {
+        "name": "Nico Elvedi",
+        "pos": "DF",
+        "club": "Borussia Mönchengladbach"
+      },
+      {
+        "name": "Luca Jaquez",
+        "pos": "DF",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Miro Muheim",
+        "pos": "DF",
+        "club": "Hamburger SV"
+      },
+      {
+        "name": "Ricardo Rodríguez",
+        "pos": "DF",
+        "club": "Real Betis"
+      },
+      {
+        "name": "Silvan Widmer",
+        "pos": "DF",
+        "club": "Mainz"
+      },
+      {
+        "name": "Michel Aebischer",
+        "pos": "MF",
+        "club": "Pisa"
+      },
+      {
+        "name": "Christian Fassnacht",
+        "pos": "MF",
+        "club": "Young Boys"
+      },
+      {
+        "name": "Remo Freuler",
+        "pos": "MF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Ardon Jashari",
+        "pos": "MF",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Johan Manzambi",
+        "pos": "MF",
+        "club": "SC Freiburg"
+      },
+      {
+        "name": "Fabian Rieder",
+        "pos": "MF",
+        "club": "Augsburg"
+      },
+      {
+        "name": "Djibril Sow",
+        "pos": "MF",
+        "club": "Sevilla"
+      },
+      {
+        "name": "Rubén Vargas",
+        "pos": "MF",
+        "club": "Sevilla"
+      },
+      {
+        "name": "Granit Xhaka",
+        "pos": "MF",
+        "club": "Sunderland"
+      },
+      {
+        "name": "Denis Zakaria",
+        "pos": "MF",
+        "club": "Monaco"
+      },
+      {
+        "name": "Zeki Amdouni",
+        "pos": "FW",
+        "club": "Burnley"
+      },
+      {
+        "name": "Breel Embolo",
+        "pos": "FW",
+        "club": "Stade Rennais"
+      },
+      {
+        "name": "Cédric Itten",
+        "pos": "FW",
+        "club": "Fortuna Düsseldorf"
+      },
+      {
+        "name": "Dan Ndoye",
+        "pos": "FW",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Noah Okafor",
+        "pos": "FW",
+        "club": "Leeds United"
+      }
+    ]
+  },
+  "Brazil": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Alisson",
+        "pos": "GK",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Ederson",
+        "pos": "GK",
+        "club": "Fenerbahçe"
+      },
+      {
+        "name": "Weverton",
+        "pos": "GK",
+        "club": "Grêmio"
+      },
+      {
+        "name": "Marquinhos",
+        "pos": "DF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Danilo",
+        "pos": "DF",
+        "club": "Flamengo"
+      },
+      {
+        "name": "Alex Sandro",
+        "pos": "DF",
+        "club": "Flamengo"
+      },
+      {
+        "name": "Gabriel Magalhães",
+        "pos": "DF",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Bremer",
+        "pos": "DF",
+        "club": "Juventus"
+      },
+      {
+        "name": "Wesley",
+        "pos": "DF",
+        "club": "Roma"
+      },
+      {
+        "name": "Roger Ibañez",
+        "pos": "DF",
+        "club": "Al-Ahli"
+      },
+      {
+        "name": "Douglas Santos",
+        "pos": "DF",
+        "club": "Zenit"
+      },
+      {
+        "name": "Léo Pereira",
+        "pos": "DF",
+        "club": "Flamengo"
+      },
+      {
+        "name": "Casemiro",
+        "pos": "MF",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Lucas Paquetá",
+        "pos": "MF",
+        "club": "Flamengo"
+      },
+      {
+        "name": "Bruno Guimarães",
+        "pos": "MF",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Fabinho",
+        "pos": "MF",
+        "club": "Al-Ittihad"
+      },
+      {
+        "name": "Danilo Santos",
+        "pos": "MF",
+        "club": "Botafogo"
+      },
+      {
+        "name": "Neymar",
+        "pos": "FW",
+        "club": "Santos"
+      },
+      {
+        "name": "Vinícius Júnior",
+        "pos": "FW",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Raphinha",
+        "pos": "FW",
+        "club": "Barcelona"
+      },
+      {
+        "name": "Gabriel Martinelli",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Matheus Cunha",
+        "pos": "FW",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Endrick",
+        "pos": "FW",
+        "club": "Lyon (on loan from Real Madrid)"
+      },
+      {
+        "name": "Luiz Henrique",
+        "pos": "FW",
+        "club": "Zenit"
+      },
+      {
+        "name": "Igor Thiago",
+        "pos": "FW",
+        "club": "Brentford"
+      },
+      {
+        "name": "Rayan",
+        "pos": "FW",
+        "club": "Bournemouth"
+      }
+    ]
+  },
+  "Morocco": {
+    "status": "TBA — announces 26 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Haiti": {
+    "status": "Final 26-man squad (confirmed 15 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Johny Placide",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Alexandre Pierre",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Josué Duverger",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Ricardo Adé",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Carlens Arcus",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Martin Experience",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jean-Kévin Duverne",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Duke Lacroix",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Wilguens Paugain",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Hannes Delcroix",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Keeto Thermoncy",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Leverton Pierre",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Danley Jean Jacques",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Carl Sainte",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jean-Ricner Bellegarde",
+        "pos": "MF",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Woodensky Pierre",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Dominique Simon",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Duckens Nazon",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Frantzdy Pierrot",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Derrick Etienne Jr.",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Louicius Deedson",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Ruben Providence",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Josué Casimir",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Yassin Fortune",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Wilson Isidor",
+        "pos": "FW",
+        "club": "Sunderland"
+      },
+      {
+        "name": "Lenny Joseph",
+        "pos": "FW",
+        "club": "TBD"
+      }
+    ]
+  },
+  "Scotland": {
+    "status": "Final 26-man squad (confirmed 19 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Craig Gordon",
+        "pos": "GK",
+        "club": "Hearts"
+      },
+      {
+        "name": "Angus Gunn",
+        "pos": "GK",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Liam Kelly",
+        "pos": "GK",
+        "club": "Rangers"
+      },
+      {
+        "name": "Grant Hanley",
+        "pos": "DF",
+        "club": "Hibernian"
+      },
+      {
+        "name": "Jack Hendry",
+        "pos": "DF",
+        "club": "Al-Ettifaq"
+      },
+      {
+        "name": "Aaron Hickey",
+        "pos": "DF",
+        "club": "Brentford"
+      },
+      {
+        "name": "Dominic Hyam",
+        "pos": "DF",
+        "club": "Wrexham"
+      },
+      {
+        "name": "Scott McKenna",
+        "pos": "DF",
+        "club": "Dinamo Zagreb"
+      },
+      {
+        "name": "Nathan Patterson",
+        "pos": "DF",
+        "club": "Everton"
+      },
+      {
+        "name": "Anthony Ralston",
+        "pos": "DF",
+        "club": "Celtic"
+      },
+      {
+        "name": "Andy Robertson",
+        "pos": "DF",
+        "club": "Liverpool"
+      },
+      {
+        "name": "John Souttar",
+        "pos": "DF",
+        "club": "Rangers"
+      },
+      {
+        "name": "Kieran Tierney",
+        "pos": "DF",
+        "club": "Celtic"
+      },
+      {
+        "name": "Ryan Christie",
+        "pos": "MF",
+        "club": "Bournemouth"
+      },
+      {
+        "name": "Findlay Curtis",
+        "pos": "MF",
+        "club": "Kilmarnock"
+      },
+      {
+        "name": "Lewis Ferguson",
+        "pos": "MF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Ben Gannon-Doak",
+        "pos": "MF",
+        "club": "Bournemouth"
+      },
+      {
+        "name": "Billy Gilmour",
+        "pos": "MF",
+        "club": "Napoli"
+      },
+      {
+        "name": "John McGinn",
+        "pos": "MF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Kenny McLean",
+        "pos": "MF",
+        "club": "Norwich City"
+      },
+      {
+        "name": "Scott McTominay",
+        "pos": "MF",
+        "club": "Napoli"
+      },
+      {
+        "name": "Che Adams",
+        "pos": "FW",
+        "club": "Torino"
+      },
+      {
+        "name": "Lyndon Dykes",
+        "pos": "FW",
+        "club": "Charlton Athletic"
+      },
+      {
+        "name": "George Hirst",
+        "pos": "FW",
+        "club": "Ipswich Town"
+      },
+      {
+        "name": "Lawrence Shankland",
+        "pos": "FW",
+        "club": "Hearts"
+      },
+      {
+        "name": "Ross Stewart",
+        "pos": "FW",
+        "club": "Southampton"
+      }
+    ]
+  },
+  "United States": {
+    "status": "TBA — announces 26 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Paraguay": {
+    "status": "Preliminary squad submitted (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": []
+  },
+  "Australia": {
+    "status": "TBA — announces 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Türkiye": {
+    "status": "Provisional 35-man squad submitted (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": []
+  },
+  "Germany": {
+    "status": "Final 26-man squad (confirmed 21 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Oliver Baumann",
+        "pos": "GK",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Manuel Neuer",
+        "pos": "GK",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Alexander Nübel",
+        "pos": "GK",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Waldemar Anton",
+        "pos": "DF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Nathaniel Brown",
+        "pos": "DF",
+        "club": "Eintracht Frankfurt"
+      },
+      {
+        "name": "David Raum",
+        "pos": "DF",
+        "club": "RB Leipzig"
+      },
+      {
+        "name": "Antonio Rüdiger",
+        "pos": "DF",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Nico Schlotterbeck",
+        "pos": "DF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Jonathan Tah",
+        "pos": "DF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Malick Thiaw",
+        "pos": "DF",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Pascal Groß",
+        "pos": "MF",
+        "club": "Brighton"
+      },
+      {
+        "name": "Joshua Kimmich",
+        "pos": "MF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Felix Nmecha",
+        "pos": "MF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Aleksandar Pavlović",
+        "pos": "MF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Angelo Stiller",
+        "pos": "MF",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Leon Goretzka",
+        "pos": "MF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Florian Wirtz",
+        "pos": "MF",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Jamie Leweling",
+        "pos": "MF",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Maximilian Beier",
+        "pos": "FW",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Kai Havertz",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Lennart Karl",
+        "pos": "FW",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Jamal Musiala",
+        "pos": "FW",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Leroy Sané",
+        "pos": "FW",
+        "club": "Galatasaray"
+      },
+      {
+        "name": "Deniz Undav",
+        "pos": "FW",
+        "club": "VfB Stuttgart"
+      },
+      {
+        "name": "Nick Woltemade",
+        "pos": "FW",
+        "club": "Newcastle"
+      }
+    ]
+  },
+  "Curaçao": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Tyrick Bodak",
+        "pos": "GK",
+        "club": "SC Telstar"
+      },
+      {
+        "name": "Trevor Doornbusch",
+        "pos": "GK",
+        "club": "VVV-Venlo"
+      },
+      {
+        "name": "Eloy Room",
+        "pos": "GK",
+        "club": "Miami FC"
+      },
+      {
+        "name": "Riechedly Bazoer",
+        "pos": "DF",
+        "club": "Konyaspor"
+      },
+      {
+        "name": "Joshua Brenet",
+        "pos": "DF",
+        "club": "Kayserispor"
+      },
+      {
+        "name": "Roshon van Eijma",
+        "pos": "DF",
+        "club": "RKC Waalwijk"
+      },
+      {
+        "name": "Sherel Floranus",
+        "pos": "DF",
+        "club": "PEC Zwolle"
+      },
+      {
+        "name": "Deveron Fonville",
+        "pos": "DF",
+        "club": "NEC Nijmegen"
+      },
+      {
+        "name": "Jurien Gaari",
+        "pos": "DF",
+        "club": "Abha Club"
+      },
+      {
+        "name": "Armando Obispo",
+        "pos": "DF",
+        "club": "PSV Eindhoven"
+      },
+      {
+        "name": "Shurandy Sambo",
+        "pos": "DF",
+        "club": "Sparta Rotterdam"
+      },
+      {
+        "name": "Juninho Bacuna",
+        "pos": "MF",
+        "club": "FC Volendam"
+      },
+      {
+        "name": "Leandro Bacuna",
+        "pos": "MF",
+        "club": "Iğdır FK"
+      },
+      {
+        "name": "Livano Comenencia",
+        "pos": "MF",
+        "club": "FC Zürich"
+      },
+      {
+        "name": "Kevin Felida",
+        "pos": "MF",
+        "club": "FC Den Bosch"
+      },
+      {
+        "name": "Ar'jany Martha",
+        "pos": "MF",
+        "club": "Rotherham United"
+      },
+      {
+        "name": "Tyrese Noslin",
+        "pos": "MF",
+        "club": "SC Telstar"
+      },
+      {
+        "name": "Godfried Roemeratoe",
+        "pos": "MF",
+        "club": "RKC Waalwijk"
+      },
+      {
+        "name": "Jeremy Antonisse",
+        "pos": "FW",
+        "club": "AE Kifisia"
+      },
+      {
+        "name": "Tahith Chong",
+        "pos": "FW",
+        "club": "Sheffield United"
+      },
+      {
+        "name": "Kenji Gorré",
+        "pos": "FW",
+        "club": "Maccabi Haifa"
+      },
+      {
+        "name": "Sontje Hansen",
+        "pos": "FW",
+        "club": "Middlesbrough"
+      },
+      {
+        "name": "Gervane Kastaneer",
+        "pos": "FW",
+        "club": "Terengganu FC"
+      },
+      {
+        "name": "Brandley Kuwas",
+        "pos": "FW",
+        "club": "FC Volendam"
+      },
+      {
+        "name": "Jürgen Locadia",
+        "pos": "FW",
+        "club": "Miami FC"
+      },
+      {
+        "name": "Jearl Margaritha",
+        "pos": "FW",
+        "club": "SK Beveren"
+      }
+    ]
+  },
+  "Ivory Coast": {
+    "status": "Final 26-man squad (confirmed 15 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Yahia Fofana",
+        "pos": "GK",
+        "club": "Çaykur Rizespor"
+      },
+      {
+        "name": "Mohamed Koné",
+        "pos": "GK",
+        "club": "Charleroi"
+      },
+      {
+        "name": "Alban Lafont",
+        "pos": "GK",
+        "club": "Panathinaikos"
+      },
+      {
+        "name": "Emmanuel Agbadou",
+        "pos": "DF",
+        "club": "Beşiktaş"
+      },
+      {
+        "name": "Clément Akpa",
+        "pos": "DF",
+        "club": "AJ Auxerre"
+      },
+      {
+        "name": "Ousmane Diomandé",
+        "pos": "DF",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Guéla Doué",
+        "pos": "DF",
+        "club": "Strasbourg"
+      },
+      {
+        "name": "Ghislain Konan",
+        "pos": "DF",
+        "club": "Gil Vicente"
+      },
+      {
+        "name": "Odilon Kossounou",
+        "pos": "DF",
+        "club": "Atalanta"
+      },
+      {
+        "name": "Evan Ndicka",
+        "pos": "DF",
+        "club": "Roma"
+      },
+      {
+        "name": "Wilfried Singo",
+        "pos": "DF",
+        "club": "Galatasaray"
+      },
+      {
+        "name": "Seko Fofana",
+        "pos": "MF",
+        "club": "Porto"
+      },
+      {
+        "name": "Parfait Guiagon",
+        "pos": "MF",
+        "club": "Charleroi"
+      },
+      {
+        "name": "Christ Inao Oulaï",
+        "pos": "MF",
+        "club": "Trabzonspor"
+      },
+      {
+        "name": "Franck Kessié",
+        "pos": "MF",
+        "club": "Al-Ahli"
+      },
+      {
+        "name": "Ibrahim Sangaré",
+        "pos": "MF",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Jean-Michaël Seri",
+        "pos": "MF",
+        "club": "NK Maribor"
+      },
+      {
+        "name": "Simon Adingra",
+        "pos": "FW",
+        "club": "Monaco"
+      },
+      {
+        "name": "Ange-Yoan Bonny",
+        "pos": "FW",
+        "club": "Inter Milan"
+      },
+      {
+        "name": "Amad Diallo",
+        "pos": "FW",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Oumar Diakité",
+        "pos": "FW",
+        "club": "Cercle Brugge"
+      },
+      {
+        "name": "Yan Diomande",
+        "pos": "FW",
+        "club": "RB Leipzig"
+      },
+      {
+        "name": "Evann Guessand",
+        "pos": "FW",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Nicolas Pépé",
+        "pos": "FW",
+        "club": "Villarreal"
+      },
+      {
+        "name": "Bazoumana Touré",
+        "pos": "FW",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Elye Wahi",
+        "pos": "FW",
+        "club": "Nice"
+      }
+    ]
+  },
+  "Ecuador": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Netherlands": {
+    "status": "TBA — announces 25 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Japan": {
+    "status": "Final 26-man squad (confirmed 15 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Zion Suzuki",
+        "pos": "GK",
+        "club": "Parma"
+      },
+      {
+        "name": "Keisuke Osako",
+        "pos": "GK",
+        "club": "Sanfrecce Hiroshima"
+      },
+      {
+        "name": "Tomoki Hayakawa",
+        "pos": "GK",
+        "club": "Kashima Antlers"
+      },
+      {
+        "name": "Yuto Nagatomo",
+        "pos": "DF",
+        "club": "FC Tokyo"
+      },
+      {
+        "name": "Takehiro Tomiyasu",
+        "pos": "DF",
+        "club": "Ajax"
+      },
+      {
+        "name": "Ko Itakura",
+        "pos": "DF",
+        "club": "Ajax"
+      },
+      {
+        "name": "Shogo Taniguchi",
+        "pos": "DF",
+        "club": "Sint-Truiden"
+      },
+      {
+        "name": "Hiroki Ito",
+        "pos": "DF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Yukinari Sugawara",
+        "pos": "DF",
+        "club": "Werder Bremen"
+      },
+      {
+        "name": "Ayumu Seko",
+        "pos": "DF",
+        "club": "Le Havre"
+      },
+      {
+        "name": "Tsuyoshi Watanabe",
+        "pos": "DF",
+        "club": "Feyenoord"
+      },
+      {
+        "name": "Junnosuke Suzuki",
+        "pos": "DF",
+        "club": "FC Copenhagen"
+      },
+      {
+        "name": "Wataru Endo",
+        "pos": "MF",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Junya Ito",
+        "pos": "MF",
+        "club": "Genk"
+      },
+      {
+        "name": "Ritsu Doan",
+        "pos": "MF",
+        "club": "Eintracht Frankfurt"
+      },
+      {
+        "name": "Daichi Kamada",
+        "pos": "MF",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Takefusa Kubo",
+        "pos": "MF",
+        "club": "Real Sociedad"
+      },
+      {
+        "name": "Ao Tanaka",
+        "pos": "MF",
+        "club": "Leeds United"
+      },
+      {
+        "name": "Keito Nakamura",
+        "pos": "MF",
+        "club": "Stade de Reims"
+      },
+      {
+        "name": "Kaishu Sano",
+        "pos": "MF",
+        "club": "Mainz"
+      },
+      {
+        "name": "Ayase Ueda",
+        "pos": "FW",
+        "club": "Feyenoord"
+      },
+      {
+        "name": "Daizen Maeda",
+        "pos": "FW",
+        "club": "Celtic"
+      },
+      {
+        "name": "Koki Ogawa",
+        "pos": "FW",
+        "club": "NEC Nijmegen"
+      },
+      {
+        "name": "Yuito Suzuki",
+        "pos": "FW",
+        "club": "SC Freiburg"
+      },
+      {
+        "name": "Keisuke Goto",
+        "pos": "FW",
+        "club": "Sint-Truiden"
+      },
+      {
+        "name": "Kento Shiogai",
+        "pos": "FW",
+        "club": "Wolfsburg"
+      }
+    ]
+  },
+  "Sweden": {
+    "status": "Final 26-man squad (confirmed 12 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Kristoffer Nordfeldt",
+        "pos": "GK",
+        "club": "AIK"
+      },
+      {
+        "name": "Viktor Johansson",
+        "pos": "GK",
+        "club": "Stoke City"
+      },
+      {
+        "name": "Jacob Widell Zetterström",
+        "pos": "GK",
+        "club": "Derby County"
+      },
+      {
+        "name": "Victor Lindelöf",
+        "pos": "DF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Isak Hien",
+        "pos": "DF",
+        "club": "Atalanta"
+      },
+      {
+        "name": "Gabriel Gudmundsson",
+        "pos": "DF",
+        "club": "Leeds United"
+      },
+      {
+        "name": "Carl Starfelt",
+        "pos": "DF",
+        "club": "Celta Vigo"
+      },
+      {
+        "name": "Emil Holm",
+        "pos": "DF",
+        "club": "Juventus"
+      },
+      {
+        "name": "Hjalmar Ekdal",
+        "pos": "DF",
+        "club": "Burnley"
+      },
+      {
+        "name": "Daniel Svensson",
+        "pos": "DF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Gustaf Lagerbielke",
+        "pos": "DF",
+        "club": "Braga"
+      },
+      {
+        "name": "Eric Smith",
+        "pos": "DF",
+        "club": "St. Pauli"
+      },
+      {
+        "name": "Elliot Stroud",
+        "pos": "DF",
+        "club": "Mjällby"
+      },
+      {
+        "name": "Mattias Svanberg",
+        "pos": "MF",
+        "club": "Wolfsburg"
+      },
+      {
+        "name": "Jesper Karlström",
+        "pos": "MF",
+        "club": "Udinese"
+      },
+      {
+        "name": "Yasin Ayari",
+        "pos": "MF",
+        "club": "Brighton"
+      },
+      {
+        "name": "Lucas Bergvall",
+        "pos": "MF",
+        "club": "Tottenham"
+      },
+      {
+        "name": "Besfort Zeneli",
+        "pos": "MF",
+        "club": "Union Saint-Gilloise"
+      },
+      {
+        "name": "Alexander Isak",
+        "pos": "FW",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Viktor Gyökeres",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Ken Sema",
+        "pos": "FW",
+        "club": "Pafos"
+      },
+      {
+        "name": "Anthony Elanga",
+        "pos": "FW",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Benjamin Nygren",
+        "pos": "FW",
+        "club": "Celtic"
+      },
+      {
+        "name": "Alexander Bernhardsson",
+        "pos": "FW",
+        "club": "Holstein Kiel"
+      },
+      {
+        "name": "Gustaf Nilsson",
+        "pos": "FW",
+        "club": "Club Brugge"
+      },
+      {
+        "name": "Taha Ali",
+        "pos": "FW",
+        "club": "Malmö FF"
+      }
+    ]
+  },
+  "Tunisia": {
+    "status": "Final 26-man squad (confirmed 15 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Aymen Dahmen",
+        "pos": "GK",
+        "club": "CS Sfaxien"
+      },
+      {
+        "name": "Sabri Ben Hessen",
+        "pos": "GK",
+        "club": "Étoile du Sahel"
+      },
+      {
+        "name": "Mouhib Chamakh",
+        "pos": "GK",
+        "club": "Club Africain"
+      },
+      {
+        "name": "Montassar Talbi",
+        "pos": "DF",
+        "club": "Lorient"
+      },
+      {
+        "name": "Dylan Bronn",
+        "pos": "DF",
+        "club": "Servette Genève"
+      },
+      {
+        "name": "Ali Abdi",
+        "pos": "DF",
+        "club": "Nice"
+      },
+      {
+        "name": "Yan Valery",
+        "pos": "DF",
+        "club": "Young Boys Berne"
+      },
+      {
+        "name": "Mohamed Amine Ben Hamida",
+        "pos": "DF",
+        "club": "Espérance"
+      },
+      {
+        "name": "Moutaz Neffati",
+        "pos": "DF",
+        "club": "Norrköping"
+      },
+      {
+        "name": "Omar Rekik",
+        "pos": "DF",
+        "club": "NK Maribor"
+      },
+      {
+        "name": "Adem Arous",
+        "pos": "DF",
+        "club": "Kasımpaşa"
+      },
+      {
+        "name": "Raed Chikhaoui",
+        "pos": "DF",
+        "club": "US Monastir"
+      },
+      {
+        "name": "Ellyes Skhiri",
+        "pos": "MF",
+        "club": "Eintracht Frankfurt"
+      },
+      {
+        "name": "Hannibal Mejbri",
+        "pos": "MF",
+        "club": "Burnley"
+      },
+      {
+        "name": "Anis Ben Slimane",
+        "pos": "MF",
+        "club": "Norwich City"
+      },
+      {
+        "name": "Mortadha Ben Ouanes",
+        "pos": "MF",
+        "club": "Kasımpaşa"
+      },
+      {
+        "name": "Ismaël Gharbi",
+        "pos": "MF",
+        "club": "Augsburg"
+      },
+      {
+        "name": "Mohamed Hadj Mahmoud",
+        "pos": "MF",
+        "club": "Lugano"
+      },
+      {
+        "name": "Rani Khedira",
+        "pos": "MF",
+        "club": "Union Berlin"
+      },
+      {
+        "name": "Elias Achouri",
+        "pos": "FW",
+        "club": "Copenhagen"
+      },
+      {
+        "name": "Firas Chaouat",
+        "pos": "FW",
+        "club": "Club Africain"
+      },
+      {
+        "name": "Hazem Mastouri",
+        "pos": "FW",
+        "club": "Dynamo Makhachkala"
+      },
+      {
+        "name": "Elias Saad",
+        "pos": "FW",
+        "club": "Hannover 96"
+      },
+      {
+        "name": "Sebastian Tounekti",
+        "pos": "FW",
+        "club": "Celtic"
+      },
+      {
+        "name": "Khalil Ayari",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Rayan Elloumi",
+        "pos": "FW",
+        "club": "Vancouver Whitecaps"
+      }
+    ]
+  },
+  "Belgium": {
+    "status": "Final 26-man squad (confirmed 15 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Thibaut Courtois",
+        "pos": "GK",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Senne Lammens",
+        "pos": "GK",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Mike Penders",
+        "pos": "GK",
+        "club": "Strasbourg"
+      },
+      {
+        "name": "Thomas Meunier",
+        "pos": "DF",
+        "club": "Lille"
+      },
+      {
+        "name": "Timothy Castagne",
+        "pos": "DF",
+        "club": "Fulham"
+      },
+      {
+        "name": "Arthur Theate",
+        "pos": "DF",
+        "club": "Eintracht Frankfurt"
+      },
+      {
+        "name": "Zeno Debast",
+        "pos": "DF",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Maxim De Cuyper",
+        "pos": "DF",
+        "club": "Brighton"
+      },
+      {
+        "name": "Brandon Mechele",
+        "pos": "DF",
+        "club": "Club Brugge"
+      },
+      {
+        "name": "Koni De Winter",
+        "pos": "DF",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Joaquin Seys",
+        "pos": "DF",
+        "club": "Club Brugge"
+      },
+      {
+        "name": "Nathan Ngoy",
+        "pos": "DF",
+        "club": "Lille"
+      },
+      {
+        "name": "Axel Witsel",
+        "pos": "MF",
+        "club": "Girona"
+      },
+      {
+        "name": "Kevin De Bruyne",
+        "pos": "MF",
+        "club": "Napoli"
+      },
+      {
+        "name": "Youri Tielemans",
+        "pos": "MF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Hans Vanaken",
+        "pos": "MF",
+        "club": "Club Brugge"
+      },
+      {
+        "name": "Amadou Onana",
+        "pos": "MF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Nicolas Raskin",
+        "pos": "MF",
+        "club": "Rangers"
+      },
+      {
+        "name": "Romelu Lukaku",
+        "pos": "FW",
+        "club": "Napoli"
+      },
+      {
+        "name": "Leandro Trossard",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Jeremy Doku",
+        "pos": "FW",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Dodi Lukebakio",
+        "pos": "FW",
+        "club": "Benfica"
+      },
+      {
+        "name": "Charles De Ketelaere",
+        "pos": "FW",
+        "club": "Atalanta"
+      },
+      {
+        "name": "Alexis Saelemaekers",
+        "pos": "FW",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Diego Moreira",
+        "pos": "FW",
+        "club": "Strasbourg"
+      },
+      {
+        "name": "Matias Fernandez-Pardo",
+        "pos": "FW",
+        "club": "Lille"
+      }
+    ]
+  },
+  "Egypt": {
+    "status": "Preliminary squad (final 26 by 29 May)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Mohamed El Shenawy",
+        "pos": "GK",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Mostafa Shobeir",
+        "pos": "GK",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "El Mahdi Soliman",
+        "pos": "GK",
+        "club": "Zamalek"
+      },
+      {
+        "name": "Mohamed Alaa",
+        "pos": "GK",
+        "club": "El Gouna"
+      },
+      {
+        "name": "Mohamed Hany",
+        "pos": "DF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Tarek Alaa",
+        "pos": "DF",
+        "club": "Zed FC"
+      },
+      {
+        "name": "Hamdy Fathy",
+        "pos": "DF",
+        "club": "Al Wakrah"
+      },
+      {
+        "name": "Rami Rabia",
+        "pos": "DF",
+        "club": "Al Ain"
+      },
+      {
+        "name": "Yasser Ibrahim",
+        "pos": "DF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Hossam Abdelmaguid",
+        "pos": "DF",
+        "club": "Zamalek"
+      },
+      {
+        "name": "Mohamed Abdelmonem",
+        "pos": "DF",
+        "club": "Nice"
+      },
+      {
+        "name": "Ahmed Fatouh",
+        "pos": "DF",
+        "club": "Zamalek"
+      },
+      {
+        "name": "Karim Hafez",
+        "pos": "DF",
+        "club": "Pyramids"
+      },
+      {
+        "name": "Marwan Ateya",
+        "pos": "MF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Mohanad Lasheen",
+        "pos": "MF",
+        "club": "Pyramids"
+      },
+      {
+        "name": "Nabil Emad",
+        "pos": "MF",
+        "club": "Al Najma"
+      },
+      {
+        "name": "Mahmoud Saber",
+        "pos": "MF",
+        "club": "Zed FC"
+      },
+      {
+        "name": "Ahmed Zizo",
+        "pos": "MF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Emam Ashour",
+        "pos": "MF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Mostafa Ziko",
+        "pos": "MF",
+        "club": "Pyramids"
+      },
+      {
+        "name": "Mahmoud Trezeguet",
+        "pos": "MF",
+        "club": "Al Ahly"
+      },
+      {
+        "name": "Ibrahim Adel",
+        "pos": "MF",
+        "club": "Nordsjælland"
+      },
+      {
+        "name": "Haissem Hassan",
+        "pos": "MF",
+        "club": "Real Oviedo"
+      },
+      {
+        "name": "Omar Marmoush",
+        "pos": "FW",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Mohamed Salah",
+        "pos": "FW",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Aqtay Abdallah",
+        "pos": "FW",
+        "club": "Enppi"
+      },
+      {
+        "name": "Hamza Abdelkarim",
+        "pos": "FW",
+        "club": "Barcelona"
+      }
+    ]
+  },
+  "Iran": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "New Zealand": {
+    "status": "Final 26-man squad (confirmed 14 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Max Crocombe",
+        "pos": "GK",
+        "club": "Millwall"
+      },
+      {
+        "name": "Alex Paulsen",
+        "pos": "GK",
+        "club": "Lechia Gdańsk"
+      },
+      {
+        "name": "Michael Woud",
+        "pos": "GK",
+        "club": "Auckland FC"
+      },
+      {
+        "name": "Tim Payne",
+        "pos": "DF",
+        "club": "Wellington Phoenix"
+      },
+      {
+        "name": "Francis de Vries",
+        "pos": "DF",
+        "club": "Auckland FC"
+      },
+      {
+        "name": "Tyler Bindon",
+        "pos": "DF",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Michael Boxall",
+        "pos": "DF",
+        "club": "Minnesota United"
+      },
+      {
+        "name": "Liberato Cacace",
+        "pos": "DF",
+        "club": "Wrexham"
+      },
+      {
+        "name": "Nando Pijnaker",
+        "pos": "DF",
+        "club": "Auckland FC"
+      },
+      {
+        "name": "Finn Surman",
+        "pos": "DF",
+        "club": "Portland Timbers"
+      },
+      {
+        "name": "Callan Elliot",
+        "pos": "DF",
+        "club": "Auckland FC"
+      },
+      {
+        "name": "Tommy Smith",
+        "pos": "DF",
+        "club": "Braintree Town"
+      },
+      {
+        "name": "Joe Bell",
+        "pos": "MF",
+        "club": "Viking FK"
+      },
+      {
+        "name": "Matthew Garbett",
+        "pos": "MF",
+        "club": "Peterborough United"
+      },
+      {
+        "name": "Marko Stamenic",
+        "pos": "MF",
+        "club": "Swansea City"
+      },
+      {
+        "name": "Sarpreet Singh",
+        "pos": "MF",
+        "club": "Wellington Phoenix"
+      },
+      {
+        "name": "Elijah Just",
+        "pos": "MF",
+        "club": "Motherwell"
+      },
+      {
+        "name": "Alex Rufer",
+        "pos": "MF",
+        "club": "Wellington Phoenix"
+      },
+      {
+        "name": "Ben Old",
+        "pos": "MF",
+        "club": "Saint-Étienne"
+      },
+      {
+        "name": "Callum McCowatt",
+        "pos": "MF",
+        "club": "Silkeborg"
+      },
+      {
+        "name": "Ryan Thomas",
+        "pos": "MF",
+        "club": "PEC Zwolle"
+      },
+      {
+        "name": "Lachlan Bayliss",
+        "pos": "MF",
+        "club": "Newcastle Jets"
+      },
+      {
+        "name": "Chris Wood",
+        "pos": "FW",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Kosta Barbarouses",
+        "pos": "FW",
+        "club": "Western Sydney Wanderers"
+      },
+      {
+        "name": "Ben Waine",
+        "pos": "FW",
+        "club": "Port Vale"
+      },
+      {
+        "name": "Jesse Randall",
+        "pos": "FW",
+        "club": "Auckland FC"
+      }
+    ]
+  },
+  "Spain": {
+    "status": "TBA — announces 25 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Cape Verde": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Vozinha",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Márcio Rosa",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "CJ dos Santos",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Stopira",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Roberto Lopes",
+        "pos": "DF",
+        "club": "Shamrock Rovers"
+      },
+      {
+        "name": "João Paulo",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Diney",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Logan Costa",
+        "pos": "DF",
+        "club": "Villarreal"
+      },
+      {
+        "name": "Steven Moreira",
+        "pos": "DF",
+        "club": "Columbus Crew"
+      },
+      {
+        "name": "Wágner Pina",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Sidny Lopes Cabral",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Kelvin Pires",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jamiro Monteiro",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Kévin Pina",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Deroy Duarte",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Telmo Arcanjo",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Laros Duarte",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Yannick Semedo",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Ryan Mendes",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Garry Rodrigues",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Willy Semedo",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Jovane Cabral",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Gilson Benchimol",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Dailon Livramento",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Hélio Varela",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Nuno da Costa",
+        "pos": "FW",
+        "club": "TBD"
+      }
+    ]
+  },
+  "Saudi Arabia": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Uruguay": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "France": {
+    "status": "Final 26-man squad (confirmed 14 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Mike Maignan",
+        "pos": "GK",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Brice Samba",
+        "pos": "GK",
+        "club": "Rennes"
+      },
+      {
+        "name": "Robin Risser",
+        "pos": "GK",
+        "club": "Lens"
+      },
+      {
+        "name": "Lucas Digne",
+        "pos": "DF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Jules Koundé",
+        "pos": "DF",
+        "club": "Barcelona"
+      },
+      {
+        "name": "Theo Hernández",
+        "pos": "DF",
+        "club": "Al-Hilal"
+      },
+      {
+        "name": "Lucas Hernández",
+        "pos": "DF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Dayot Upamecano",
+        "pos": "DF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "William Saliba",
+        "pos": "DF",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Ibrahima Konaté",
+        "pos": "DF",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Malo Gusto",
+        "pos": "DF",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Maxence Lacroix",
+        "pos": "DF",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "N'Golo Kanté",
+        "pos": "MF",
+        "club": "Fenerbahçe"
+      },
+      {
+        "name": "Adrien Rabiot",
+        "pos": "MF",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Aurélien Tchouaméni",
+        "pos": "MF",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Manu Koné",
+        "pos": "MF",
+        "club": "Roma"
+      },
+      {
+        "name": "Warren Zaïre-Emery",
+        "pos": "MF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Kylian Mbappé",
+        "pos": "FW",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Ousmane Dembélé",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Marcus Thuram",
+        "pos": "FW",
+        "club": "Inter Milan"
+      },
+      {
+        "name": "Bradley Barcola",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Michael Olise",
+        "pos": "FW",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Maghnes Akliouche",
+        "pos": "FW",
+        "club": "Monaco"
+      },
+      {
+        "name": "Désiré Doué",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Rayan Cherki",
+        "pos": "FW",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Jean-Philippe Mateta",
+        "pos": "FW",
+        "club": "Crystal Palace"
+      }
+    ]
+  },
+  "Senegal": {
+    "status": "Final 26-man squad (confirmed 21 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Édouard Mendy",
+        "pos": "GK",
+        "club": "Al-Ahli"
+      },
+      {
+        "name": "Mory Diaw",
+        "pos": "GK",
+        "club": "Le Havre"
+      },
+      {
+        "name": "Yehvann Diouf",
+        "pos": "GK",
+        "club": "Nice"
+      },
+      {
+        "name": "Krépin Diatta",
+        "pos": "DF",
+        "club": "Monaco"
+      },
+      {
+        "name": "Antoine Mendy",
+        "pos": "DF",
+        "club": "Nice"
+      },
+      {
+        "name": "Kalidou Koulibaly",
+        "pos": "DF",
+        "club": "Al-Hilal"
+      },
+      {
+        "name": "El Hadji Malick Diouf",
+        "pos": "DF",
+        "club": "West Ham"
+      },
+      {
+        "name": "Mamadou Sarr",
+        "pos": "DF",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Moussa Niakhaté",
+        "pos": "DF",
+        "club": "Lyon"
+      },
+      {
+        "name": "Moustapha Mbow",
+        "pos": "DF",
+        "club": "Paris FC"
+      },
+      {
+        "name": "Abdoulaye Seck",
+        "pos": "DF",
+        "club": "Maccabi Haifa"
+      },
+      {
+        "name": "Ismaïl Jakobs",
+        "pos": "DF",
+        "club": "Galatasaray"
+      },
+      {
+        "name": "Ilay Camara",
+        "pos": "DF",
+        "club": "Anderlecht"
+      },
+      {
+        "name": "Idrissa Gueye",
+        "pos": "MF",
+        "club": "Everton"
+      },
+      {
+        "name": "Pape Gueye",
+        "pos": "MF",
+        "club": "Villarreal"
+      },
+      {
+        "name": "Lamine Camara",
+        "pos": "MF",
+        "club": "Monaco"
+      },
+      {
+        "name": "Habib Diarra",
+        "pos": "MF",
+        "club": "Sunderland"
+      },
+      {
+        "name": "Pathé Ciss",
+        "pos": "MF",
+        "club": "Rayo Vallecano"
+      },
+      {
+        "name": "Pape Matar Sarr",
+        "pos": "MF",
+        "club": "Tottenham"
+      },
+      {
+        "name": "Bara Sapoko Ndiaye",
+        "pos": "MF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Sadio Mané",
+        "pos": "FW",
+        "club": "Al-Nassr"
+      },
+      {
+        "name": "Ismaïla Sarr",
+        "pos": "FW",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Iliman Ndiaye",
+        "pos": "FW",
+        "club": "Everton"
+      },
+      {
+        "name": "Nicolas Jackson",
+        "pos": "FW",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Assane Diao",
+        "pos": "FW",
+        "club": "Como"
+      },
+      {
+        "name": "Ibrahim Mbaye",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      }
+    ]
+  },
+  "Iraq": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Norway": {
+    "status": "Final 26-man squad (confirmed 21 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Ørjan Nyland",
+        "pos": "GK",
+        "club": "Sevilla"
+      },
+      {
+        "name": "Egil Selvik",
+        "pos": "GK",
+        "club": "Watford"
+      },
+      {
+        "name": "Sander Tangvik",
+        "pos": "GK",
+        "club": "Hamburger SV"
+      },
+      {
+        "name": "Kristoffer Ajer",
+        "pos": "DF",
+        "club": "Brentford"
+      },
+      {
+        "name": "Julian Ryerson",
+        "pos": "DF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Leo Østigård",
+        "pos": "DF",
+        "club": "Genoa"
+      },
+      {
+        "name": "Marcus Holmgren Pedersen",
+        "pos": "DF",
+        "club": "Torino"
+      },
+      {
+        "name": "David Møller Wolfe",
+        "pos": "DF",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Fredrik André Bjørkan",
+        "pos": "DF",
+        "club": "Bodø/Glimt"
+      },
+      {
+        "name": "Torbjørn Heggem",
+        "pos": "DF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Sondre Langås",
+        "pos": "DF",
+        "club": "Derby County"
+      },
+      {
+        "name": "Henrik Falchener",
+        "pos": "DF",
+        "club": "Viking"
+      },
+      {
+        "name": "Martin Ødegaard",
+        "pos": "MF",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Sander Berge",
+        "pos": "MF",
+        "club": "Fulham"
+      },
+      {
+        "name": "Patrick Berg",
+        "pos": "MF",
+        "club": "Bodø/Glimt"
+      },
+      {
+        "name": "Kristian Thorstvedt",
+        "pos": "MF",
+        "club": "Sassuolo"
+      },
+      {
+        "name": "Morten Thorsby",
+        "pos": "MF",
+        "club": "Cremonese"
+      },
+      {
+        "name": "Antonio Nusa",
+        "pos": "MF",
+        "club": "RB Leipzig"
+      },
+      {
+        "name": "Fredrik Aursnes",
+        "pos": "MF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Oscar Bobb",
+        "pos": "MF",
+        "club": "Fulham"
+      },
+      {
+        "name": "Jens Petter Hauge",
+        "pos": "MF",
+        "club": "Bodø/Glimt"
+      },
+      {
+        "name": "Andreas Schjelderup",
+        "pos": "MF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Thelo Aasgaard",
+        "pos": "MF",
+        "club": "Rangers"
+      },
+      {
+        "name": "Erling Haaland",
+        "pos": "FW",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Alexander Sørloth",
+        "pos": "FW",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Jørgen Strand Larsen",
+        "pos": "FW",
+        "club": "Crystal Palace"
+      }
+    ]
+  },
+  "Argentina": {
+    "status": "Preliminary 55-man squad (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Emiliano Martínez",
+        "pos": "GK",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Gerónimo Rulli",
+        "pos": "GK",
+        "club": "Marseille"
+      },
+      {
+        "name": "Juan Musso",
+        "pos": "GK",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Walter Benítez",
+        "pos": "GK",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Facundo Cambeses",
+        "pos": "GK",
+        "club": "Racing Club"
+      },
+      {
+        "name": "Santiago Beltrán",
+        "pos": "GK",
+        "club": "River Plate"
+      },
+      {
+        "name": "Agustín Giay",
+        "pos": "DF",
+        "club": "Palmeiras"
+      },
+      {
+        "name": "Gonzalo Montiel",
+        "pos": "DF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Nahuel Molina",
+        "pos": "DF",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Nicolás Capaldo",
+        "pos": "DF",
+        "club": "Hamburger SV"
+      },
+      {
+        "name": "Kevin Mac Allister",
+        "pos": "DF",
+        "club": "Union Saint-Gilloise"
+      },
+      {
+        "name": "Lucas Martínez Quarta",
+        "pos": "DF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Marcos Senesi",
+        "pos": "DF",
+        "club": "Bournemouth"
+      },
+      {
+        "name": "Lisandro Martínez",
+        "pos": "DF",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Nicolás Otamendi",
+        "pos": "DF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Germán Pezzella",
+        "pos": "DF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Leonardo Balerdi",
+        "pos": "DF",
+        "club": "Marseille"
+      },
+      {
+        "name": "Cristian Romero",
+        "pos": "DF",
+        "club": "Tottenham"
+      },
+      {
+        "name": "Lautaro Di Lollo",
+        "pos": "DF",
+        "club": "Boca Juniors"
+      },
+      {
+        "name": "Zaid Romero",
+        "pos": "DF",
+        "club": "Getafe"
+      },
+      {
+        "name": "Facundo Medina",
+        "pos": "DF",
+        "club": "Marseille"
+      },
+      {
+        "name": "Marcos Acuña",
+        "pos": "DF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Nicolás Tagliafico",
+        "pos": "DF",
+        "club": "Lyon"
+      },
+      {
+        "name": "Gabriel Rojas",
+        "pos": "DF",
+        "club": "Racing Club"
+      },
+      {
+        "name": "Máximo Perrone",
+        "pos": "MF",
+        "club": "Como"
+      },
+      {
+        "name": "Leandro Paredes",
+        "pos": "MF",
+        "club": "Boca Juniors"
+      },
+      {
+        "name": "Guido Rodríguez",
+        "pos": "MF",
+        "club": "Valencia"
+      },
+      {
+        "name": "Aníbal Moreno",
+        "pos": "MF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Milton Delgado",
+        "pos": "MF",
+        "club": "Boca Juniors"
+      },
+      {
+        "name": "Alan Varela",
+        "pos": "MF",
+        "club": "Porto"
+      },
+      {
+        "name": "Ezequiel Fernández",
+        "pos": "MF",
+        "club": "Bayer Leverkusen"
+      },
+      {
+        "name": "Rodrigo De Paul",
+        "pos": "MF",
+        "club": "Inter Miami"
+      },
+      {
+        "name": "Exequiel Palacios",
+        "pos": "MF",
+        "club": "Bayer Leverkusen"
+      },
+      {
+        "name": "Enzo Fernández",
+        "pos": "MF",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Alexis Mac Allister",
+        "pos": "MF",
+        "club": "Liverpool"
+      },
+      {
+        "name": "Giovani Lo Celso",
+        "pos": "MF",
+        "club": "Real Betis"
+      },
+      {
+        "name": "Nicolás Domínguez",
+        "pos": "MF",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Emiliano Buendía",
+        "pos": "MF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Valentín Barco",
+        "pos": "MF",
+        "club": "Strasbourg"
+      },
+      {
+        "name": "Lionel Messi",
+        "pos": "FW",
+        "club": "Inter Miami"
+      },
+      {
+        "name": "Nicolás Paz",
+        "pos": "FW",
+        "club": "Como"
+      },
+      {
+        "name": "Franco Mastantuono",
+        "pos": "FW",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Thiago Almada",
+        "pos": "FW",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Tomás Aranda",
+        "pos": "FW",
+        "club": "Boca Juniors"
+      },
+      {
+        "name": "Nicolás González",
+        "pos": "FW",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Alejandro Garnacho",
+        "pos": "FW",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Giuliano Simeone",
+        "pos": "FW",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Matías Soulé",
+        "pos": "FW",
+        "club": "Roma"
+      },
+      {
+        "name": "Claudio Echeverri",
+        "pos": "FW",
+        "club": "Girona"
+      },
+      {
+        "name": "Gianluca Prestianni",
+        "pos": "FW",
+        "club": "Benfica"
+      },
+      {
+        "name": "Santiago Castro",
+        "pos": "FW",
+        "club": "Bologna"
+      },
+      {
+        "name": "Lautaro Martínez",
+        "pos": "FW",
+        "club": "Inter Milan"
+      },
+      {
+        "name": "José Manuel López",
+        "pos": "FW",
+        "club": "Palmeiras"
+      },
+      {
+        "name": "Julián Álvarez",
+        "pos": "FW",
+        "club": "Atlético Madrid"
+      },
+      {
+        "name": "Mateo Pellegrino",
+        "pos": "FW",
+        "club": "Parma"
+      }
+    ]
+  },
+  "Algeria": {
+    "status": "TBA — announces 31 May 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Austria": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Alexander Schlager",
+        "pos": "GK",
+        "club": "RB Salzburg"
+      },
+      {
+        "name": "Florian Wiegele",
+        "pos": "GK",
+        "club": "Viktoria Plzeň"
+      },
+      {
+        "name": "Patrick Pentz",
+        "pos": "GK",
+        "club": "Brøndby"
+      },
+      {
+        "name": "David Affengruber",
+        "pos": "DF",
+        "club": "Elche"
+      },
+      {
+        "name": "Kevin Danso",
+        "pos": "DF",
+        "club": "Tottenham"
+      },
+      {
+        "name": "Stefan Posch",
+        "pos": "DF",
+        "club": "Como"
+      },
+      {
+        "name": "David Alaba",
+        "pos": "DF",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Philipp Lienhart",
+        "pos": "DF",
+        "club": "SC Freiburg"
+      },
+      {
+        "name": "Phillipp Mwene",
+        "pos": "DF",
+        "club": "Mainz"
+      },
+      {
+        "name": "Alexander Prass",
+        "pos": "DF",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Marco Friedl",
+        "pos": "DF",
+        "club": "Werder Bremen"
+      },
+      {
+        "name": "Michael Svoboda",
+        "pos": "DF",
+        "club": "Venezia"
+      },
+      {
+        "name": "Xaver Schlager",
+        "pos": "MF",
+        "club": "RB Leipzig"
+      },
+      {
+        "name": "Nicolas Seiwald",
+        "pos": "MF",
+        "club": "RB Leipzig"
+      },
+      {
+        "name": "Marcel Sabitzer",
+        "pos": "MF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Florian Grillitsch",
+        "pos": "MF",
+        "club": "Braga"
+      },
+      {
+        "name": "Carney Chukwuemeka",
+        "pos": "MF",
+        "club": "Borussia Dortmund"
+      },
+      {
+        "name": "Romano Schmid",
+        "pos": "MF",
+        "club": "Werder Bremen"
+      },
+      {
+        "name": "Christoph Baumgartner",
+        "pos": "MF",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Konrad Laimer",
+        "pos": "MF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Patrick Wimmer",
+        "pos": "MF",
+        "club": "Wolfsburg"
+      },
+      {
+        "name": "Paul Wanner",
+        "pos": "MF",
+        "club": "PSV Eindhoven"
+      },
+      {
+        "name": "Alessandro Schöpf",
+        "pos": "MF",
+        "club": "Wolfsberger AC"
+      },
+      {
+        "name": "Marko Arnautović",
+        "pos": "FW",
+        "club": "Red Star Belgrade"
+      },
+      {
+        "name": "Michael Gregoritsch",
+        "pos": "FW",
+        "club": "Brøndby"
+      },
+      {
+        "name": "Saša Kalajdžić",
+        "pos": "FW",
+        "club": "Wolverhampton"
+      }
+    ]
+  },
+  "Jordan": {
+    "status": "Preliminary squad submitted (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": []
+  },
+  "Portugal": {
+    "status": "Final 26-man squad (confirmed 19 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Diogo Costa",
+        "pos": "GK",
+        "club": "Porto"
+      },
+      {
+        "name": "José Sá",
+        "pos": "GK",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Rui Silva",
+        "pos": "GK",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Ricardo Velho",
+        "pos": "GK",
+        "club": "Gençlerbirliği"
+      },
+      {
+        "name": "Diogo Dalot",
+        "pos": "DF",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Matheus Nunes",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Nélson Semedo",
+        "pos": "DF",
+        "club": "Fenerbahçe"
+      },
+      {
+        "name": "João Cancelo",
+        "pos": "DF",
+        "club": "Barcelona"
+      },
+      {
+        "name": "Nuno Mendes",
+        "pos": "DF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Gonçalo Inácio",
+        "pos": "DF",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Renato Veiga",
+        "pos": "DF",
+        "club": "Villarreal"
+      },
+      {
+        "name": "Rúben Dias",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Tomás Araújo",
+        "pos": "DF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Rúben Neves",
+        "pos": "MF",
+        "club": "Al-Hilal"
+      },
+      {
+        "name": "Samu Costa",
+        "pos": "MF",
+        "club": "Mallorca"
+      },
+      {
+        "name": "João Neves",
+        "pos": "MF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Vitinha",
+        "pos": "MF",
+        "club": "Paris Saint-Germain"
+      },
+      {
+        "name": "Bruno Fernandes",
+        "pos": "MF",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Bernardo Silva",
+        "pos": "MF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "pos": "FW",
+        "club": "Al-Nassr"
+      },
+      {
+        "name": "João Félix",
+        "pos": "FW",
+        "club": "Al-Nassr"
+      },
+      {
+        "name": "Francisco Trincão",
+        "pos": "FW",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Francisco Conceição",
+        "pos": "FW",
+        "club": "Juventus"
+      },
+      {
+        "name": "Pedro Neto",
+        "pos": "FW",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Rafael Leão",
+        "pos": "FW",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Gonçalo Guedes",
+        "pos": "FW",
+        "club": "Real Sociedad"
+      },
+      {
+        "name": "Gonçalo Ramos",
+        "pos": "FW",
+        "club": "Paris Saint-Germain"
+      }
+    ]
+  },
+  "DR Congo": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Matthieu Epolo",
+        "pos": "GK",
+        "club": "Standard Liège"
+      },
+      {
+        "name": "Timothy Fayulu",
+        "pos": "GK",
+        "club": "FC Noah"
+      },
+      {
+        "name": "Lionel Mpasi",
+        "pos": "GK",
+        "club": "Le Havre"
+      },
+      {
+        "name": "Dylan Batubinsika",
+        "pos": "DF",
+        "club": "Larissa"
+      },
+      {
+        "name": "Rocky Bushiri",
+        "pos": "DF",
+        "club": "Hibernian"
+      },
+      {
+        "name": "Gédéon Kalulu",
+        "pos": "DF",
+        "club": "Aris Limassol"
+      },
+      {
+        "name": "Steve Kapuadi",
+        "pos": "DF",
+        "club": "Widzew Łódź"
+      },
+      {
+        "name": "Joris Kayembe",
+        "pos": "DF",
+        "club": "Racing Genk"
+      },
+      {
+        "name": "Arthur Masuaku",
+        "pos": "DF",
+        "club": "Lens"
+      },
+      {
+        "name": "Chancel Mbemba",
+        "pos": "DF",
+        "club": "Lille"
+      },
+      {
+        "name": "Axel Tuanzebe",
+        "pos": "DF",
+        "club": "Burnley"
+      },
+      {
+        "name": "Aaron Wan-Bissaka",
+        "pos": "DF",
+        "club": "West Ham"
+      },
+      {
+        "name": "Théo Bongonda",
+        "pos": "MF",
+        "club": "Spartak Moscow"
+      },
+      {
+        "name": "Brian Cipenga",
+        "pos": "MF",
+        "club": "Castellón"
+      },
+      {
+        "name": "Meschack Elia",
+        "pos": "MF",
+        "club": "Alanyaspor"
+      },
+      {
+        "name": "Gaël Kakuta",
+        "pos": "MF",
+        "club": "Larissa"
+      },
+      {
+        "name": "Edo Kayembe",
+        "pos": "MF",
+        "club": "Watford"
+      },
+      {
+        "name": "Nathanaël Mbuku",
+        "pos": "MF",
+        "club": "Montpellier"
+      },
+      {
+        "name": "Samuel Moutoussamy",
+        "pos": "MF",
+        "club": "Atromitos"
+      },
+      {
+        "name": "Ngal'ayel Mukau",
+        "pos": "MF",
+        "club": "Lille"
+      },
+      {
+        "name": "Charles Pickel",
+        "pos": "MF",
+        "club": "Espanyol"
+      },
+      {
+        "name": "Noah Sadiki",
+        "pos": "MF",
+        "club": "Sunderland"
+      },
+      {
+        "name": "Cédric Bakambu",
+        "pos": "FW",
+        "club": "Real Betis"
+      },
+      {
+        "name": "Simon Banza",
+        "pos": "FW",
+        "club": "Al Jazira"
+      },
+      {
+        "name": "Fiston Mayele",
+        "pos": "FW",
+        "club": "Pyramids"
+      },
+      {
+        "name": "Yoane Wissa",
+        "pos": "FW",
+        "club": "Newcastle"
+      }
+    ]
+  },
+  "Uzbekistan": {
+    "status": "Preliminary squad (final 26 by 1 Jun)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "Vladimir Nazarov",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Utkir Yusupov",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Botirali Ergashev",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Abduvokhid Nematov",
+        "pos": "GK",
+        "club": "TBD"
+      },
+      {
+        "name": "Ibrohimkhalil Yuldoshev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Avazbek Ulmasaliev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jakhongir Urozov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Rustamjon Ashurmatov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Mukhammadkodir Hamraliev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Umarbek Eshmurodov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Abdukodir Khusanov",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Abdulla Abdullaev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Farrukh Sayfiev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Khojiakbar Alijonov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Sherzod Nasrullaev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Muhammadrasul Abdumajidov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Behruz Karimov",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Diyor Ortikboev",
+        "pos": "DF",
+        "club": "TBD"
+      },
+      {
+        "name": "Kuvondik Ruziev",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Sherzod Esanov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Nodirbek Abdurazzokov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Odiljon Khamrobekov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Umarali Rakhmonaliev",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Alisher Odilov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Sardorbek Rakhmonov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Akmal Mozgovoy",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Otabek Shukurov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jamshid Iskanderov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Jasurbek Jaloliddinov",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Azizjon Ganiev",
+        "pos": "MF",
+        "club": "TBD"
+      },
+      {
+        "name": "Abbosbek Fayzullaev",
+        "pos": "FW",
+        "club": "CSKA Moscow"
+      },
+      {
+        "name": "Jaloliddin Masharipov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Dostonbek Khamdamov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Oston Urunov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Ruslanbek Jiyanov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Azizbek Amonov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Khusain Norchaev",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Sherzod Temirov",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Igor Sergeev",
+        "pos": "FW",
+        "club": "TBD"
+      },
+      {
+        "name": "Eldor Shomurodov",
+        "pos": "FW",
+        "club": "Istanbul Başakşehir"
+      }
+    ]
+  },
+  "Colombia": {
+    "status": "Preliminary squad (final 26 by 29 May)",
+    "confirmed": false,
+    "players": [
+      {
+        "name": "David Ospina",
+        "pos": "GK",
+        "club": "Atlético Nacional"
+      },
+      {
+        "name": "Álvaro Montero",
+        "pos": "GK",
+        "club": "Vélez Sarsfield"
+      },
+      {
+        "name": "Camilo Vargas",
+        "pos": "GK",
+        "club": "Atlas"
+      },
+      {
+        "name": "Mosquera Marmolejo",
+        "pos": "GK",
+        "club": "Santa Fe"
+      },
+      {
+        "name": "Aldair Quintana",
+        "pos": "GK",
+        "club": "Independiente del Valle"
+      },
+      {
+        "name": "Kevin Mier",
+        "pos": "GK",
+        "club": "Cruz Azul"
+      },
+      {
+        "name": "Daniel Muñoz",
+        "pos": "DF",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Jhon Lucumí",
+        "pos": "DF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Álvaro Angulo",
+        "pos": "DF",
+        "club": "Pumas"
+      },
+      {
+        "name": "Santiago Arias",
+        "pos": "DF",
+        "club": "Independiente"
+      },
+      {
+        "name": "Davinson Sánchez",
+        "pos": "DF",
+        "club": "Galatasaray"
+      },
+      {
+        "name": "Johan Mojica",
+        "pos": "DF",
+        "club": "Mallorca"
+      },
+      {
+        "name": "Yerry Mina",
+        "pos": "DF",
+        "club": "Cagliari"
+      },
+      {
+        "name": "Cristian Borja",
+        "pos": "DF",
+        "club": "Club América"
+      },
+      {
+        "name": "Juan Cabal",
+        "pos": "DF",
+        "club": "Juventus"
+      },
+      {
+        "name": "Carlos Cuesta",
+        "pos": "DF",
+        "club": "Vasco da Gama"
+      },
+      {
+        "name": "Willer Ditta",
+        "pos": "DF",
+        "club": "Cruz Azul"
+      },
+      {
+        "name": "Junior Hernández",
+        "pos": "DF",
+        "club": "Deportes Tolima"
+      },
+      {
+        "name": "Deiver Machado",
+        "pos": "DF",
+        "club": "Nantes"
+      },
+      {
+        "name": "Yerson Mosquera",
+        "pos": "DF",
+        "club": "Wolverhampton"
+      },
+      {
+        "name": "Édier Ocampo",
+        "pos": "DF",
+        "club": "Vancouver Whitecaps"
+      },
+      {
+        "name": "Jhohan Romaña",
+        "pos": "DF",
+        "club": "San Lorenzo"
+      },
+      {
+        "name": "Andrés Román",
+        "pos": "DF",
+        "club": "Atlético Nacional"
+      },
+      {
+        "name": "Jorge Carrascal",
+        "pos": "MF",
+        "club": "Flamengo"
+      },
+      {
+        "name": "Sebastian Gómez",
+        "pos": "MF",
+        "club": "Coritiba"
+      },
+      {
+        "name": "Nelson Deossa",
+        "pos": "MF",
+        "club": "Real Betis"
+      },
+      {
+        "name": "Kevin Castaño",
+        "pos": "MF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Gustavo Puerta",
+        "pos": "MF",
+        "club": "Racing Santander"
+      },
+      {
+        "name": "Juan Manuel Rengifo",
+        "pos": "MF",
+        "club": "Atlético Nacional"
+      },
+      {
+        "name": "Johan Rojas",
+        "pos": "MF",
+        "club": "Vasco da Gama"
+      },
+      {
+        "name": "Juan Fernando Quintero",
+        "pos": "MF",
+        "club": "River Plate"
+      },
+      {
+        "name": "Juan Portilla",
+        "pos": "MF",
+        "club": "Athletico Paranaense"
+      },
+      {
+        "name": "Jordan Barrera",
+        "pos": "MF",
+        "club": "Botafogo"
+      },
+      {
+        "name": "Jhon Solís",
+        "pos": "MF",
+        "club": "Birmingham City"
+      },
+      {
+        "name": "Jefferson Lerma",
+        "pos": "MF",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "Richard Ríos",
+        "pos": "MF",
+        "club": "Benfica"
+      },
+      {
+        "name": "Jhon Arias",
+        "pos": "MF",
+        "club": "Palmeiras"
+      },
+      {
+        "name": "Wilmar Barrios",
+        "pos": "MF",
+        "club": "Zenit"
+      },
+      {
+        "name": "Juan Cuadrado",
+        "pos": "MF",
+        "club": "Pisa"
+      },
+      {
+        "name": "Yáser Asprilla",
+        "pos": "MF",
+        "club": "Galatasaray"
+      },
+      {
+        "name": "James Rodríguez",
+        "pos": "MF",
+        "club": "Minnesota United"
+      },
+      {
+        "name": "Luis Díaz",
+        "pos": "FW",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Jhon Córdoba",
+        "pos": "FW",
+        "club": "Krasnodar"
+      },
+      {
+        "name": "Luis Suárez",
+        "pos": "FW",
+        "club": "Sporting CP"
+      },
+      {
+        "name": "Sebastián Villa",
+        "pos": "FW",
+        "club": "Independiente Rivadavia"
+      },
+      {
+        "name": "Neyser Villarreal",
+        "pos": "FW",
+        "club": "Cruzeiro"
+      },
+      {
+        "name": "Kevin Viveros",
+        "pos": "FW",
+        "club": "Athletico Paranaense"
+      },
+      {
+        "name": "Stiven Mendoza",
+        "pos": "FW",
+        "club": "Athletico Paranaense"
+      },
+      {
+        "name": "Edwuin Cetré",
+        "pos": "FW",
+        "club": "Estudiantes"
+      },
+      {
+        "name": "Jhon Durán",
+        "pos": "FW",
+        "club": "Zenit"
+      },
+      {
+        "name": "Andrés Gómez",
+        "pos": "FW",
+        "club": "Vasco da Gama"
+      },
+      {
+        "name": "Rafael Santos Borré",
+        "pos": "FW",
+        "club": "Internacional"
+      },
+      {
+        "name": "Jaminton Campaz",
+        "pos": "FW",
+        "club": "Rosario Central"
+      },
+      {
+        "name": "Johan Carbonero",
+        "pos": "FW",
+        "club": "Internacional"
+      },
+      {
+        "name": "Cucho Hernández",
+        "pos": "FW",
+        "club": "Real Betis"
+      }
+    ]
+  },
+  "England": {
+    "status": "Final 26-man squad (confirmed 22 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Jordan Pickford",
+        "pos": "GK",
+        "club": "Everton"
+      },
+      {
+        "name": "Dean Henderson",
+        "pos": "GK",
+        "club": "Crystal Palace"
+      },
+      {
+        "name": "James Trafford",
+        "pos": "GK",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Dan Burn",
+        "pos": "DF",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Marc Guéhi",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Reece James",
+        "pos": "DF",
+        "club": "Chelsea"
+      },
+      {
+        "name": "Ezri Konsa",
+        "pos": "DF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Tino Livramento",
+        "pos": "DF",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Nico O'Reilly",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Jarell Quansah",
+        "pos": "DF",
+        "club": "Bayer Leverkusen"
+      },
+      {
+        "name": "Djed Spence",
+        "pos": "DF",
+        "club": "Tottenham"
+      },
+      {
+        "name": "John Stones",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Elliot Anderson",
+        "pos": "MF",
+        "club": "Nottingham Forest"
+      },
+      {
+        "name": "Jude Bellingham",
+        "pos": "MF",
+        "club": "Real Madrid"
+      },
+      {
+        "name": "Eberechi Eze",
+        "pos": "MF",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Jordan Henderson",
+        "pos": "MF",
+        "club": "Brentford"
+      },
+      {
+        "name": "Kobbie Mainoo",
+        "pos": "MF",
+        "club": "Manchester United"
+      },
+      {
+        "name": "Declan Rice",
+        "pos": "MF",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Morgan Rogers",
+        "pos": "MF",
+        "club": "Aston Villa"
+      },
+      {
+        "name": "Harry Kane",
+        "pos": "FW",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Anthony Gordon",
+        "pos": "FW",
+        "club": "Newcastle"
+      },
+      {
+        "name": "Noni Madueke",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Marcus Rashford",
+        "pos": "FW",
+        "club": "Barcelona"
+      },
+      {
+        "name": "Bukayo Saka",
+        "pos": "FW",
+        "club": "Arsenal"
+      },
+      {
+        "name": "Ivan Toney",
+        "pos": "FW",
+        "club": "Al-Ahli"
+      },
+      {
+        "name": "Ollie Watkins",
+        "pos": "FW",
+        "club": "Aston Villa"
+      }
+    ]
+  },
+  "Croatia": {
+    "status": "Final 26-man squad (confirmed 18 May)",
+    "confirmed": true,
+    "players": [
+      {
+        "name": "Dominik Livaković",
+        "pos": "GK",
+        "club": "Dinamo Zagreb"
+      },
+      {
+        "name": "Dominik Kotarski",
+        "pos": "GK",
+        "club": "Copenhagen"
+      },
+      {
+        "name": "Ivor Pandur",
+        "pos": "GK",
+        "club": "Hull City"
+      },
+      {
+        "name": "Joško Gvardiol",
+        "pos": "DF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Duje Ćaleta-Car",
+        "pos": "DF",
+        "club": "Real Sociedad"
+      },
+      {
+        "name": "Josip Šutalo",
+        "pos": "DF",
+        "club": "Ajax"
+      },
+      {
+        "name": "Josip Stanišić",
+        "pos": "DF",
+        "club": "Bayern Munich"
+      },
+      {
+        "name": "Marin Pongračić",
+        "pos": "DF",
+        "club": "Fiorentina"
+      },
+      {
+        "name": "Martin Erlić",
+        "pos": "DF",
+        "club": "Midtjylland"
+      },
+      {
+        "name": "Luka Vušković",
+        "pos": "DF",
+        "club": "Hamburger SV"
+      },
+      {
+        "name": "Luka Modrić",
+        "pos": "MF",
+        "club": "AC Milan"
+      },
+      {
+        "name": "Mateo Kovačić",
+        "pos": "MF",
+        "club": "Manchester City"
+      },
+      {
+        "name": "Mario Pašalić",
+        "pos": "MF",
+        "club": "Atalanta"
+      },
+      {
+        "name": "Nikola Vlašić",
+        "pos": "MF",
+        "club": "Torino"
+      },
+      {
+        "name": "Luka Sučić",
+        "pos": "MF",
+        "club": "Real Sociedad"
+      },
+      {
+        "name": "Martin Baturina",
+        "pos": "MF",
+        "club": "Como"
+      },
+      {
+        "name": "Kristijan Jakić",
+        "pos": "MF",
+        "club": "Augsburg"
+      },
+      {
+        "name": "Petar Sučić",
+        "pos": "MF",
+        "club": "Inter Milan"
+      },
+      {
+        "name": "Nikola Moro",
+        "pos": "MF",
+        "club": "Bologna"
+      },
+      {
+        "name": "Toni Fruk",
+        "pos": "MF",
+        "club": "Rijeka"
+      },
+      {
+        "name": "Ivan Perišić",
+        "pos": "FW",
+        "club": "PSV Eindhoven"
+      },
+      {
+        "name": "Andrej Kramarić",
+        "pos": "FW",
+        "club": "Hoffenheim"
+      },
+      {
+        "name": "Ante Budimir",
+        "pos": "FW",
+        "club": "Osasuna"
+      },
+      {
+        "name": "Marco Pašalić",
+        "pos": "FW",
+        "club": "Orlando City"
+      },
+      {
+        "name": "Petar Musa",
+        "pos": "FW",
+        "club": "FC Dallas"
+      },
+      {
+        "name": "Igor Matanović",
+        "pos": "FW",
+        "club": "SC Freiburg"
+      }
+    ]
+  },
+  "Ghana": {
+    "status": "TBA — final 26 by 1 Jun 2026",
+    "confirmed": false,
+    "players": []
+  },
+  "Panama": {
+    "status": "TBA — announces 26 May 2026",
+    "confirmed": false,
+    "players": []
+  }
+}

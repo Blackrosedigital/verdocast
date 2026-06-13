@@ -11,6 +11,7 @@
   "teams": [
     {
       "name": "Mexico",
+      "slug": "mexico",
       "code": "MEX",
       "confederation": "CONCACAF",
       "route": "Host",
@@ -20,6 +21,7 @@
     },
     {
       "name": "South Africa",
+      "slug": "south-africa",
       "code": "RSA",
       "confederation": "CAF",
       "route": "Qualified",
@@ -29,6 +31,7 @@
     },
     {
       "name": "South Korea",
+      "slug": "south-korea",
       "code": "KOR",
       "confederation": "AFC",
       "route": "Qualified",
@@ -38,6 +41,7 @@
     },
     {
       "name": "Czechia",
+      "slug": "czechia",
       "code": "CZE",
       "confederation": "UEFA",
       "route": "UEFA Playoff",
@@ -47,6 +51,7 @@
     },
     {
       "name": "Canada",
+      "slug": "canada",
       "code": "CAN",
       "confederation": "CONCACAF",
       "route": "Host",
@@ -56,6 +61,7 @@
     },
     {
       "name": "Bosnia and Herzegovina",
+      "slug": "bosnia-and-herzegovina",
       "code": "BIH",
       "confederation": "UEFA",
       "route": "UEFA Playoff",
@@ -65,6 +71,7 @@
     },
     {
       "name": "Qatar",
+      "slug": "qatar",
       "code": "QAT",
       "confederation": "AFC",
       "route": "Qualified",
@@ -74,6 +81,7 @@
     },
     {
       "name": "Switzerland",
+      "slug": "switzerland",
       "code": "SUI",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -83,6 +91,7 @@
     },
     {
       "name": "Brazil",
+      "slug": "brazil",
       "code": "BRA",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -92,6 +101,7 @@
     },
     {
       "name": "Morocco",
+      "slug": "morocco",
       "code": "MAR",
       "confederation": "CAF",
       "route": "Qualified",
@@ -101,6 +111,7 @@
     },
     {
       "name": "Haiti",
+      "slug": "haiti",
       "code": "HAI",
       "confederation": "CONCACAF",
       "route": "Qualified",
@@ -110,6 +121,7 @@
     },
     {
       "name": "Scotland",
+      "slug": "scotland",
       "code": "SCO",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -119,6 +131,7 @@
     },
     {
       "name": "United States",
+      "slug": "united-states",
       "code": "USA",
       "confederation": "CONCACAF",
       "route": "Host",
@@ -128,6 +141,7 @@
     },
     {
       "name": "Paraguay",
+      "slug": "paraguay",
       "code": "PAR",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -137,6 +151,7 @@
     },
     {
       "name": "Australia",
+      "slug": "australia",
       "code": "AUS",
       "confederation": "AFC",
       "route": "Qualified",
@@ -146,6 +161,7 @@
     },
     {
       "name": "Türkiye",
+      "slug": "turkiye",
       "code": "TUR",
       "confederation": "UEFA",
       "route": "UEFA Playoff",
@@ -155,6 +171,7 @@
     },
     {
       "name": "Germany",
+      "slug": "germany",
       "code": "GER",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -164,6 +181,7 @@
     },
     {
       "name": "Curaçao",
+      "slug": "curacao",
       "code": "CUW",
       "confederation": "CONCACAF",
       "route": "Qualified",
@@ -173,6 +191,7 @@
     },
     {
       "name": "Ivory Coast",
+      "slug": "ivory-coast",
       "code": "CIV",
       "confederation": "CAF",
       "route": "Qualified",
@@ -182,6 +201,7 @@
     },
     {
       "name": "Ecuador",
+      "slug": "ecuador",
       "code": "ECU",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -191,6 +211,7 @@
     },
     {
       "name": "Netherlands",
+      "slug": "netherlands",
       "code": "NED",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -200,6 +221,7 @@
     },
     {
       "name": "Japan",
+      "slug": "japan",
       "code": "JPN",
       "confederation": "AFC",
       "route": "Qualified",
@@ -209,6 +231,7 @@
     },
     {
       "name": "Sweden",
+      "slug": "sweden",
       "code": "SWE",
       "confederation": "UEFA",
       "route": "UEFA Playoff",
@@ -218,6 +241,7 @@
     },
     {
       "name": "Tunisia",
+      "slug": "tunisia",
       "code": "TUN",
       "confederation": "CAF",
       "route": "Qualified",
@@ -227,6 +251,7 @@
     },
     {
       "name": "Belgium",
+      "slug": "belgium",
       "code": "BEL",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -236,6 +261,7 @@
     },
     {
       "name": "Egypt",
+      "slug": "egypt",
       "code": "EGY",
       "confederation": "CAF",
       "route": "Qualified",
@@ -245,6 +271,7 @@
     },
     {
       "name": "Iran",
+      "slug": "iran",
       "code": "IRN",
       "confederation": "AFC",
       "route": "Qualified",
@@ -254,6 +281,7 @@
     },
     {
       "name": "New Zealand",
+      "slug": "new-zealand",
       "code": "NZL",
       "confederation": "OFC",
       "route": "Qualified",
@@ -263,6 +291,7 @@
     },
     {
       "name": "Spain",
+      "slug": "spain",
       "code": "ESP",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -272,6 +301,7 @@
     },
     {
       "name": "Cape Verde",
+      "slug": "cape-verde",
       "code": "CPV",
       "confederation": "CAF",
       "route": "Qualified",
@@ -281,6 +311,7 @@
     },
     {
       "name": "Saudi Arabia",
+      "slug": "saudi-arabia",
       "code": "KSA",
       "confederation": "AFC",
       "route": "Qualified",
@@ -290,6 +321,7 @@
     },
     {
       "name": "Uruguay",
+      "slug": "uruguay",
       "code": "URU",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -299,6 +331,7 @@
     },
     {
       "name": "France",
+      "slug": "france",
       "code": "FRA",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -308,6 +341,7 @@
     },
     {
       "name": "Senegal",
+      "slug": "senegal",
       "code": "SEN",
       "confederation": "CAF",
       "route": "Qualified",
@@ -317,6 +351,7 @@
     },
     {
       "name": "Iraq",
+      "slug": "iraq",
       "code": "IRQ",
       "confederation": "AFC",
       "route": "Intercont. P/O",
@@ -326,6 +361,7 @@
     },
     {
       "name": "Norway",
+      "slug": "norway",
       "code": "NOR",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -335,6 +371,7 @@
     },
     {
       "name": "Argentina",
+      "slug": "argentina",
       "code": "ARG",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -344,6 +381,7 @@
     },
     {
       "name": "Algeria",
+      "slug": "algeria",
       "code": "ALG",
       "confederation": "CAF",
       "route": "Qualified",
@@ -353,6 +391,7 @@
     },
     {
       "name": "Austria",
+      "slug": "austria",
       "code": "AUT",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -362,6 +401,7 @@
     },
     {
       "name": "Jordan",
+      "slug": "jordan",
       "code": "JOR",
       "confederation": "AFC",
       "route": "Qualified",
@@ -371,6 +411,7 @@
     },
     {
       "name": "Portugal",
+      "slug": "portugal",
       "code": "POR",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -380,6 +421,7 @@
     },
     {
       "name": "DR Congo",
+      "slug": "dr-congo",
       "code": "COD",
       "confederation": "CAF",
       "route": "Intercont. P/O",
@@ -389,6 +431,7 @@
     },
     {
       "name": "Uzbekistan",
+      "slug": "uzbekistan",
       "code": "UZB",
       "confederation": "AFC",
       "route": "Qualified",
@@ -398,6 +441,7 @@
     },
     {
       "name": "Colombia",
+      "slug": "colombia",
       "code": "COL",
       "confederation": "CONMEBOL",
       "route": "Qualified",
@@ -407,6 +451,7 @@
     },
     {
       "name": "England",
+      "slug": "england",
       "code": "ENG",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -416,6 +461,7 @@
     },
     {
       "name": "Croatia",
+      "slug": "croatia",
       "code": "CRO",
       "confederation": "UEFA",
       "route": "Qualified",
@@ -425,6 +471,7 @@
     },
     {
       "name": "Ghana",
+      "slug": "ghana",
       "code": "GHA",
       "confederation": "CAF",
       "route": "Qualified",
@@ -434,6 +481,7 @@
     },
     {
       "name": "Panama",
+      "slug": "panama",
       "code": "PAN",
       "confederation": "CONCACAF",
       "route": "Qualified",
