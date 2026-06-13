@@ -92,6 +92,30 @@ for (const name of Object.keys(DATA.squads ?? {})) {
   };
 }
 
+// Manually-sourced squads (final 26s announced after the reference HTML was
+// captured) override the HTML-derived entries. See data/squads-overrides-2026.json.
+let overrides = {};
+try {
+  overrides = JSON.parse(
+    readFileSync(join(root, "data", "squads-overrides-2026.json"), "utf8"),
+  );
+} catch {
+  // No overrides file — fall back to HTML-only squads.
+}
+for (const name of Object.keys(overrides)) {
+  if (name.startsWith("_")) continue; // skip _comment
+  const s = overrides[name];
+  squads[name] = {
+    status: s.status ?? null,
+    confirmed: s.confirmed ?? false,
+    players: (s.players ?? []).map((p) => ({
+      name: p.name,
+      pos: p.pos ?? null,
+      club: p.club ?? null,
+    })),
+  };
+}
+
 // ---- venues (16) ----
 const venues = DATA.venues.map((v) => ({
   name: v.name,
