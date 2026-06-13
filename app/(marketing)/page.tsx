@@ -4,6 +4,7 @@ import { Faq, FAQ_ITEMS } from "@/components/marketing/faq";
 import { Button } from "@/components/ui/button";
 import { GROUP_COLOR_LIST, TOURNAMENT } from "@/lib/brand";
 import { PRICING_TIERS } from "@/lib/pricing";
+import { DEFAULT_RULES } from "@/lib/scoring";
 
 export const metadata: Metadata = {
   title: "Verdocast - Run a World Cup 2026 prediction league in 5 minutes",
@@ -26,6 +27,39 @@ const STEPS = [
   {
     title: "Watch leaderboard",
     body: "Everyone predicts all 72 group matches. Scores update automatically and the leaderboard goes live.",
+  },
+];
+
+// Scoring tiers shown on the landing page. Points come from lib/scoring.ts
+// (DEFAULT_RULES) so the page can never drift from the engine.
+const SCORING = [
+  {
+    points: DEFAULT_RULES.exact,
+    label: "Exact score",
+    body: "You call the precise scoreline.",
+    example: "Predict 2-1, it ends 2-1",
+    color: "var(--gold)",
+  },
+  {
+    points: DEFAULT_RULES.goal_diff,
+    label: "Goal difference",
+    body: "Right margin, wrong score (non-draws).",
+    example: "Predict 2-1, it ends 3-2",
+    color: "var(--accent)",
+  },
+  {
+    points: DEFAULT_RULES.result,
+    label: "Correct result",
+    body: "Right winner, or you called the draw.",
+    example: "Predict 1-0, it ends 3-1",
+    color: "var(--foreground)",
+  },
+  {
+    points: 0,
+    label: "Anything else",
+    body: "Wrong result - no points this time.",
+    example: "Predict 1-0, it ends 0-2",
+    color: "var(--muted-foreground)",
   },
 ];
 
@@ -140,6 +174,53 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* How points work */}
+      <section id="scoring" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-16">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+            How points work
+          </h2>
+          <p className="max-w-xl text-muted-foreground">
+            Predict the exact score of every match. The closer you get, the more
+            you score - so nobody&rsquo;s ever out of it until the final whistle.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SCORING.map((tier) => (
+            <div
+              key={tier.label}
+              className="rounded-2xl border border-border bg-surface p-6 text-center"
+            >
+              <p
+                className="font-display text-6xl leading-none"
+                style={{ color: tier.color }}
+              >
+                {tier.points}
+              </p>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                {tier.points === 1 ? "point" : "points"}
+              </p>
+              <h3 className="mt-4 font-display text-xl tracking-wide text-foreground">
+                {tier.label}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">{tier.body}</p>
+              <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+                {tier.example}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl text-balance text-center text-sm text-muted-foreground">
+          So if a match ends{" "}
+          <span className="font-mono text-foreground">2-1</span>: predicting{" "}
+          <span className="font-mono text-foreground">2-1</span> earns{" "}
+          {DEFAULT_RULES.exact}, <span className="font-mono text-foreground">3-2</span>{" "}
+          earns {DEFAULT_RULES.goal_diff} (right margin), and{" "}
+          <span className="font-mono text-foreground">1-0</span> earns{" "}
+          {DEFAULT_RULES.result} (right winner).
+        </p>
       </section>
 
       {/* Pricing summary */}
