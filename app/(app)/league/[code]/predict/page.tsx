@@ -5,6 +5,7 @@ import {
   PredictionsGrid,
   type PredictMatch,
 } from "@/components/predictions-grid";
+import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
@@ -132,6 +133,8 @@ export default async function PredictPage({
       <p className="mt-2 text-muted-foreground">
         Predict the score of every group-stage match. Each one locks at kickoff.
       </p>
+
+      <ScoringLegend className="mt-6" />
 
       <div className="mt-8">
         <PredictionsGrid leagueCode={code} matches={matches} />
