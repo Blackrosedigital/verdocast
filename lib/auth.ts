@@ -25,6 +25,18 @@ export async function requireAdmin(): Promise<User> {
 }
 
 /**
+ * Site super-admin (you) — for the private stats dashboard. Set
+ * SUPERADMIN_EMAILS (comma-separated); falls back to the founder email.
+ */
+export function isSuperAdmin(email: string | null | undefined): boolean {
+  const list = (process.env.SUPERADMIN_EMAILS ?? "christopher@emtech.com")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return !!email && list.includes(email.toLowerCase());
+}
+
+/**
  * Establish a Supabase session for `email` server-side (no email round-trip):
  * ensure the user exists, mint a magic-link token with the service role, then
  * verify it on the cookie client to set the session. MUST be called from a

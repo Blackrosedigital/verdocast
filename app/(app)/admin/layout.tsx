@@ -1,5 +1,5 @@
 import { AppNav, type NavLink } from "@/components/app-nav";
-import { getUser } from "@/lib/auth";
+import { getUser, isSuperAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -40,6 +40,10 @@ export default async function AdminLayout({
         { href: `/admin/league/${slug}/invite`, label: "Invite" },
       ]
     : [{ href: "/admin", label: "Dashboard" }];
+
+  if (isSuperAdmin(user?.email)) {
+    links.push({ href: "/admin/stats", label: "Stats" });
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
