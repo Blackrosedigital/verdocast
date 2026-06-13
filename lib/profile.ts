@@ -65,3 +65,58 @@ export async function updateDisplayName(input: {
   }
   return { ok: true, data: { displayName } };
 }
+
+const AdminSchema = z.object({
+  slug: z.string().min(1),
+  memberId: z.string().uuid(),
+  displayName: z.string().trim().min(1, "Enter a name").max(80),
+});
+
+/**
+ * Rename any member of a league. Owner-only: verifies the caller owns the
+ * league's organization, and that the target member belongs to that league.
+ */
+export async function adminUpdateMemberName(input: {
+  slug: string;
+  memberId: string;
+  displayName: string;
+}): Promise<ActionResult> {
+  const user = await requireUser();
+  const parsed = AdminSchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: parsed.error.issues[0]?.message ?? "Invalid input.",
+      code: "invalid_input",
+    };
+  }
+  const { slug, memberId, displayName } = parsed.data;
+
+  const admin = createAdminClient();
+  const { data: league } = await admin
+    .from("leagues")
+    .select("id, organization_id")
+    .eq("slug", slug)
+    .is("deleted_at", null)
+    .maybeSingle();
+  if (!league) return { ok: false, error: "League not found.", code: "not_found" };
+
+  const { data: org } = await admin
+    .from("organizations")
+    .select("owner_email")
+    .eq("id", league.organization_id)
+    .maybeSingle();
+  if (!org || org.owner_email !== user.email) {
+    return { ok: false, error: "You don’t own this league.", code: "forbidden" };
+  }
+
+  const { error } = await admin
+    .from("members")
+    .update({ display_name: displayName })
+    .eq("id", memberId)
+    .eq("league_id", league.id);
+  if (error) {
+    return { ok: false, error: "Could not rename member.", code: "save_failed" };
+  }
+  return { ok: true, data: { displayName } };
+}

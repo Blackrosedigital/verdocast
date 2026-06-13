@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DisplayNameForm } from "@/components/display-name-form";
 import { Leaderboard } from "@/components/leaderboard";
 import { ShareButton } from "@/components/share-button";
 import { requireUser } from "@/lib/auth";
@@ -47,7 +48,7 @@ export default async function LeaderboardPage({
   // Find the viewer's rank for a Wordle-style share line.
   const { data: me } = await admin
     .from("members")
-    .select("id")
+    .select("id, display_name")
     .eq("league_id", league.id)
     .eq("email", user.email ?? "")
     .maybeSingle();
@@ -76,6 +77,13 @@ export default async function LeaderboardPage({
           <ShareButton text={shareText} url={joinUrl} label="Share / Invite" />
         </div>
       </div>
+
+      {me && (
+        <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          You&rsquo;re playing as{" "}
+          <DisplayNameForm code={code} initialName={me.display_name ?? ""} />
+        </p>
+      )}
 
       <div className="mt-8">
         <Leaderboard

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { BrandingForm } from "@/components/admin/branding-form";
 import { JoinLink } from "@/components/admin/join-link";
+import { MembersList } from "@/components/admin/members-list";
 import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
@@ -53,7 +54,11 @@ export default async function AdminLeaguePage({
 
   const [licenseRes, membersRes, groupCountRes, topRes] = await Promise.all([
     admin.from("licenses").select("max_members").eq("id", league.license_id).maybeSingle(),
-    admin.from("members").select("id").eq("league_id", league.id),
+    admin
+      .from("members")
+      .select("id, display_name, email")
+      .eq("league_id", league.id)
+      .order("display_name", { ascending: true }),
     admin
       .from("matches")
       .select("*", { count: "exact", head: true })
@@ -68,8 +73,14 @@ export default async function AdminLeaguePage({
   ]);
 
   const cap = licenseRes.data?.max_members ?? 0;
-  const memberIds = (membersRes.data ?? []).map((m) => m.id);
+  const memberRows = membersRes.data ?? [];
+  const memberIds = memberRows.map((m) => m.id);
   const memberCount = memberIds.length;
+  const members = memberRows.map((m) => ({
+    id: m.id,
+    displayName: m.display_name ?? "",
+    email: m.email,
+  }));
   const groupCount = groupCountRes.count ?? 0;
 
   let predictionsMade = 0;
@@ -175,6 +186,18 @@ export default async function AdminLeaguePage({
             </Link>
           </Button>
         </div>
+      </div>
+
+      {/* Members */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <h2 className="font-display text-2xl tracking-wide text-foreground">
+          Members
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {memberCount} member{memberCount === 1 ? "" : "s"}. Rename anyone whose
+          display name needs tidying up.
+        </p>
+        <MembersList slug={slug} members={members} />
       </div>
 
       {/* Branding */}
