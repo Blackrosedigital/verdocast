@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DisplayNameForm } from "@/components/display-name-form";
 import {
   PredictionsGrid,
   type PredictMatch,
@@ -112,7 +113,8 @@ export default async function PredictPage({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {league.name} · {member.display_name}
+            {league.name} ·{" "}
+            <DisplayNameForm code={code} initialName={member.display_name ?? ""} />
           </p>
           <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
             Your predictions
