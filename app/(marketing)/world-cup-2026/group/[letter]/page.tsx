@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GroupPill } from "@/components/group-pill";
+import { LocalDate, LocalTime } from "@/components/local-time";
 import { Button } from "@/components/ui/button";
 import { createAdminClient } from "@/lib/db";
 import { computeStandings, type StandingsMatch } from "@/lib/standings";
@@ -192,7 +193,6 @@ export default async function GroupPage({
       </h2>
       <ul className="mt-4 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
         {matches.map((m) => {
-          const kickoff = new Date(m.kickoff_utc);
           const r = results.get(m.match_code);
           const home = getTeam(m.home_team);
           const away = getTeam(m.away_team);
@@ -202,7 +202,7 @@ export default async function GroupPage({
           return (
             <li key={m.match_code} className="flex items-center gap-3 px-4 py-3 text-sm">
               <span className="w-24 shrink-0 font-mono text-xs text-muted-foreground">
-                {kickoff.toLocaleDateString(undefined, { day: "numeric", month: "short" })}
+                <LocalDate iso={m.kickoff_utc} />
               </span>
               <span className="flex flex-1 items-center justify-end gap-2 truncate text-right text-foreground">
                 <Link
@@ -223,10 +223,7 @@ export default async function GroupPage({
                   </span>
                 ) : (
                   <span className="text-muted-foreground">
-                    {kickoff.toLocaleTimeString(undefined, {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
+                    <LocalTime iso={m.kickoff_utc} />
                   </span>
                 )}
               </span>

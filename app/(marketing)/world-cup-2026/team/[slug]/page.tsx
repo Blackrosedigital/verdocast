@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GroupPill } from "@/components/group-pill";
+import { LocalDate, LocalTime } from "@/components/local-time";
 import { Button } from "@/components/ui/button";
 import squadsData from "@/data/squads-2026.json";
 import {
@@ -143,7 +144,6 @@ export default async function TeamPage({
           </h2>
           <ul className="mt-4 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
             {fixtures.map((m) => {
-              const kickoff = new Date(m.kickoff_utc);
               const opponentName =
                 m.home_team === team.name ? m.away_team : m.home_team;
               const opponent = getTeam(opponentName);
@@ -154,10 +154,7 @@ export default async function TeamPage({
                   className="flex items-center gap-3 px-4 py-3 text-sm"
                 >
                   <span className="w-24 shrink-0 font-mono text-xs text-muted-foreground">
-                    {kickoff.toLocaleDateString(undefined, {
-                      day: "numeric",
-                      month: "short",
-                    })}
+                    <LocalDate iso={m.kickoff_utc} /> · <LocalTime iso={m.kickoff_utc} />
                   </span>
                   <span className="font-mono text-xs text-muted-foreground">
                     {home ? "vs" : "@"}
