@@ -29,7 +29,10 @@ export async function requireAdmin(): Promise<User> {
  * SUPERADMIN_EMAILS (comma-separated); falls back to the founder email.
  */
 export function isSuperAdmin(email: string | null | undefined): boolean {
-  const list = (process.env.SUPERADMIN_EMAILS ?? "christopher@emtech.com")
+  const list = (
+    process.env.SUPERADMIN_EMAILS ??
+    "christopher@emtech.com,christophermensah@gmail.com"
+  )
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);

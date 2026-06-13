@@ -4,7 +4,7 @@ import { BrandingForm } from "@/components/admin/branding-form";
 import { JoinLink } from "@/components/admin/join-link";
 import { MembersList } from "@/components/admin/members-list";
 import { Button } from "@/components/ui/button";
-import { requireUser } from "@/lib/auth";
+import { isSuperAdmin, requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -48,7 +48,9 @@ export default async function AdminLeaguePage({
     .select("name, owner_email")
     .eq("id", league.organization_id)
     .maybeSingle();
-  if (org?.owner_email && user.email !== org.owner_email) {
+  // Platform admins can view any league; league owners only their own.
+  const superAdmin = isSuperAdmin(user.email);
+  if (org?.owner_email && user.email !== org.owner_email && !superAdmin) {
     redirect("/");
   }
 
@@ -76,11 +78,15 @@ export default async function AdminLeaguePage({
   const memberRows = membersRes.data ?? [];
   const memberIds = memberRows.map((m) => m.id);
   const memberCount = memberIds.length;
-  const members = memberRows.map((m) => ({
-    id: m.id,
-    displayName: m.display_name ?? "",
-    email: m.email,
-  }));
+  // Member emails + rename are platform-admin-only (privacy): never exposed to
+  // league owners.
+  const members = superAdmin
+    ? memberRows.map((m) => ({
+        id: m.id,
+        displayName: m.display_name ?? "",
+        email: m.email,
+      }))
+    : [];
   const groupCount = groupCountRes.count ?? 0;
 
   let predictionsMade = 0;
@@ -188,17 +194,24 @@ export default async function AdminLeaguePage({
         </div>
       </div>
 
-      {/* Members */}
-      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
-        <h2 className="font-display text-2xl tracking-wide text-foreground">
-          Members
-        </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {memberCount} member{memberCount === 1 ? "" : "s"}. Rename anyone whose
-          display name needs tidying up.
-        </p>
-        <MembersList slug={slug} members={members} />
-      </div>
+      {/* Members - platform admins only (emails + rename are not shown to league owners) */}
+      {superAdmin && (
+        <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-display text-2xl tracking-wide text-foreground">
+              Members
+            </h2>
+            <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              Platform admin
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {memberCount} member{memberCount === 1 ? "" : "s"}. Rename anyone whose
+            display name needs tidying up.
+          </p>
+          <MembersList slug={slug} members={members} />
+        </div>
+      )}
 
       {/* Branding */}
       <div className="mt-6 rounded-2xl border border-border bg-surface p-6">

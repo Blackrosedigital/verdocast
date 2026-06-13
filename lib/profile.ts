@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { requireUser } from "@/lib/auth";
+import { isSuperAdmin, requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 
 export type ActionResult =
@@ -73,8 +73,9 @@ const AdminSchema = z.object({
 });
 
 /**
- * Rename any member of a league. Owner-only: verifies the caller owns the
- * league's organization, and that the target member belongs to that league.
+ * Rename any member of a league. PLATFORM-ADMIN ONLY (isSuperAdmin) — league
+ * owners are deliberately NOT permitted to rename other members or access their
+ * data. Verifies the target member belongs to the named league.
  */
 export async function adminUpdateMemberName(input: {
   slug: string;
@@ -82,6 +83,9 @@ export async function adminUpdateMemberName(input: {
   displayName: string;
 }): Promise<ActionResult> {
   const user = await requireUser();
+  if (!isSuperAdmin(user.email)) {
+    return { ok: false, error: "Not authorized.", code: "forbidden" };
+  }
   const parsed = AdminSchema.safeParse(input);
   if (!parsed.success) {
     return {
@@ -95,20 +99,11 @@ export async function adminUpdateMemberName(input: {
   const admin = createAdminClient();
   const { data: league } = await admin
     .from("leagues")
-    .select("id, organization_id")
+    .select("id")
     .eq("slug", slug)
     .is("deleted_at", null)
     .maybeSingle();
   if (!league) return { ok: false, error: "League not found.", code: "not_found" };
-
-  const { data: org } = await admin
-    .from("organizations")
-    .select("owner_email")
-    .eq("id", league.organization_id)
-    .maybeSingle();
-  if (!org || org.owner_email !== user.email) {
-    return { ok: false, error: "You don’t own this league.", code: "forbidden" };
-  }
 
   const { error } = await admin
     .from("members")
