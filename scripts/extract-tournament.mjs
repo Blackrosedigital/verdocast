@@ -30,9 +30,23 @@ function extractData(html) {
   throw new Error("Unbalanced braces while extracting DATA");
 }
 
-/** ET wall-clock -> UTC ISO string (EDT = UTC-4 for the whole tournament). */
+/**
+ * ET wall-clock -> UTC ISO string (EDT = UTC-4 for the whole tournament).
+ *
+ * Late West-coast evening kickoffs roll past ET midnight: the source files them
+ * under the local matchday `date` but with the post-midnight ET clock (e.g.
+ * "00:00"). No real match starts 00:00-06:59 ET, so any such time belongs to the
+ * NEXT ET calendar day — advance the date before converting (e.g. Australia v
+ * Türkiye: 2026-06-13 "00:00" ET -> 2026-06-14T04:00:00Z).
+ */
 function toUtc(date, timeET) {
-  return new Date(`${date}T${timeET}:00-04:00`)
+  let day = date;
+  if (parseInt(timeET.split(":")[0], 10) < 7) {
+    const next = new Date(`${date}T00:00:00Z`);
+    next.setUTCDate(next.getUTCDate() + 1);
+    day = next.toISOString().slice(0, 10);
+  }
+  return new Date(`${day}T${timeET}:00-04:00`)
     .toISOString()
     .replace(".000Z", "Z");
 }

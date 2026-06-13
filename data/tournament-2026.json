@@ -667,7 +667,7 @@
     },
     {
       "match_code": "GROUP_D_2",
-      "kickoff_utc": "2026-06-13T04:00:00Z",
+      "kickoff_utc": "2026-06-14T04:00:00Z",
       "stage": "group",
       "group_letter": "D",
       "home_team": "Australia",
@@ -832,7 +832,7 @@
     },
     {
       "match_code": "GROUP_J_2",
-      "kickoff_utc": "2026-06-17T04:00:00Z",
+      "kickoff_utc": "2026-06-18T04:00:00Z",
       "stage": "group",
       "group_letter": "J",
       "home_team": "Austria",
@@ -975,7 +975,7 @@
     },
     {
       "match_code": "GROUP_F_3",
-      "kickoff_utc": "2026-06-20T04:00:00Z",
+      "kickoff_utc": "2026-06-21T04:00:00Z",
       "stage": "group",
       "group_letter": "F",
       "home_team": "Tunisia",
