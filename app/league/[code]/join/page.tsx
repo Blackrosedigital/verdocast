@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { JoinForm } from "@/components/league/join-form";
 import { createAdminClient } from "@/lib/db";
@@ -8,40 +9,57 @@ export const dynamic = "force-dynamic";
 /**
  * Join landing. Two ways in:
  *  - Signed email invite (?email=&sig=): email is verified + locked.
- *  - General shared link (no sig): anyone with the league code self-joins by
- *    entering their email.
- * A signature that's PRESENT but wrong is treated as tampering (shown invalid).
+ *  - General shared link (no sig): anyone with the league code self-joins.
+ * A signature that's PRESENT but wrong is treated as tampering. `?ref=` is
+ * captured for creator/channel attribution. League branding (colour + logo) is
+ * applied when set.
  */
 export default async function JoinPage({
   params,
   searchParams,
 }: {
   params: Promise<{ code: string }>;
-  searchParams: Promise<{ email?: string; sig?: string }>;
+  searchParams: Promise<{ email?: string; sig?: string; ref?: string }>;
 }) {
   const { code } = await params;
-  const { email: rawEmail, sig } = await searchParams;
+  const { email: rawEmail, sig, ref } = await searchParams;
 
   const admin = createAdminClient();
   const { data: league } = await admin
     .from("leagues")
-    .select("name, join_code")
+    .select("name, join_code, brand_color, brand_logo_url")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
 
   const email = rawEmail ? normalizeEmail(rawEmail) : "";
-  // A signed link must verify; a missing signature is fine (general join).
   const signedValid = Boolean(email && sig && verifyJoin(code, email, sig));
   const tampered = Boolean(sig) && !signedValid;
 
+  // Brand accent overrides --primary for this page when the league sets one.
+  const brandStyle = league.brand_color
+    ? ({ "--primary": league.brand_color } as CSSProperties)
+    : undefined;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-6 py-16">
+    <main
+      style={brandStyle}
+      className="flex min-h-screen flex-col items-center justify-center gap-8 px-6 py-16"
+    >
       <div className="text-center">
-        <span className="rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          World Cup 2026 Predictor
-        </span>
+        {league.brand_logo_url ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={league.brand_logo_url}
+            alt={league.name}
+            className="mx-auto mb-4 h-16 w-auto object-contain"
+          />
+        ) : (
+          <span className="rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            World Cup 2026 Predictor
+          </span>
+        )}
         <h1 className="mt-5 font-display text-5xl tracking-wide text-foreground">
           {league.name}
         </h1>
@@ -64,6 +82,7 @@ export default async function JoinPage({
           sig={sig ?? ""}
           emailLocked={signedValid}
           leagueName={league.name}
+          referral={ref ?? ""}
         />
       )}
     </main>

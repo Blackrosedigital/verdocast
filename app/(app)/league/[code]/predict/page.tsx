@@ -24,11 +24,14 @@ export default async function PredictPage({
 
   const { data: league } = await admin
     .from("leagues")
-    .select("id, name")
+    .select("id, name, brand_color")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
+  const brandStyle = league.brand_color
+    ? ({ "--primary": league.brand_color } as React.CSSProperties)
+    : undefined;
 
   const { data: member } = await admin
     .from("members")
@@ -105,7 +108,7 @@ export default async function PredictPage({
   });
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">

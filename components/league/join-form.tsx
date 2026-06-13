@@ -13,12 +13,14 @@ export function JoinForm({
   sig,
   emailLocked,
   leagueName,
+  referral = "",
 }: {
   code: string;
   email: string;
   sig: string;
   emailLocked: boolean;
   leagueName: string;
+  referral?: string;
 }) {
   const [email, setEmail] = useState(initialEmail);
   const [displayName, setDisplayName] = useState("");
@@ -41,6 +43,7 @@ export function JoinForm({
         email: email.trim(),
         sig,
         displayName: displayName.trim(),
+        ref: referral || undefined,
       });
       if (!res.ok) {
         toast({

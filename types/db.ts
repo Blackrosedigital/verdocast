@@ -166,6 +166,7 @@ export type Database = {
           email: string;
           display_name: string;
           is_admin: boolean;
+          referral_source: string | null;
           joined_at: string;
         };
         Insert: {
@@ -174,6 +175,7 @@ export type Database = {
           email: string;
           display_name: string;
           is_admin?: boolean;
+          referral_source?: string | null;
           joined_at?: string;
         };
         Update: {
@@ -182,6 +184,7 @@ export type Database = {
           email?: string;
           display_name?: string;
           is_admin?: boolean;
+          referral_source?: string | null;
           joined_at?: string;
         };
         Relationships: [

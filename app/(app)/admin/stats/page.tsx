@@ -38,10 +38,19 @@ export default async function StatsPage() {
     count(db, "predictions"),
   ]);
 
-  const { data: memberRows } = await db.from("members").select("email");
+  const { data: memberRows } = await db
+    .from("members")
+    .select("email, referral_source");
   const uniquePlayers = new Set(
     (memberRows ?? []).map((m) => m.email.toLowerCase()),
   ).size;
+
+  const refCounts = new Map<string, number>();
+  for (const m of memberRows ?? []) {
+    const s = m.referral_source?.trim();
+    if (s) refCounts.set(s, (refCounts.get(s) ?? 0) + 1);
+  }
+  const topRefs = [...refCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
 
   let authUsers = 0;
   for (let page = 1; ; page++) {
@@ -97,6 +106,31 @@ export default async function StatsPage() {
                 <span className="w-12 text-right font-mono text-primary">
                   {l.members}
                 </span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <h2 className="font-display text-2xl tracking-wide text-foreground">
+          Referral sources
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Joins attributed via <code>?ref=</code> links (e.g. per-creator codes).
+        </p>
+        {topRefs.length === 0 ? (
+          <p className="mt-3 text-sm text-muted-foreground">
+            No referral joins yet. Share links like{" "}
+            <code>verdocast.com/play?ref=yourcreator</code>.
+          </p>
+        ) : (
+          <ol className="mt-4 space-y-2">
+            {topRefs.map(([source, n], i) => (
+              <li key={source} className="flex items-center gap-3 text-sm">
+                <span className="w-5 font-mono text-muted-foreground">{i + 1}</span>
+                <span className="flex-1 font-mono text-foreground">{source}</span>
+                <span className="w-12 text-right font-mono text-primary">{n}</span>
               </li>
             ))}
           </ol>

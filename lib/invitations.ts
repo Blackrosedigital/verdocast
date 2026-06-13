@@ -132,6 +132,8 @@ const JoinSchema = z.object({
   // Optional: present for signed email invites, empty for general shared links.
   sig: z.string().optional().default(""),
   displayName: z.string().trim().min(1, "Enter your name").max(80),
+  // Optional creator/channel attribution from a ?ref= link.
+  ref: z.string().trim().max(60).optional(),
 });
 
 /**
@@ -143,6 +145,7 @@ export async function joinLeague(input: {
   email: string;
   sig: string;
   displayName: string;
+  ref?: string;
 }): Promise<ActionResult<{ leagueName: string }>> {
   const parsed = JoinSchema.safeParse(input);
   if (!parsed.success) {
@@ -152,8 +155,9 @@ export async function joinLeague(input: {
       code: "invalid_input",
     };
   }
-  const { code, sig, displayName } = parsed.data;
+  const { code, sig, displayName, ref } = parsed.data;
   const email = normalizeEmail(parsed.data.email);
+  const referralSource = ref?.trim() || null;
 
   // Signed email invites must verify; general (unsigned) links are code-gated.
   if (sig && !verifyJoin(code, email, sig)) {
@@ -201,9 +205,12 @@ export async function joinLeague(input: {
       return { ok: false, error: "This league is full.", code: "cap_reached" };
     }
 
-    const { error } = await admin
-      .from("members")
-      .insert({ league_id: league.id, email, display_name: displayName });
+    const { error } = await admin.from("members").insert({
+      league_id: league.id,
+      email,
+      display_name: displayName,
+      referral_source: referralSource,
+    });
     if (error) {
       // DB cap trigger is the backstop; treat a unique-violation race as success.
       if (/cap/i.test(error.message)) {

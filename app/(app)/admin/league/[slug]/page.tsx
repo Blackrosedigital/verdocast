@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { BrandingForm } from "@/components/admin/branding-form";
 import { JoinLink } from "@/components/admin/join-link";
 import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
@@ -173,6 +174,24 @@ export default async function AdminLeaguePage({
               Invite your team by email
             </Link>
           </Button>
+        </div>
+      </div>
+
+      {/* Branding */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <h2 className="font-display text-2xl tracking-wide text-foreground">
+          League branding
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Make it yours — set an accent colour and logo shown on your league
+          pages.
+        </p>
+        <div className="mt-4">
+          <BrandingForm
+            slug={slug}
+            initialColor={league.brand_color ?? ""}
+            initialLogo={league.brand_logo_url ?? ""}
+          />
         </div>
       </div>
     </main>

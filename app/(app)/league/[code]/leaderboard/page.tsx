@@ -21,11 +21,14 @@ export default async function LeaderboardPage({
   const admin = createAdminClient();
   const { data: league } = await admin
     .from("leagues")
-    .select("id, name")
+    .select("id, name, brand_color")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
   if (!league) notFound();
+  const brandStyle = league.brand_color
+    ? ({ "--primary": league.brand_color } as React.CSSProperties)
+    : undefined;
 
   const result = await getLeaderboard(code);
   if (!result.ok) {
@@ -59,7 +62,7 @@ export default async function LeaderboardPage({
       : `Join my World Cup 2026 prediction league "${league.name}" on Verdocast 🏆 Free to play:`;
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
