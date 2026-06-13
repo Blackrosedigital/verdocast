@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
 import { Leaderboard } from "@/components/leaderboard";
+import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
@@ -92,6 +93,8 @@ export default async function LeaderboardPage({
           initialLiveCount={result.data.liveCount}
         />
       </div>
+
+      <ScoringLegend className="mt-6" />
     </main>
   );
 }
