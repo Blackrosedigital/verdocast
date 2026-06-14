@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { BrandingForm } from "@/components/admin/branding-form";
 import { JoinLink } from "@/components/admin/join-link";
 import { MembersList } from "@/components/admin/members-list";
+import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { isSuperAdmin, requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
@@ -28,10 +29,13 @@ function Stat({ label, value, sub }: { label: string; value: string; sub?: strin
 
 export default async function AdminLeaguePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ welcome?: string }>;
 }) {
   const { slug } = await params;
+  const { welcome } = await searchParams;
   const user = await requireUser();
   const admin = createAdminClient();
 
@@ -101,26 +105,108 @@ export default async function AdminLeaguePage({
   const completion = possible > 0 ? Math.round((predictionsMade / possible) * 100) : 0;
 
   const joinUrl = `${SITE_URL}/league/${league.join_code}/join`;
+  const predictUrl = `/league/${league.join_code}/predict`;
+  const leaderboardUrl = `/league/${league.join_code}/leaderboard`;
   const top = topRes.data ?? [];
+
+  // First-run setup checklist — ticks off from live data so a new admin always
+  // knows the next step.
+  const ownerEmail = (org?.owner_email ?? user.email ?? "").toLowerCase();
+  const ownerMember = memberRows.find(
+    (m) => m.email.toLowerCase() === ownerEmail,
+  );
+  let ownerPredicted = false;
+  if (ownerMember) {
+    const { count } = await admin
+      .from("predictions")
+      .select("*", { count: "exact", head: true })
+      .eq("member_id", ownerMember.id);
+    ownerPredicted = (count ?? 0) > 0;
+  }
+  const setupSteps = [
+    { label: "Create your league", done: true, href: null, cta: null },
+    {
+      label: "Make your predictions",
+      done: ownerPredicted,
+      href: predictUrl,
+      cta: "Predict",
+    },
+    {
+      label: "Invite your team",
+      done: memberCount > 1,
+      href: `/admin/league/${slug}/invite`,
+      cta: "Invite",
+    },
+  ];
+  const allSet = setupSteps.every((s) => s.done);
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
       <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
         {org?.name ?? "Your organization"} · Admin
       </p>
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="mt-2 font-display text-5xl tracking-wide text-foreground">
           {league.name}
         </h1>
-        {new Date() >= BILLING_VISIBLE_FROM && (
-          <Link
-            href="/admin/billing"
-            className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
-          >
-            Manage billing
-          </Link>
-        )}
+        <div className="flex items-center gap-2">
+          <Button asChild variant="secondary" size="sm">
+            <Link href={predictUrl}>Make predictions</Link>
+          </Button>
+          <Button asChild variant="secondary" size="sm">
+            <Link href={leaderboardUrl}>Leaderboard</Link>
+          </Button>
+          {new Date() >= BILLING_VISIBLE_FROM && (
+            <Link
+              href="/admin/billing"
+              className="shrink-0 text-sm text-muted-foreground underline hover:text-foreground"
+            >
+              Billing
+            </Link>
+          )}
+        </div>
       </div>{/* billing link hidden during the free group stage */}
+
+      {/* First-run setup checklist (hidden once the league is up and running) */}
+      {!allSet && (
+        <div className="mt-8 rounded-2xl border border-primary/40 bg-surface p-6">
+          <h2 className="font-display text-2xl tracking-wide text-foreground">
+            {welcome ? "Your league is live 🎉" : "Get your league going"}
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A couple of quick steps and you&rsquo;re off.
+          </p>
+          <ol className="mt-4 space-y-3">
+            {setupSteps.map((step, i) => (
+              <li key={step.label} className="flex items-center gap-3">
+                <span
+                  className={`flex size-6 shrink-0 items-center justify-center rounded-full font-mono text-xs ${
+                    step.done
+                      ? "bg-primary text-black"
+                      : "border border-border text-muted-foreground"
+                  }`}
+                >
+                  {step.done ? "✓" : i + 1}
+                </span>
+                <span
+                  className={
+                    step.done
+                      ? "text-muted-foreground line-through"
+                      : "text-foreground"
+                  }
+                >
+                  {step.label}
+                </span>
+                {!step.done && step.href && (
+                  <Button asChild size="sm" className="ml-auto">
+                    <Link href={step.href}>{step.cta}</Link>
+                  </Button>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Stat
@@ -185,10 +271,16 @@ export default async function AdminLeaguePage({
         <div className="mt-4">
           <JoinLink joinUrl={joinUrl} />
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-wrap gap-3">
+          <ShareButton
+            text={`Join my World Cup 2026 prediction league "${league.name}" on Verdocast 🏆 Free to play, two minutes to start:`}
+            url={joinUrl}
+            label="Copy invite message"
+            variant="secondary"
+          />
           <Button asChild>
             <Link href={`/admin/league/${slug}/invite`}>
-              Invite your team by email
+              Invite by email
             </Link>
           </Button>
         </div>
