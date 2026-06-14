@@ -2,11 +2,15 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { BrandingForm } from "@/components/admin/branding-form";
 import { JoinLink } from "@/components/admin/join-link";
+import { MemberRoster } from "@/components/admin/member-roster";
 import { MembersList } from "@/components/admin/members-list";
+import { NudgeButton } from "@/components/admin/nudge-button";
+import { KnockoutCountdown } from "@/components/knockout-countdown";
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { isSuperAdmin, requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
+import { predictionCountsByMember } from "@/lib/member-stats";
 
 export const dynamic = "force-dynamic";
 
@@ -93,14 +97,9 @@ export default async function AdminLeaguePage({
     : [];
   const groupCount = groupCountRes.count ?? 0;
 
+  const counts = await predictionCountsByMember(admin, memberIds);
   let predictionsMade = 0;
-  if (memberIds.length > 0) {
-    const { count } = await admin
-      .from("predictions")
-      .select("*", { count: "exact", head: true })
-      .in("member_id", memberIds);
-    predictionsMade = count ?? 0;
-  }
+  for (const n of counts.values()) predictionsMade += n;
   const possible = memberCount * groupCount;
   const completion = possible > 0 ? Math.round((predictionsMade / possible) * 100) : 0;
 
@@ -115,14 +114,22 @@ export default async function AdminLeaguePage({
   const ownerMember = memberRows.find(
     (m) => m.email.toLowerCase() === ownerEmail,
   );
-  let ownerPredicted = false;
-  if (ownerMember) {
-    const { count } = await admin
-      .from("predictions")
-      .select("*", { count: "exact", head: true })
-      .eq("member_id", ownerMember.id);
-    ownerPredicted = (count ?? 0) > 0;
-  }
+  const ownerPredicted = ownerMember
+    ? (counts.get(ownerMember.id) ?? 0) > 0
+    : false;
+
+  // Privacy-safe roster (no emails) for owners; remove + nudge run through
+  // owner-or-platform-admin server actions.
+  const roster = memberRows.map((m) => ({
+    id: m.id,
+    displayName: m.display_name ?? "(no name)",
+    predictions: counts.get(m.id) ?? 0,
+    isOwner: m.id === ownerMember?.id,
+  }));
+  const nonPredictorCount = roster.filter(
+    (m) => !m.isOwner && m.predictions === 0,
+  ).length;
+
   const setupSteps = [
     { label: "Create your league", done: true, href: null, cta: null },
     {
@@ -167,9 +174,11 @@ export default async function AdminLeaguePage({
         </div>
       </div>{/* billing link hidden during the free group stage */}
 
+      <KnockoutCountdown billingHref="/admin/billing" />
+
       {/* First-run setup checklist (hidden once the league is up and running) */}
       {!allSet && (
-        <div className="mt-8 rounded-2xl border border-primary/40 bg-surface p-6">
+        <div className="mt-8 rounded-2xl border border-border bg-surface p-6">
           <h2 className="font-display text-2xl tracking-wide text-foreground">
             {welcome ? "Your league is live 🎉" : "Get your league going"}
           </h2>
@@ -286,20 +295,37 @@ export default async function AdminLeaguePage({
         </div>
       </div>
 
+      {/* Members roster (owner + platform admin): names + progress + remove + nudge */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="font-display text-2xl tracking-wide text-foreground">
+            Members
+          </h2>
+          <NudgeButton slug={slug} count={nonPredictorCount} />
+        </div>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {memberCount} member{memberCount === 1 ? "" : "s"}
+          {nonPredictorCount > 0
+            ? ` · ${nonPredictorCount} haven’t predicted yet`
+            : " · everyone’s predicting"}
+          .
+        </p>
+        <MemberRoster slug={slug} members={roster} />
+      </div>
+
       {/* Members - platform admins only (emails + rename are not shown to league owners) */}
       {superAdmin && (
         <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
           <div className="flex items-center justify-between gap-3">
             <h2 className="font-display text-2xl tracking-wide text-foreground">
-              Members
+              Member emails
             </h2>
             <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
               Platform admin
             </span>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            {memberCount} member{memberCount === 1 ? "" : "s"}. Rename anyone whose
-            display name needs tidying up.
+            Emails + rename, visible to platform admins only.
           </p>
           <MembersList slug={slug} members={members} />
         </div>

@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
 import { Resend } from "resend";
 import { InvitationEmail } from "@/emails/invitation";
+import { ReminderEmail } from "@/emails/reminder";
 
 /**
  * Resend client + typed senders. Server-only.
@@ -39,6 +40,29 @@ export async function sendInvitation(
       from: FROM,
       to,
       subject: `${leagueName} — World Cup 2026 Predictor: you're invited`,
+      html,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "send_failed" };
+  }
+}
+
+export async function sendPredictionReminder(
+  to: string,
+  leagueName: string,
+  predictUrl: string,
+): Promise<SendResult> {
+  const resend = getResend();
+  if (!resend) return { ok: false, skipped: true };
+
+  try {
+    const html = await render(ReminderEmail({ leagueName, predictUrl }));
+    const { error } = await resend.emails.send({
+      from: FROM,
+      to,
+      subject: `${leagueName} — your World Cup predictions are missing`,
       html,
     });
     if (error) return { ok: false, error: error.message };
