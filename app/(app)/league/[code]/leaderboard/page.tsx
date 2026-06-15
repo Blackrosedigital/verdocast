@@ -5,6 +5,7 @@ import { KnockoutCountdown } from "@/components/knockout-countdown";
 import { Leaderboard } from "@/components/leaderboard";
 import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
+import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 import { getLeaderboard } from "@/lib/leaderboard";
@@ -19,7 +20,7 @@ export default async function LeaderboardPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const user = await requireUser();
+  const user = await requireUser(`/league/${code}/leaderboard`);
 
   const admin = createAdminClient();
   const { data: league } = await admin
@@ -38,9 +39,15 @@ export default async function LeaderboardPage({
     return (
       <main className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-4 px-6 text-center">
         <h1 className="font-display text-4xl tracking-wide text-foreground">
-          You&rsquo;re not in this league
+          You&rsquo;re not in {league.name} yet
         </h1>
-        <Link href="/" className="text-primary underline">
+        <p className="text-muted-foreground">
+          Join the league to see the leaderboard and make your predictions.
+        </p>
+        <Button asChild className="mt-2">
+          <Link href={`/league/${code}/join`}>Join {league.name}</Link>
+        </Button>
+        <Link href="/" className="text-sm text-muted-foreground underline">
           Back to home
         </Link>
       </main>

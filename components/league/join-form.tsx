@@ -67,9 +67,17 @@ export function JoinForm({
           You&rsquo;ve joined <span className="text-foreground">{leagueName}</span>.
           Make your predictions before each match kicks off.
         </p>
-        <Button asChild className="mt-6">
-          <Link href={`/league/${code}/predict`}>Make your predictions</Link>
-        </Button>
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <Button asChild>
+            <Link href={`/league/${code}/predict`}>Make your predictions</Link>
+          </Button>
+          <Link
+            href={`/league/${code}/leaderboard`}
+            className="text-sm text-muted-foreground underline hover:text-foreground"
+          >
+            View the leaderboard
+          </Link>
+        </div>
       </div>
     );
   }

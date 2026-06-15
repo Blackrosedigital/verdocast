@@ -9,10 +9,15 @@ export async function getUser(): Promise<User | null> {
   return data.user;
 }
 
-/** Require an authenticated user; redirect home if there isn't one. */
-export async function requireUser(): Promise<User> {
+/**
+ * Require an authenticated user. If signed out, redirect to sign-in returning to
+ * `next` (so members land back where they were) — or home when no `next` given.
+ */
+export async function requireUser(next?: string): Promise<User> {
   const user = await getUser();
-  if (!user) redirect("/");
+  if (!user) {
+    redirect(next ? `/login?next=${encodeURIComponent(next)}` : "/");
+  }
   return user;
 }
 

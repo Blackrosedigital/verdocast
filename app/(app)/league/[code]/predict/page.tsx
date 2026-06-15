@@ -8,6 +8,7 @@ import {
 } from "@/components/predictions-grid";
 import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
+import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
 import { getTeam } from "@/lib/tournament";
@@ -22,7 +23,7 @@ export default async function PredictPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const user = await requireUser();
+  const user = await requireUser(`/league/${code}/predict`);
   const admin = createAdminClient();
 
   const { data: league } = await admin
@@ -47,12 +48,15 @@ export default async function PredictPage({
     return (
       <main className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-4 px-6 text-center">
         <h1 className="font-display text-4xl tracking-wide text-foreground">
-          You&rsquo;re not in this league
+          You&rsquo;re not in {league.name} yet
         </h1>
         <p className="text-muted-foreground">
-          Ask your league admin for an invitation to {league.name}.
+          Join the league to make your predictions and climb the leaderboard.
         </p>
-        <Link href="/" className="text-primary underline">
+        <Button asChild className="mt-2">
+          <Link href={`/league/${code}/join`}>Join {league.name}</Link>
+        </Button>
+        <Link href="/" className="text-sm text-muted-foreground underline">
           Back to home
         </Link>
       </main>
@@ -110,6 +114,10 @@ export default async function PredictPage({
     };
   });
 
+  const predictedCount = matches.filter((m) => m.prediction).length;
+  const totalMatches = matches.length;
+  const pct = totalMatches ? Math.round((predictedCount / totalMatches) * 100) : 0;
+
   return (
     <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
       <div className="flex items-start justify-between gap-4">
@@ -134,6 +142,21 @@ export default async function PredictPage({
       <p className="mt-2 text-muted-foreground">
         Predict the score of every group-stage match. Each one locks at kickoff.
       </p>
+
+      <div className="mt-5">
+        <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <span>Your progress</span>
+          <span>
+            {predictedCount} / {totalMatches} predicted
+          </span>
+        </div>
+        <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-surface-2">
+          <div
+            className="h-full rounded-full bg-primary transition-all"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+      </div>
 
       <div className="mt-6">
         <KnockoutCountdown audience="member" />
