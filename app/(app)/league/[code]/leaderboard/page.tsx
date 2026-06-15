@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
+import { KnockoutCountdown } from "@/components/knockout-countdown";
 import { Leaderboard } from "@/components/leaderboard";
 import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
@@ -86,7 +87,11 @@ export default async function LeaderboardPage({
         </p>
       )}
 
-      <div className="mt-8">
+      <div className="mt-6">
+        <KnockoutCountdown audience="member" />
+      </div>
+
+      <div className="mt-6">
         <Leaderboard
           code={code}
           initialRows={rows}

@@ -173,3 +173,96 @@ export async function createFreeLeague(input: {
     `/admin/league/${league.slug}?welcome=${encodeURIComponent(league.join_code)}`,
   );
 }
+
+const AnotherSchema = z.object({
+  leagueName: z.string().trim().min(1, "Enter a league name").max(120),
+});
+
+/**
+ * Create an ADDITIONAL league under the caller's existing org (e.g. a second
+ * department). Unlike createFreeLeague this never reuses an existing league — it
+ * always makes a new one, sharing the org's free license.
+ */
+export async function createAnotherLeague(input: {
+  leagueName: string;
+}): Promise<CreateFreeResult> {
+  const user = await requireUser();
+  const email = (user.email ?? "").toLowerCase();
+  if (!email) {
+    return { ok: false, error: "No email on your account.", code: "no_email" };
+  }
+  const parsed = AnotherSchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: parsed.error.issues[0]?.message ?? "Invalid input.",
+      code: "invalid_input",
+    };
+  }
+  const { leagueName } = parsed.data;
+  const admin = createAdminClient();
+
+  const { data: org } = await admin
+    .from("organizations")
+    .select("*")
+    .eq("owner_email", email)
+    .order("created_at", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (!org) {
+    return { ok: false, error: "Create your first league first.", code: "no_org" };
+  }
+
+  let { data: license } = await admin
+    .from("licenses")
+    .select("*")
+    .eq("organization_id", org.id)
+    .order("created_at", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (!license) {
+    const created = await admin
+      .from("licenses")
+      .insert({
+        organization_id: org.id,
+        tier: "team",
+        max_members: FREE_MAX_MEMBERS,
+        amount_paid_pence: 0,
+        currency: "gbp",
+        expires_at: LICENSE_EXPIRES_AT,
+      })
+      .select()
+      .single();
+    license = created.data;
+  }
+  if (!license) {
+    return {
+      ok: false,
+      error: "Could not set up your free plan.",
+      code: "license_failed",
+    };
+  }
+
+  const league = await createLeague(admin, { org, license, leagueName, email });
+  if (!league) {
+    return {
+      ok: false,
+      error: "Could not create your league.",
+      code: "league_failed",
+    };
+  }
+
+  await admin.from("members").upsert(
+    {
+      league_id: league.id,
+      email,
+      display_name: email.split("@")[0] ?? "Organizer",
+      is_admin: true,
+    },
+    { onConflict: "league_id,email", ignoreDuplicates: true },
+  );
+
+  redirect(
+    `/admin/league/${league.slug}?welcome=${encodeURIComponent(league.join_code)}`,
+  );
+}

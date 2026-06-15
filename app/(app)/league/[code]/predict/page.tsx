@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
+import { KnockoutCountdown } from "@/components/knockout-countdown";
 import {
   PredictionsGrid,
   type PredictMatch,
@@ -133,6 +134,10 @@ export default async function PredictPage({
       <p className="mt-2 text-muted-foreground">
         Predict the score of every group-stage match. Each one locks at kickoff.
       </p>
+
+      <div className="mt-6">
+        <KnockoutCountdown audience="member" />
+      </div>
 
       <ScoringLegend className="mt-6" />
 

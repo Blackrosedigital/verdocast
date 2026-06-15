@@ -149,7 +149,13 @@ export default async function AdminLeaguePage({
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+      <Link
+        href="/admin"
+        className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground"
+      >
+        ← My leagues
+      </Link>
+      <p className="mt-3 font-mono text-xs uppercase tracking-widest text-muted-foreground">
         {org?.name ?? "Your organization"} · Admin
       </p>
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -174,7 +180,9 @@ export default async function AdminLeaguePage({
         </div>
       </div>{/* billing link hidden during the free group stage */}
 
-      <KnockoutCountdown billingHref="/admin/billing" />
+      <div className="mt-6">
+        <KnockoutCountdown billingHref="/admin/billing" />
+      </div>
 
       {/* First-run setup checklist (hidden once the league is up and running) */}
       {!allSet && (
