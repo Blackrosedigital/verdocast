@@ -66,10 +66,14 @@ export default async function LeaderboardPage({
   const total = rows.length;
 
   const joinUrl = `${SITE_URL}/league/${code}/join`;
-  const shareText =
-    myIndex >= 0
-      ? `I'm #${myIndex + 1} of ${total} in "${league.name}" with ${rows[myIndex]!.total_points} pts on Verdocast 🏆 Think you can beat me? Predict the World Cup 2026:`
-      : `Join my World Cup 2026 prediction league "${league.name}" on Verdocast 🏆 Free to play:`;
+  const standingsUrl = `${SITE_URL}/league/${code}/standings`;
+  // "Beat me" shares point at the public standings (anyone can view + join from
+  // there); a plain invite points at the join page.
+  const ranked = myIndex >= 0;
+  const shareText = ranked
+    ? `I'm #${myIndex + 1} of ${total} in "${league.name}" with ${rows[myIndex]!.total_points} pts on Verdocast 🏆 Think you can beat me? Predict the World Cup 2026:`
+    : `Join my World Cup 2026 prediction league "${league.name}" on Verdocast 🏆 Free to play:`;
+  const shareUrl = ranked ? standingsUrl : joinUrl;
 
   return (
     <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
@@ -83,7 +87,7 @@ export default async function LeaderboardPage({
           </h1>
         </div>
         <div className="mt-2">
-          <ShareButton text={shareText} url={joinUrl} label="Share / Invite" />
+          <ShareButton text={shareText} url={shareUrl} label="Share / Invite" />
         </div>
       </div>
 

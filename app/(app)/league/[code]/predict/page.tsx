@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
 import { KnockoutCountdown } from "@/components/knockout-countdown";
+import { PredictCoachMark } from "@/components/predict-coach-mark";
 import {
   PredictionsGrid,
   type PredictMatch,
@@ -117,6 +118,11 @@ export default async function PredictPage({
   const predictedCount = matches.filter((m) => m.prediction).length;
   const totalMatches = matches.length;
   const pct = totalMatches ? Math.round((predictedCount / totalMatches) * 100) : 0;
+  const openCount = matches.filter((m) => !m.locked).length;
+  const openUnpredicted = matches.filter(
+    (m) => !m.locked && !m.prediction,
+  ).length;
+  const caughtUp = openCount > 0 && openUnpredicted === 0;
 
   return (
     <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
@@ -157,6 +163,28 @@ export default async function PredictPage({
           />
         </div>
       </div>
+
+      {predictedCount === 0 && (
+        <div className="mt-5">
+          <PredictCoachMark />
+        </div>
+      )}
+
+      {caughtUp && (
+        <div className="mt-5 flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm">
+          <span
+            aria-hidden
+            className="inline-block size-2 shrink-0 rounded-full"
+            style={{ backgroundColor: "var(--green)" }}
+          />
+          <span className="text-foreground">
+            You&rsquo;re all caught up
+          </span>
+          <span className="text-muted-foreground">
+            — predictions in for every upcoming match.
+          </span>
+        </div>
+      )}
 
       <div className="mt-6">
         <KnockoutCountdown audience="member" />

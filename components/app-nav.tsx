@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -9,12 +10,28 @@ export interface NavLink {
   label: string;
 }
 
-/** App header for authenticated surfaces: wordmark home, section tabs, sign out. */
-export function AppNav({ links }: { links: NavLink[] }) {
+/**
+ * App header for authenticated surfaces: wordmark home, section tabs, sign out.
+ * `brandColor` overrides the accent (--primary) so league pages stay on-brand in
+ * the nav too, not just the page body.
+ */
+export function AppNav({
+  links,
+  brandColor,
+}: {
+  links: NavLink[];
+  brandColor?: string | null;
+}) {
   const pathname = usePathname();
+  const style = brandColor
+    ? ({ "--primary": brandColor } as CSSProperties)
+    : undefined;
 
   return (
-    <header className="border-b border-border bg-[rgba(10,11,13,0.92)] backdrop-blur">
+    <header
+      style={style}
+      className="border-b border-border bg-[rgba(10,11,13,0.92)] backdrop-blur"
+    >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3">
         <Link
           href="/"
