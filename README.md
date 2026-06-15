@@ -34,6 +34,12 @@ Tagline candidates to A/B-test on the marketing page:
 - "Predictions, made decisive."
 - "The office World Cup tournament, sorted in five minutes."
 
+## Reference docs
+
+- [`docs/PRD.md`](docs/PRD.md) — product requirements: personas, journeys, feature inventory, monetization, roadmap (reflects what's live).
+- [`CLAUDE.md`](CLAUDE.md) — architecture contract (authoritative for tech/data model).
+- [`docs/marketing/office-b2b-playbook.md`](docs/marketing/office-b2b-playbook.md) — B2B go-to-market playbook.
+
 ## How to use this starter
 
 1. Read `CLAUDE.md` end to end. It's the architecture brief Claude Code reads on every task — keep it accurate.

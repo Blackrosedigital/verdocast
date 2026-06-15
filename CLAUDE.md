@@ -2,6 +2,8 @@
 
 This file is the architectural contract for the Verdocast codebase. Claude Code reads it on every task. Keep it accurate; when you change the architecture, update this file in the same PR.
 
+> **Product reference:** [`docs/PRD.md`](docs/PRD.md) covers product intent, personas, user journeys, monetization, and roadmap. This file stays authoritative for tech/architecture; the PRD defers to it on those.
+
 ## Product
 
 **Verdocast** is a B2B SaaS that lets companies run World Cup 2026 prediction leagues for their employees, with a consumer tournament pass and an editorial subscription riding the same backend.
