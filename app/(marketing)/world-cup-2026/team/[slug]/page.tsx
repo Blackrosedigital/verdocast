@@ -258,6 +258,15 @@ export default async function TeamPage({
         <Button asChild size="lg" className="mt-5">
           <Link href="/start">Start a free league</Link>
         </Button>
+        <p className="mt-4 text-sm text-muted-foreground">
+          New to this?{" "}
+          <Link
+            href="/blog/world-cup-2026-prediction-league"
+            className="text-primary underline"
+          >
+            How to run a World Cup prediction league →
+          </Link>
+        </p>
       </div>
     </div>
   );

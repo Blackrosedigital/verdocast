@@ -123,7 +123,11 @@ export function WorldCupPredictionLeagueBody() {
       <h2 className={H2}>Set yours up before the next kick-off</h2>
       <p className={P}>
         The tournament runs until 19 July, and the group stage — free on
-        Verdocast — is on right now. The sooner you start, the more matches your
+        Verdocast — is on right now. Browse{" "}
+        <Link href="/world-cup-2026" className="text-primary underline">
+          every fixture and live group table
+        </Link>
+        , then set your league up. The sooner you start, the more matches your
         team gets to predict.
       </p>
       <ul className="mt-4 space-y-2 pl-5">

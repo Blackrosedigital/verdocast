@@ -98,6 +98,15 @@ export default function WorldCup2026Page() {
         <Button asChild size="lg" className="mt-6">
           <Link href="/start">Start free</Link>
         </Button>
+        <p className="mt-4 text-sm text-muted-foreground">
+          First time?{" "}
+          <Link
+            href="/blog/world-cup-2026-prediction-league"
+            className="text-primary underline"
+          >
+            Read how to run a World Cup prediction league →
+          </Link>
+        </p>
       </div>
     </div>
   );
