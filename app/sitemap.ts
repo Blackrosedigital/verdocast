@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 import { getAllTeams } from "@/lib/tournament";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://verdocast.com";
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/play`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE}/pricing`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE}/demo`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${SITE}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
@@ -31,5 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  return [...core, ...groups, ...teams];
+  const posts: MetadataRoute.Sitemap = getAllPosts().map((p) => ({
+    url: `${SITE}/blog/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...core, ...groups, ...teams, ...posts];
 }
