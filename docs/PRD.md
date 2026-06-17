@@ -1,7 +1,7 @@
 # Verdocast — Product Requirements Document
 
 **Status:** Living reference · reflects the product as built and live.
-**Last updated:** 15 Jun 2026.
+**Last updated:** 18 Jun 2026.
 **Owner:** Christopher Mensah (founder).
 **Canonical architecture contract:** [`CLAUDE.md`](../CLAUDE.md) (authoritative for tech/architecture; this PRD covers product intent, journeys, and scope).
 
@@ -36,7 +36,7 @@ One backend powers three pricing surfaces: **B2B office leagues**, a **consumer 
 
 ### Non-goals (v1)
 - Custom payment forms (Stripe Checkout/Portal only).
-- Knockout-stage *predictions* with draw logic (see §13 v2).
+- Knockout-stage *predictions* with draw logic (see §14 v2).
 - In-app cash prizes / pooled money (gambling-regulated — never custody funds).
 - Multi-tournament support (single-tournament product).
 - Native mobile apps; Slack/Teams integrations.
@@ -80,29 +80,76 @@ See [`docs/marketing/office-b2b-playbook.md`](marketing/office-b2b-playbook.md) 
 
 ---
 
-## 7. Key user journeys
+## 7. Knockout stage, rewards & gamification
 
-### 7.1 Admin (create → activate → convert)
+The knockouts (R32 onward, from 28 Jun) are the engagement *and* monetization peak. The strategy: re-engage the group-stage tail with a fresh competition, add a qualification ladder and rewards to drive a climb, and layer lightweight gamification to lift daily engagement — all without crossing into gambling.
+
+### 7.1 The gambling guardrail (shapes everything here)
+
+This rule determines what is safe to build. In the UK:
+- **Pay-to-enter + cash prize from a pooled pot = a lottery** → regulated gambling. **Never build this.**
+- **Free to enter + winner decided by skill (the leaderboard) = a prize competition** → legal, and exactly Verdocast's model (predicting scores is skill; there is no fee to play).
+
+So rewards are encouraged, provided the prize is **free to compete for** and **funded by someone other than a pool of players' money** — the employer, a sponsor, or Verdocast. Final terms to be legal-checked; a "Rewards & rules" page (free entry, skill-based, no purchase necessary) is part of the build.
+
+### 7.2 Knockout competition structure
+
+- **Fresh reset at R32.** A separate knockout leaderboard (scoring window from R32) so everyone starts level — built-in re-engagement for players who fell behind in the groups.
+- **Qualification ladder ("Q" spots).** The **top N (5–10)** of a leaderboard qualify for a finale / grand prize, shown as Champions-League-style **"Q" rows**. This gives every mid-table player a visible target and a deadline-driven scramble before the cutoff.
+- **Two qualification levels (do both):**
+  - **Per-league** — each office/group crowns its own top N for the *employer-funded* prize.
+  - **Platform-wide** — top performers across the **global league** qualify for a headline **Verdocast Championship** finale.
+- **Per-round mini-leaderboards** — a fresh winner each round (R32, R16, QF, SF) keeps short-term stakes high.
+
+### 7.3 Rewards — three clean funding models
+
+- **B2B (primary, zero money-handling risk):** the **admin/employer sets and funds the prize** (team lunch, half-day, trophy, gift card) via an admin **"league prize" field**. Verdocast only runs the leaderboard and never touches the money.
+- **Consumer / global:** a **free-to-enter prize draw or championship** for the global top N, funded by a **sponsor** (a brand pays for the prize + gets exposure → a revenue line) or by Verdocast.
+- **Non-cash always-safe options:** merch, "Verdocast Champion 2026" status/badge, a charity donation in the winner's name, premium features, shoutouts.
+
+Rewards double as the upsell for the paid knockout unlock ("Unlock the knockouts — your league plays for [prize]; top 10 qualify for the final"), and sponsor-funded prizes turn the reward into revenue.
+
+### 7.4 Gamification (engagement, prize-independent)
+
+- **Streaks & badges** — "3 correct in a row", "perfect round", "called the upset". Derived from predictions; cheap to compute, sticky.
+- **Per-round milestones & reminders** — "lock your R16 picks" nudges (reuses the existing nudge + reminder-email infra).
+- **Live leaderboard moments** — the board already polls during live matches; lean into "watch it move" social shares.
+- **Public standings shares** — "I'm top 10, qualified for the final 👇" is a built-in viral loop (`/league/[code]/standings`).
+- **Progress + affirmations** — predict-progress bar and "all caught up" states already exist; extend with knockout-round completion.
+
+### 7.5 Build order
+
+1. **Knockout leaderboard reset + "Q" top-N highlighting** (per-league) — the backbone of the "top 5–10 automatic entry" mechanic.
+2. **Admin "league prize" field** — employer-funded rewards; smallest build, highest B2B engagement, no money risk.
+3. **Streaks / badges** — gamification lift.
+4. **Global championship view** — platform-wide top-N qualification + finale; sponsor-funded prize later.
+5. **"Rewards & rules" page** — free-entry, skill-based, no-purchase-necessary footing.
+
+---
+
+## 8. Key user journeys
+
+### 8.1 Admin (create → activate → convert)
 1. **Create** — `/start` → magic-link/OTP/Google sign-in → name org + league → free league provisioned (org + free license + league + owner auto-added as a member). Redirects to the dashboard with a `?welcome=` celebration.
 2. **Dashboard** (`/admin/league/[slug]`) — first-run **setup checklist** (create → predict → invite), live stats (members, prediction completion %, group matches), **knockout countdown** banner, top scorers, **invite** (copyable link + join code + one-click share message + invite-by-email), **members roster** (display names + prediction progress + remove; **emails are platform-admin only**), **nudge non-predictors** (batch reminder email), league **branding** (accent colour + logo).
 3. **Multi-league** — `/admin` is a **leagues hub** listing every league the owner runs + "create another league" (shares the free license; each league independently capped).
 4. **Convert** — at the 28 Jun cutover, billing surfaces (knockout unlock). *(Unlock flow is the next build.)*
 
-### 7.2 Member (join → play → return)
+### 8.2 Member (join → play → return)
 1. **Join** — `/league/[code]/join` (public, branded). Two ways in: signed email invite (email locked) or general shared link (self-serve). Enter email + display name → joined → **auto signed-in server-side** (no email round-trip) → success screen → Predict / Leaderboard.
 2. **Predict** — `/league/[code]/predict` — mobile-first grid grouped by date; **autosave** per score (debounced, with saving/saved/error feedback); locks at each kickoff; **progress bar**, first-visit **coach mark**, **all-caught-up** affirmation, **scoring legend**, **knockout countdown**, **self-service display-name** edit.
 3. **Leaderboard** — `/league/[code]/leaderboard` — live (polls every 30s during live matches, 5 min otherwise), tap a player to see their predictions, "you're playing as" + share line, scoring legend.
 4. **Member hub** — `/leagues` lists every league the member belongs to.
 5. **Return** — logged-out access to a league page routes to `/login?next=…` and returns the member to where they were (not the marketing home).
 
-### 7.3 Visitor / viral
+### 8.3 Visitor / viral
 - **Public standings** — `/league/[code]/standings` — no-auth, read-only, branded leaderboard with scoring legend + Join CTA. "I'm #3, beat me" shares point here.
 - **SEO surface** — `/world-cup-2026` hub, 12 group pages (live tables + fixtures), 48 team pages (squads + details), all interlinked; `sitemap.ts`, `robots.ts`, OG images.
 - **Global league** — `/play` (→ `/league/GLOBAL/join`), public league anyone can join; `?ref=` attribution for creators/channels.
 
 ---
 
-## 8. Features (current state)
+## 9. Features (current state)
 
 | Area | Capability | Status |
 |---|---|---|
@@ -121,12 +168,16 @@ See [`docs/marketing/office-b2b-playbook.md`](marketing/office-b2b-playbook.md) 
 | Analytics/observability | PostHog + Sentry | Live |
 | Billing | Stripe Checkout + webhook + Customer Portal | Wired, dormant |
 | Knockout unlock flow | Paid gating of knockout features | **Planned (next)** |
+| Knockout qualification leaderboard | Fresh R32 reset + top-N "Q" highlighting (per-league + global) | Planned (§7) |
+| League prize / rewards | Admin-set, employer/sponsor-funded; free-entry skill comp | Planned (§7) |
+| Gamification | Streaks, badges, per-round mini-leaderboards | Planned (§7) |
+| Global championship | Platform-wide top-N → finale; sponsor-funded prize | Planned (§7) |
 | Knockout predictions | R32+ with draw logic | v2 |
 | Sweepstake layer | Random-team allocation, free | Proposed |
 
 ---
 
-## 9. Scoring rules (default)
+## 10. Scoring rules (default)
 
 Stored as JSONB on `leagues.scoring_rules` (per-league customisable in-DB; editor UI is post-launch). Defaults:
 
@@ -141,7 +192,7 @@ The goal-difference bonus excludes draws (every draw has GD 0). Logic lives in p
 
 ---
 
-## 10. Data model (canonical)
+## 11. Data model (canonical)
 
 See `supabase/migrations/0001_initial.sql`. Core tables:
 
@@ -156,7 +207,7 @@ See `supabase/migrations/0001_initial.sql`. Core tables:
 
 ---
 
-## 11. Architecture (summary)
+## 12. Architecture (summary)
 
 Next.js 15 App Router (RSC default, Server Actions for mutations), TypeScript strict. Supabase (Postgres + Auth + Realtime, RLS hardened, email-based policies + SECURITY DEFINER helpers; service-role admin client for trusted server paths). Stripe (Checkout + webhook as source of truth for license state). Resend (transactional email + custom SMTP). API-Football (live results). shadcn/ui + Tailwind with brand tokens. Zod at every boundary. PostHog + Sentry. Vitest (100% on `lib/scoring.ts`, `lib/tournament.ts`, `lib/standings.ts`) + Playwright happy path. Full detail in `CLAUDE.md`.
 
@@ -164,7 +215,7 @@ Next.js 15 App Router (RSC default, Server Actions for mutations), TypeScript st
 
 ---
 
-## 12. Timeline (WC2026)
+## 13. Timeline (WC2026)
 
 - **11 Jun** — tournament starts; group stage live (free).
 - **~27 Jun** — group stage ends.
@@ -174,15 +225,19 @@ Next.js 15 App Router (RSC default, Server Actions for mutations), TypeScript st
 
 ---
 
-## 13. Roadmap
+## 14. Roadmap
 
-**Shipped (v1):** everything in §8 marked Live — full free group-stage product, growth loop, SEO, admin + member journeys, public standings, multi-league.
+**Shipped (v1):** everything in §9 marked Live — full free group-stage product, growth loop, SEO, admin + member journeys, public standings, multi-league.
 
 **Near-term (pre/at 28 Jun):**
 - Knockout unlock flow (admin-paid per-league; £4.99 consumer pass) — activates dormant Stripe.
+- **Knockout qualification leaderboard** — fresh R32 reset + top-N "Q" spots (per-league), per §7.
+- **Admin "league prize" field** — employer-funded rewards, no money handling.
+- **Gamification** — streaks/badges, per-round mini-leaderboards.
 - Conversion lifecycle emails (deadline/early-bird) per the B2B playbook.
 
 **v2 / post-launch:**
+- **Global championship** — platform-wide top-N finale + sponsor-funded prize; "Rewards & rules" page.
 - Knockout-stage predictions (R32+, needs draw logic).
 - Sweepstake re-engagement layer (free).
 - Custom scoring-rule editor UI; branding UI polish.
@@ -191,7 +246,7 @@ Next.js 15 App Router (RSC default, Server Actions for mutations), TypeScript st
 
 ---
 
-## 14. Metrics / KPIs
+## 15. Metrics / KPIs
 
 Funnel (admin dashboard + `/admin/stats`): leagues created → **activation** (% leagues with ≥60% members predicting) → habit (predictions/member) → **knockout-unlock conversion** (north star) → retention (knockout-round return) → referral-attributed joins (`?ref=`).
 
@@ -199,7 +254,7 @@ Performance budgets: marketing TTFB <200ms / LCP <1.5s; predictions grid <100ms 
 
 ---
 
-## 15. Privacy, security, trust
+## 16. Privacy, security, trust
 
 - Magic-link/OTP/Google auth; no passwords. Email-only member identity.
 - **Member emails are platform-admin-only** — league owners see display names + progress, never emails.
@@ -209,10 +264,11 @@ Performance budgets: marketing TTFB <200ms / LCP <1.5s; predictions grid <100ms 
 
 ---
 
-## 16. Open questions / risks
+## 17. Open questions / risks
 
 - **Knockout unlock pricing** (per-league tiers, early-bird, risk-reversal) — to finalise before 28 Jun.
 - **Conversion timing** — the whole B2B model hinges on activating free leagues before the cutover.
 - **Email deliverability** at scale for invites/nudges (Resend limits; nudge is batched at 100/run).
+- **Rewards / prize legality** — confirm the free-entry, skill-based prize-competition footing (no purchase necessary) and decide funding (employer vs sponsor vs Verdocast) before any prize goes live. Qualification scope is decided: **both** per-league and platform-wide (§7).
 - **Sweepstake** — decide whether to build as the free re-engagement layer.
 - **Data accuracy** — squads/fixtures sourced mid-tournament; spot-checks ongoing (e.g. the midnight-ET kickoff fix).
