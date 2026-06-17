@@ -22,7 +22,7 @@ export function WorldCupPredictionLeagueBody() {
       <p className={P}>
         A <strong className="text-foreground">World Cup 2026 prediction league</strong>{" "}
         captures the buzz and turns it into a daily reason for people to talk to
-        each other — a shared ritual that runs from the opening match to the
+        each other - a shared ritual that runs from the opening match to the
         final. Here&rsquo;s why it works, and how to set one up for your team in
         about two minutes.
       </p>
@@ -31,7 +31,7 @@ export function WorldCupPredictionLeagueBody() {
       <p className={P}>
         The classic office sweepstake pulls a country out of a hat. It&rsquo;s fun
         for ten seconds, then most people are knocked out by the second week and
-        stop caring. A prediction league is different — and better for a team:
+        stop caring. A prediction league is different - and better for a team:
       </p>
       <ul className="mt-4 space-y-3 pl-5">
         <li className={LI}>
@@ -50,12 +50,12 @@ export function WorldCupPredictionLeagueBody() {
         </li>
         <li className={LI}>
           <strong className="text-foreground">It&rsquo;s not gambling.</strong> No entry
-          fees, no pooled cash, no bookmaker vibes — just a leaderboard and pride.
+          fees, no pooled cash, no bookmaker vibes - just a leaderboard and pride.
         </li>
       </ul>
       <p className={P}>
         That last point matters at work. A prediction league is a culture
-        activity, not a betting pool — which makes it something HR and People
+        activity, not a betting pool - which makes it something HR and People
         teams can actually get behind.
       </p>
 
@@ -64,12 +64,12 @@ export function WorldCupPredictionLeagueBody() {
       <ol className="mt-4 space-y-3 pl-5">
         <li className={LI}>
           <strong className="text-foreground">Start free.</strong> Name your company
-          and your league. No card, no subscription, no IT ticket — free for the
+          and your league. No card, no subscription, no IT ticket - free for the
           entire group stage.
         </li>
         <li className={LI}>
           <strong className="text-foreground">Share one link.</strong> Drop the join
-          link in your team channel. People join with a magic link — no passwords.
+          link in your team channel. People join with a magic link - no passwords.
         </li>
         <li className={LI}>
           <strong className="text-foreground">Watch the leaderboard.</strong> Everyone
@@ -88,19 +88,19 @@ export function WorldCupPredictionLeagueBody() {
       </p>
       <ul className="mt-4 space-y-2 pl-5">
         <li className={LI}>
-          <strong className="text-foreground">Exact score — 5 points.</strong> You
+          <strong className="text-foreground">Exact score - 5 points.</strong> You
           called it precisely.
         </li>
         <li className={LI}>
-          <strong className="text-foreground">Correct goal difference — 3 points.</strong>{" "}
+          <strong className="text-foreground">Correct goal difference - 3 points.</strong>{" "}
           Right margin, wrong score (non-draws).
         </li>
         <li className={LI}>
-          <strong className="text-foreground">Correct result — 2 points.</strong> Right
+          <strong className="text-foreground">Correct result - 2 points.</strong> Right
           winner, or you called the draw.
         </li>
         <li className={LI}>
-          <strong className="text-foreground">Anything else — 0.</strong>
+          <strong className="text-foreground">Anything else - 0.</strong>
         </li>
       </ul>
       <p className={P}>
@@ -112,7 +112,7 @@ export function WorldCupPredictionLeagueBody() {
       <h2 className={H2}>Perfect for hybrid and remote teams</h2>
       <p className={P}>
         &ldquo;Team building&rdquo; usually fails because it asks people to
-        perform. The World Cup doesn&rsquo;t — people are already invested. A
+        perform. The World Cup doesn&rsquo;t - people are already invested. A
         prediction league channels that into something a distributed team can
         share asynchronously: make your picks whenever, the leaderboard is the
         watercooler, and the banter writes itself across time zones. It&rsquo;s
@@ -122,8 +122,8 @@ export function WorldCupPredictionLeagueBody() {
 
       <h2 className={H2}>Set yours up before the next kick-off</h2>
       <p className={P}>
-        The tournament runs until 19 July, and the group stage — free on
-        Verdocast — is on right now. Browse{" "}
+        The tournament runs until 19 July, and the group stage - free on
+        Verdocast - is on right now. Browse{" "}
         <Link href="/world-cup-2026" className="text-primary underline">
           every fixture and live group table
         </Link>
@@ -136,7 +136,7 @@ export function WorldCupPredictionLeagueBody() {
           <Link href="/start" className="text-primary underline">
             Start a free league
           </Link>{" "}
-          — two minutes, one link.
+          - two minutes, one link.
         </li>
         <li className={LI}>
           Just want to play?{" "}
@@ -147,7 +147,7 @@ export function WorldCupPredictionLeagueBody() {
         </li>
       </ul>
       <p className={`${P} text-foreground`}>
-        Turn the World Cup into your team&rsquo;s ritual — a free prediction
+        Turn the World Cup into your team&rsquo;s ritual - a free prediction
         league anyone can play, live in two minutes.
       </p>
     </div>

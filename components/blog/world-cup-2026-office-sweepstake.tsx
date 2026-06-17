@@ -11,7 +11,7 @@ export function OfficeSweepstakeBody() {
       <p className={`${P} mt-0`}>
         The office World Cup sweepstake is a tradition: everyone chips in, names
         get pulled out of a hat, and someone who&rsquo;s never watched a match
-        ends up with Brazil. It&rsquo;s a bit of fun — but as a way to keep a
+        ends up with Brazil. It&rsquo;s a bit of fun - but as a way to keep a
         whole team engaged for a month, it has some real problems. Here&rsquo;s a
         free alternative that fixes all of them.
       </p>
@@ -30,12 +30,12 @@ export function OfficeSweepstakeBody() {
         </li>
         <li className={LI}>
           <strong className="text-foreground">Someone has to run it.</strong> Printing
-          slips, collecting money, tracking who has whom, paying out — it all
+          slips, collecting money, tracking who has whom, paying out - it all
           lands on one person.
         </li>
         <li className={LI}>
           <strong className="text-foreground">The money is awkward at work.</strong>{" "}
-          Cash entry plus a prize pot is, technically, gambling — not something
+          Cash entry plus a prize pot is, technically, gambling - not something
           most HR teams want to formally organise.
         </li>
       </ul>
@@ -110,7 +110,7 @@ export function OfficeSweepstakeBody() {
         before you start.
       </p>
       <p className={`${P} text-foreground`}>
-        Same tradition, none of the hassle — and everyone&rsquo;s still in it on
+        Same tradition, none of the hassle - and everyone&rsquo;s still in it on
         the final day.
       </p>
     </div>

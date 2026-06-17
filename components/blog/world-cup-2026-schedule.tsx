@@ -40,7 +40,7 @@ export function ScheduleBody() {
         teams</strong>, <strong className="text-foreground">12 groups</strong>, and{" "}
         <strong className="text-foreground">72 group-stage matches</strong> across
         the United States, Canada and Mexico. Here&rsquo;s the full group-stage
-        schedule — and the easiest way to predict every game.
+        schedule - and the easiest way to predict every game.
       </p>
 
       <h2 className={H2}>How the group stage works</h2>
@@ -104,7 +104,7 @@ export function ScheduleBody() {
 
       <h2 className={H2}>Turn the schedule into a game</h2>
       <p className={P}>
-        Knowing the fixtures is one thing — having a stake in them is better. With
+        Knowing the fixtures is one thing - having a stake in them is better. With
         a free{" "}
         <Link
           href="/blog/world-cup-2026-prediction-league"
