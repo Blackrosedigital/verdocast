@@ -29,8 +29,8 @@ export const POSTS: BlogPost[] = [
     title: "Turn the World Cup into your team's ritual",
     description:
       "Set up a free World Cup 2026 prediction league in two minutes - anyone can play, scores update automatically, live leaderboard. No gambling, no spreadsheets.",
-    date: "2026-06-17",
-    dateLabel: "17 June 2026",
+    date: "2026-06-11",
+    dateLabel: "11 June 2026",
     keywords: [
       "world cup 2026 prediction league",
       "office world cup sweepstake",
@@ -67,8 +67,8 @@ export const POSTS: BlogPost[] = [
     title: "World Cup 2026 schedule: every group-stage fixture",
     description:
       "The full World Cup 2026 group-stage schedule - all 12 groups, 48 teams and 72 matches - plus the easiest way to predict every game.",
-    date: "2026-06-17",
-    dateLabel: "17 June 2026",
+    date: "2026-06-13",
+    dateLabel: "13 June 2026",
     keywords: [
       "world cup 2026 schedule",
       "world cup 2026 fixtures",
@@ -101,8 +101,8 @@ export const POSTS: BlogPost[] = [
     title: "World Cup 2026 office sweepstake: a free, better alternative",
     description:
       "The office sweepstake is fun for ten seconds. Here's a free alternative that keeps your whole team engaged to the final - no money, no admin, no gambling.",
-    date: "2026-06-17",
-    dateLabel: "17 June 2026",
+    date: "2026-06-15",
+    dateLabel: "15 June 2026",
     keywords: [
       "world cup 2026 office sweepstake",
       "office sweepstake",
@@ -162,11 +162,24 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-/** Posts newest-first. */
-export function getAllPosts(): BlogPost[] {
-  return [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+/**
+ * A post is live once its `date` (UTC midnight) has arrived. Future-dated posts
+ * are write-ahead drafts: hidden from the index, sitemap, and direct URL until
+ * their date passes. Blog pages use ISR so this re-evaluates without a redeploy.
+ */
+export function isPublished(post: BlogPost, now: number = Date.now()): boolean {
+  return new Date(post.date).getTime() <= now;
 }
 
+/** Published posts, newest-first. */
+export function getAllPosts(): BlogPost[] {
+  const now = Date.now();
+  return POSTS.filter((p) => isPublished(p, now)).sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+}
+
+/** Any post by slug (published or not — callers gate with isPublished). */
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return POSTS.find((p) => p.slug === slug);
 }

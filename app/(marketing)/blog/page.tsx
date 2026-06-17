@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 
+// Re-evaluate hourly so write-ahead posts appear when their date arrives.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Blog - World Cup 2026 prediction leagues & team play | Verdocast",
   description:

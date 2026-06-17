@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, isPublished } from "@/lib/blog";
+
+// Re-evaluate hourly so write-ahead posts auto-release when their date arrives.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -37,7 +40,7 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) notFound();
+  if (!post || !isPublished(post)) notFound();
 
   const faqSchema = {
     "@context": "https://schema.org",
