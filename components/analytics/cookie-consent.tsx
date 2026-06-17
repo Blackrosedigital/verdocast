@@ -13,7 +13,9 @@ function initPostHog() {
   initialized = true;
   posthog.init(key, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.posthog.com",
-    capture_pageview: true,
+    // "history_change" captures the initial load AND every client-side route
+    // change (App Router navigations) — plain `true` only catches the first load.
+    capture_pageview: "history_change",
     persistence: "localStorage+cookie",
   });
 }
