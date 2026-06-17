@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { EnglandCroatiaBody } from "@/components/blog/england-v-croatia-world-cup-2026";
 import { KeepLeagueAliveBody } from "@/components/blog/keep-your-league-alive-knockouts";
 import { PredictionVsFantasyBody } from "@/components/blog/prediction-league-vs-fantasy-football";
 import { ScoringExplainedBody } from "@/components/blog/prediction-league-scoring-explained";
@@ -32,6 +33,36 @@ export interface BlogPost {
 }
 
 export const POSTS: BlogPost[] = [
+  {
+    slug: "england-v-croatia-world-cup-2026",
+    title: "England v Croatia: World Cup 2026 Group L preview",
+    description:
+      "England face Croatia in their World Cup 2026 Group L opener at AT&T Stadium. Kick-off times, what to expect, and how to predict the score.",
+    date: "2026-06-17",
+    dateLabel: "17 June 2026",
+    keywords: [
+      "england v croatia",
+      "england croatia world cup 2026",
+      "england croatia prediction",
+      "world cup 2026 group l",
+      "england world cup 2026",
+    ],
+    faqs: [
+      {
+        q: "What time is England v Croatia?",
+        a: "Kick-off is 9:00pm BST (3:00pm ET) at AT&T Stadium, Arlington, in the World Cup 2026 Group L opener.",
+      },
+      {
+        q: "What group are England and Croatia in?",
+        a: "Both are in Group L, alongside Ghana and Panama.",
+      },
+      {
+        q: "How can I predict the score?",
+        a: "Start a free Verdocast league or join the global league, predict the score before kick-off, and the leaderboard scores it automatically.",
+      },
+    ],
+    Body: EnglandCroatiaBody,
+  },
   {
     slug: "world-cup-2026-prediction-league",
     title: "Turn the World Cup into your team's ritual",
