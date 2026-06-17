@@ -1,13 +1,19 @@
-// Generate a fixture share graphic for a single match (landscape + square).
-//   node scripts/gen-match-og.mjs
-// Edit MATCH below for other fixtures.
+// Generate fixture share graphics (landscape + square) for every match on a
+// given date, from data/tournament-2026.json. Output: og-exports/matches/
+//   node scripts/gen-match-og.mjs            (defaults to TARGET_DATE below)
+//   node scripts/gen-match-og.mjs 2026-06-20 (any UTC match date)
 
-import { mkdirSync } from "node:fs";
+import { readFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const tournament = JSON.parse(
+  readFileSync(join(root, "data", "tournament-2026.json"), "utf8"),
+);
+
+const TARGET_DATE = process.argv[2] ?? "2026-06-17"; // UTC match date
 
 const BG = "#0a0b0d";
 const TEXT = "#f5f3ee";
@@ -19,13 +25,7 @@ const GROUP_COLORS = [
   "#2563EB", "#4F46E5", "#7C3AED", "#C026D3", "#DB2777", "#475569",
 ];
 
-const MATCH = {
-  slug: "england-v-croatia",
-  home: "England",
-  away: "Croatia",
-  label: "WORLD CUP 2026 · GROUP L",
-  detail: "17 June · 9:00pm BST · AT&T Stadium, Arlington",
-};
+const slugByName = new Map(tournament.teams.map((t) => [t.name, t.slug]));
 
 const esc = (s) =>
   s
@@ -34,6 +34,25 @@ const esc = (s) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+
+function detailLine(m) {
+  const d = new Date(m.kickoff_utc);
+  const date = d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    timeZone: "Europe/London",
+  });
+  const time = d
+    .toLocaleTimeString("en-GB", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "Europe/London",
+    })
+    .replace(/\s/g, "")
+    .toLowerCase();
+  return `${date} · ${time} BST · ${m.venue}, ${m.venue_city}`;
+}
 
 const FORMATS = [
   {
@@ -45,12 +64,12 @@ const FORMATS = [
   {
     name: "-square",
     W: 1080, H: 1080,
-    label: 28, team: 122, vs: 56, detail: 30, foot: 30,
+    label: 28, team: 118, vs: 56, detail: 28, foot: 30,
     labelY: 150, homeY: 430, vsY: 540, awayY: 670, detailY: 800, footY: 1000,
   },
 ];
 
-function svg(f) {
+function svg(m, f) {
   const cx = f.W / 2;
   const seg = f.W / GROUP_COLORS.length;
   const strip = GROUP_COLORS.map(
@@ -73,17 +92,17 @@ function svg(f) {
   <rect width="${f.W}" height="${f.H}" fill="url(#g2)"/>
 
   <text x="${cx}" y="${f.labelY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="${f.label}" letter-spacing="6" fill="${MUTED}" font-weight="700">${esc(MATCH.label)}</text>
+        font-size="${f.label}" letter-spacing="6" fill="${MUTED}" font-weight="700">WORLD CUP 2026 · GROUP ${m.group_letter}</text>
 
   <text x="${cx}" y="${f.homeY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="${f.team}" font-weight="800" fill="${TEXT}" letter-spacing="2">${esc(MATCH.home.toUpperCase())}</text>
+        font-size="${f.team}" font-weight="800" fill="${TEXT}" letter-spacing="2">${esc(m.home_team.toUpperCase())}</text>
   <text x="${cx}" y="${f.vsY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
         font-size="${f.vs}" font-weight="800" fill="${ACCENT}">v</text>
   <text x="${cx}" y="${f.awayY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="${f.team}" font-weight="800" fill="${TEXT}" letter-spacing="2">${esc(MATCH.away.toUpperCase())}</text>
+        font-size="${f.team}" font-weight="800" fill="${TEXT}" letter-spacing="2">${esc(m.away_team.toUpperCase())}</text>
 
   <text x="${cx}" y="${f.detailY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="${f.detail}" fill="${MUTED}">${esc(MATCH.detail)}</text>
+        font-size="${f.detail}" fill="${MUTED}">${esc(detailLine(m))}</text>
 
   <text x="${cx}" y="${f.footY}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
         font-size="${f.foot}" font-weight="700" fill="${TEXT}">Predict the score · <tspan fill="${ACCENT}">verdocast.com</tspan></text>
@@ -92,11 +111,24 @@ function svg(f) {
 </svg>`;
 }
 
+const matches = tournament.matches
+  .filter((m) => m.kickoff_utc.startsWith(TARGET_DATE) && m.home_team && m.away_team)
+  .sort((a, b) => a.kickoff_utc.localeCompare(b.kickoff_utc));
+
+if (matches.length === 0) {
+  console.log(`No matches found for ${TARGET_DATE}.`);
+  process.exit(0);
+}
+
 const outDir = join(root, "og-exports", "matches");
 mkdirSync(outDir, { recursive: true });
-for (const f of FORMATS) {
-  const out = join(outDir, `${MATCH.slug}${f.name}.png`);
-  await sharp(Buffer.from(svg(f))).png().toFile(out);
-  console.log("Wrote", out);
+
+for (const m of matches) {
+  const slug = `${slugByName.get(m.home_team) ?? "tbd"}-v-${slugByName.get(m.away_team) ?? "tbd"}`;
+  for (const f of FORMATS) {
+    const out = join(outDir, `${slug}${f.name}.png`);
+    await sharp(Buffer.from(svg(m, f))).png().toFile(out);
+  }
+  console.log("Wrote", slug);
 }
-console.log("Done.");
+console.log(`Done - ${matches.length} fixtures for ${TARGET_DATE}.`);
