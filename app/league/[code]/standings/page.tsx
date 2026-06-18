@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -14,9 +15,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 async function getLeague(code: string) {
   const admin = createAdminClient();
+  // select * so standings keep working before the prize columns migration runs.
   const { data } = await admin
     .from("leagues")
-    .select("id, name, join_code, brand_color, brand_logo_url")
+    .select("*")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
@@ -60,6 +62,7 @@ export default async function StandingsPage({
     ? ({ "--primary": league.brand_color } as CSSProperties)
     : undefined;
   const standingsUrl = `${SITE_URL}/league/${code}/standings`;
+  const qualifyCount = league.qualify_count ?? 0;
 
   return (
     <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-16">
@@ -87,6 +90,25 @@ export default async function StandingsPage({
         </p>
       </div>
 
+      {(league.prize || qualifyCount > 0) && (
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-xl border border-border bg-surface px-4 py-3 text-center text-sm">
+          <span
+            className="font-mono text-[11px] uppercase tracking-widest"
+            style={{ color: "var(--gold)" }}
+          >
+            Prize
+          </span>
+          {league.prize && (
+            <span className="font-medium text-foreground">{league.prize}</span>
+          )}
+          {qualifyCount > 0 && (
+            <span className="text-muted-foreground">
+              · Top {qualifyCount} qualify
+            </span>
+          )}
+        </div>
+      )}
+
       <div className="mt-8 overflow-hidden rounded-xl border border-border bg-surface">
         <table className="w-full text-sm">
           <thead>
@@ -99,28 +121,55 @@ export default async function StandingsPage({
             </tr>
           </thead>
           <tbody>
-            {rows.map((r, i) => (
-              <tr
-                key={r.member_id ?? i}
-                className="border-b border-border last:border-0"
-              >
-                <td className="px-4 py-3 font-mono text-muted-foreground">
-                  {i + 1}
-                </td>
-                <td className="px-4 py-3 font-medium text-foreground">
-                  {r.display_name ?? "—"}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-lg text-primary">
-                  {r.total_points ?? 0}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-muted-foreground">
-                  {r.exact_scores ?? 0}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-muted-foreground">
-                  {r.matches_scored ?? 0}
-                </td>
-              </tr>
-            ))}
+            {rows.map((r, i) => {
+              const qualifies = qualifyCount > 0 && i < qualifyCount;
+              const showDivider =
+                qualifyCount > 0 &&
+                i === qualifyCount - 1 &&
+                rows.length > qualifyCount;
+              return (
+                <Fragment key={r.member_id ?? i}>
+                  <tr className="border-b border-border last:border-0">
+                    <td className="px-4 py-3 font-mono text-muted-foreground">
+                      {i + 1}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-foreground">
+                      <span className="flex items-center gap-2">
+                        {r.display_name ?? "-"}
+                        {qualifies && (
+                          <span
+                            className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold text-black"
+                            style={{ backgroundColor: "var(--gold)" }}
+                          >
+                            Q
+                          </span>
+                        )}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-lg text-primary">
+                      {r.total_points ?? 0}
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-muted-foreground">
+                      {r.exact_scores ?? 0}
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-muted-foreground">
+                      {r.matches_scored ?? 0}
+                    </td>
+                  </tr>
+                  {showDivider && (
+                    <tr aria-hidden>
+                      <td
+                        colSpan={5}
+                        className="border-b border-dashed border-border px-4 py-1 text-center font-mono text-[10px] uppercase tracking-widest"
+                        style={{ color: "var(--gold)" }}
+                      >
+                        Qualification line
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
             {rows.length === 0 && (
               <tr>
                 <td

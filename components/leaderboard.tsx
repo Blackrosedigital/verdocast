@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import {
   getLeaderboard,
   getMemberPredictions,
@@ -22,10 +22,14 @@ export function Leaderboard({
   code,
   initialRows,
   initialLiveCount,
+  prize,
+  qualifyCount = 0,
 }: {
   code: string;
   initialRows: LeaderboardRow[];
   initialLiveCount: number;
+  prize?: string | null;
+  qualifyCount?: number;
 }) {
   const [rows, setRows] = useState(initialRows);
   const [liveCount, setLiveCount] = useState(initialLiveCount);
@@ -50,6 +54,23 @@ export function Leaderboard({
 
   return (
     <div>
+      {(prize || qualifyCount > 0) && (
+        <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-border bg-surface px-4 py-3 text-sm">
+          <span
+            className="font-mono text-[11px] uppercase tracking-widest"
+            style={{ color: "var(--gold)" }}
+          >
+            Prize
+          </span>
+          {prize && <span className="font-medium text-foreground">{prize}</span>}
+          {qualifyCount > 0 && (
+            <span className="text-muted-foreground">
+              · Top {qualifyCount} qualify
+            </span>
+          )}
+        </div>
+      )}
+
       {liveCount > 0 && (
         <p className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
           <span
@@ -72,31 +93,60 @@ export function Leaderboard({
             </tr>
           </thead>
           <tbody>
-            {rows.map((r, i) => (
-              <tr
-                key={r.member_id}
-                onClick={() =>
-                  setOpenMember({ id: r.member_id, name: r.display_name })
-                }
-                className="cursor-pointer border-b border-border last:border-0 transition-colors hover:bg-surface-2"
-              >
-                <td className="px-4 py-3 font-mono text-muted-foreground">
-                  {i + 1}
-                </td>
-                <td className="px-4 py-3 font-medium text-foreground">
-                  {r.display_name}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-lg text-primary">
-                  {r.total_points}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-muted-foreground">
-                  {r.exact_scores}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-muted-foreground">
-                  {r.matches_scored}
-                </td>
-              </tr>
-            ))}
+            {rows.map((r, i) => {
+              const qualifies = qualifyCount > 0 && i < qualifyCount;
+              const showDivider =
+                qualifyCount > 0 &&
+                i === qualifyCount - 1 &&
+                rows.length > qualifyCount;
+              return (
+                <Fragment key={r.member_id}>
+                  <tr
+                    onClick={() =>
+                      setOpenMember({ id: r.member_id, name: r.display_name })
+                    }
+                    className="cursor-pointer border-b border-border last:border-0 transition-colors hover:bg-surface-2"
+                  >
+                    <td className="px-4 py-3 font-mono text-muted-foreground">
+                      {i + 1}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-foreground">
+                      <span className="flex items-center gap-2">
+                        {r.display_name}
+                        {qualifies && (
+                          <span
+                            className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold text-black"
+                            style={{ backgroundColor: "var(--gold)" }}
+                          >
+                            Q
+                          </span>
+                        )}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-lg text-primary">
+                      {r.total_points}
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-muted-foreground">
+                      {r.exact_scores}
+                    </td>
+                    <td className="px-4 py-3 text-right font-mono text-muted-foreground">
+                      {r.matches_scored}
+                    </td>
+                  </tr>
+                  {showDivider && (
+                    <tr aria-hidden>
+                      <td
+                        colSpan={5}
+                        className="border-b border-dashed border-border px-4 py-1 text-center font-mono text-[10px] uppercase tracking-widest"
+                        style={{ color: "var(--gold)" }}
+                      >
+                        Qualification line
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
             {rows.length === 0 && (
               <tr>
                 <td

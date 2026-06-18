@@ -70,3 +70,62 @@ export async function updateLeagueBranding(input: {
   }
   return { ok: true };
 }
+
+const PrizeSchema = z.object({
+  slug: z.string().min(1),
+  prize: z.string().trim().max(140),
+  qualifyCount: z.number().int().min(0).max(50),
+});
+
+/**
+ * Set a league's prize + how many top players "qualify" for it (0 = off).
+ * Owner-only. Rewards are free-entry and skill-based (the leaderboard) — never a
+ * paid pool (PRD §7).
+ */
+export async function updateLeaguePrize(input: {
+  slug: string;
+  prize: string;
+  qualifyCount: number;
+}): Promise<ActionResult> {
+  const user = await requireUser();
+  const parsed = PrizeSchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: parsed.error.issues[0]?.message ?? "Invalid input.",
+      code: "invalid_input",
+    };
+  }
+  const { slug, prize, qualifyCount } = parsed.data;
+
+  const admin = createAdminClient();
+  const { data: league } = await admin
+    .from("leagues")
+    .select("id, organization_id")
+    .eq("slug", slug)
+    .is("deleted_at", null)
+    .maybeSingle();
+  if (!league) return { ok: false, error: "League not found.", code: "not_found" };
+
+  const { data: org } = await admin
+    .from("organizations")
+    .select("owner_email")
+    .eq("id", league.organization_id)
+    .maybeSingle();
+  if (!org || org.owner_email !== user.email) {
+    return { ok: false, error: "You don’t own this league.", code: "forbidden" };
+  }
+
+  const { error } = await admin
+    .from("leagues")
+    .update({
+      prize: prize || null,
+      qualify_count: qualifyCount,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", league.id);
+  if (error) {
+    return { ok: false, error: "Could not save the prize.", code: "save_failed" };
+  }
+  return { ok: true };
+}

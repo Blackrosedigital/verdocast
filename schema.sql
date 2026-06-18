@@ -56,6 +56,8 @@ create table leagues (
   brand_color text, -- hex like '#e6ff3d'
   brand_logo_url text,
   scoring_rules jsonb not null default '{"exact":5,"goal_diff":3,"result":2}'::jsonb,
+  prize text, -- reward the admin sets (employer/sponsor funded; free-entry skill comp)
+  qualify_count int not null default 0 check (qualify_count >= 0 and qualify_count <= 50), -- top-N who "qualify" (0 = off)
   is_demo boolean not null default false, -- the public demo league
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),

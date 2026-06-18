@@ -5,6 +5,7 @@ import { JoinLink } from "@/components/admin/join-link";
 import { MemberRoster } from "@/components/admin/member-roster";
 import { MembersList } from "@/components/admin/members-list";
 import { NudgeButton } from "@/components/admin/nudge-button";
+import { PrizeForm } from "@/components/admin/prize-form";
 import { KnockoutCountdown } from "@/components/knockout-countdown";
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
@@ -338,6 +339,24 @@ export default async function AdminLeaguePage({
           <MembersList slug={slug} members={members} />
         </div>
       )}
+
+      {/* Prize & rewards */}
+      <div className="mt-6 rounded-2xl border border-border bg-surface p-6">
+        <h2 className="font-display text-2xl tracking-wide text-foreground">
+          Prize &amp; rewards
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Give your league something to play for. Set a prize and how many top
+          players qualify - they get a &ldquo;Q&rdquo; badge on the leaderboard.
+        </p>
+        <div className="mt-4">
+          <PrizeForm
+            slug={slug}
+            initialPrize={league.prize ?? ""}
+            initialQualifyCount={league.qualify_count ?? 0}
+          />
+        </div>
+      </div>
 
       {/* Branding */}
       <div className="mt-6 rounded-2xl border border-border bg-surface p-6">

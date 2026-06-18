@@ -23,9 +23,10 @@ export default async function LeaderboardPage({
   const user = await requireUser(`/league/${code}/leaderboard`);
 
   const admin = createAdminClient();
+  // select * so the page keeps working before the prize columns migration runs.
   const { data: league } = await admin
     .from("leagues")
-    .select("id, name, brand_color")
+    .select("*")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
@@ -107,6 +108,8 @@ export default async function LeaderboardPage({
           code={code}
           initialRows={rows}
           initialLiveCount={result.data.liveCount}
+          prize={league.prize}
+          qualifyCount={league.qualify_count}
         />
       </div>
 

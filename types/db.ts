@@ -105,6 +105,8 @@ export type Database = {
           brand_color: string | null;
           brand_logo_url: string | null;
           scoring_rules: Json;
+          prize: string | null;
+          qualify_count: number;
           is_demo: boolean;
           deleted_at: string | null;
           created_at: string;
@@ -121,6 +123,8 @@ export type Database = {
           brand_color?: string | null;
           brand_logo_url?: string | null;
           scoring_rules?: Json;
+          prize?: string | null;
+          qualify_count?: number;
           is_demo?: boolean;
           deleted_at?: string | null;
           created_at?: string;
@@ -137,6 +141,8 @@ export type Database = {
           brand_color?: string | null;
           brand_logo_url?: string | null;
           scoring_rules?: Json;
+          prize?: string | null;
+          qualify_count?: number;
           is_demo?: boolean;
           deleted_at?: string | null;
           created_at?: string;
