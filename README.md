@@ -37,6 +37,7 @@ Tagline candidates to A/B-test on the marketing page:
 ## Reference docs
 
 - [`docs/PRD.md`](docs/PRD.md) — product requirements: personas, journeys, feature inventory, monetization, roadmap (reflects what's live).
+- [`docs/strategy-expansion.md`](docs/strategy-expansion.md) — expansion strategy beyond the World Cup (year-round/multi-competition), market research, competitive landscape, pricing.
 - [`CLAUDE.md`](CLAUDE.md) — architecture contract (authoritative for tech/data model).
 - [`docs/marketing/office-b2b-playbook.md`](docs/marketing/office-b2b-playbook.md) — B2B go-to-market playbook.
 
