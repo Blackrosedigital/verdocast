@@ -16,6 +16,8 @@ export interface PredictMatch {
   venue: string;
   venueCity: string;
   groupLetter: string | null;
+  /** Knockout stage badge (e.g. "R32", "QF", "Final"); null for group games. */
+  stageLabel: string | null;
   status: string;
   homeScore: number | null;
   awayScore: number | null;

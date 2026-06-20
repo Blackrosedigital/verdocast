@@ -18,6 +18,17 @@ export const dynamic = "force-dynamic";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+// Knockout stage badges (null = group stage, which uses the group pill instead).
+const STAGE_LABEL: Record<string, string | null> = {
+  group: null,
+  r32: "R32",
+  r16: "R16",
+  qf: "QF",
+  sf: "SF",
+  third: "3rd",
+  final: "Final",
+};
+
 export default async function PredictPage({
   params,
 }: {
@@ -64,14 +75,16 @@ export default async function PredictPage({
     );
   }
 
-  // Group-stage matches + this member's predictions, in parallel.
+  // Predictable matches (group stage, plus knockout fixtures once the bracket
+  // resolves and both teams are known) + this member's predictions, in parallel.
   const [matchesRes, predsRes] = await Promise.all([
     admin
       .from("matches")
       .select(
-        "id, match_code, kickoff_utc, home_team, away_team, venue, venue_city, group_letter, status, home_score, away_score",
+        "id, match_code, kickoff_utc, home_team, away_team, venue, venue_city, group_letter, stage, status, home_score, away_score",
       )
-      .eq("stage", "group")
+      .not("home_team", "is", null)
+      .not("away_team", "is", null)
       .order("kickoff_utc", { ascending: true }),
     admin
       .from("predictions")
@@ -101,6 +114,7 @@ export default async function PredictPage({
       venue: m.venue,
       venueCity: m.venue_city,
       groupLetter: m.group_letter,
+      stageLabel: STAGE_LABEL[m.stage] ?? null,
       status: m.status,
       homeScore: m.home_score,
       awayScore: m.away_score,
@@ -123,6 +137,7 @@ export default async function PredictPage({
     (m) => !m.locked && !m.prediction,
   ).length;
   const caughtUp = openCount > 0 && openUnpredicted === 0;
+  const hasKnockouts = matches.some((m) => m.stageLabel != null);
 
   return (
     <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
@@ -146,7 +161,9 @@ export default async function PredictPage({
         </div>
       </div>
       <p className="mt-2 text-muted-foreground">
-        Predict the score of every group-stage match. Each one locks at kickoff.
+        Predict the score of every match. Each one locks at kickoff.
+        {hasKnockouts &&
+          " Knockout games are scored on the 90-minute result - extra time and penalties don't count."}
       </p>
 
       <div className="mt-5">

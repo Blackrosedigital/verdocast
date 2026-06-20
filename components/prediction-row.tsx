@@ -140,13 +140,27 @@ export function PredictionRow({
     </div>
   );
 
+  // Group pill (A-L) for group games; a gold stage badge (R32/QF/Final) for
+  // knockouts (which have no group letter).
+  const groupOrStage = match.stageLabel ? (
+    <span
+      title={match.stageLabel}
+      className="flex h-6 shrink-0 items-center justify-center rounded px-1.5 font-display text-[10px] text-black sm:h-7 sm:text-xs"
+      style={{ backgroundColor: "var(--gold)" }}
+    >
+      {match.stageLabel}
+    </span>
+  ) : (
+    <GroupPill letter={match.groupLetter} />
+  );
+
   // ---- Locked row (kickoff passed) ----
   if (match.locked) {
     const finished = match.status === "finished";
     const live = match.status === "live";
     return (
       <div className="flex items-center gap-2 px-3 py-2.5 opacity-90 sm:gap-3 sm:px-4">
-        <GroupPill letter={match.groupLetter} />
+        {groupOrStage}
         {TimeCol}
         {HomeTeam}
         <div className="flex w-20 shrink-0 flex-col items-center">
