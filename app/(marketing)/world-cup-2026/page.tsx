@@ -54,6 +54,15 @@ export default function WorldCup2026Page() {
           <Link href="/play">Join the global league</Link>
         </Button>
       </div>
+      <p className="mt-4 text-sm text-muted-foreground">
+        The knockouts are here -{" "}
+        <Link
+          href="/world-cup-2026/knockouts"
+          className="text-primary underline"
+        >
+          see the live knockout bracket →
+        </Link>
+      </p>
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {GROUPS.map((g) => (

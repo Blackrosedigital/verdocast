@@ -63,3 +63,21 @@ export function createAdminClient() {
     },
   );
 }
+
+/**
+ * Anon, cookieless Supabase client for PUBLIC reads (RLS applies). Use for
+ * server-rendered public pages that only read public tables (e.g. `matches`),
+ * so they work at build/ISR time without the service-role key.
+ */
+export function createPublicClient() {
+  return createSupabaseClient<Database>(
+    requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
+    requireEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    },
+  );
+}
