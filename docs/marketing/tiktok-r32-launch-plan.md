@@ -74,6 +74,43 @@ New match drops daily. Beat the crowd.
 
 ---
 
+## Word-for-word launch-day captions (28 Jun) — paste-ready
+
+**1. 9:00am — Video 2 (pinned explainer) · sticker #4**
+> This is the whole game. Ten seconds, no money, ever.
+> Pick a score, climb a live leaderboard as the real matches play out. The knockouts are open right now.
+> Predict free - link in bio 👇
+
+`#WorldCup2026 #predictiongame #footballtok #freegame #knockouts`
+
+**2. 11:00am — Video 4 (bracket is live) · sticker #7 · link → /world-cup-2026/knockouts**
+> Every World Cup knockout match, on one page - and it's filling in live.
+> R32 to the final, scores dropping in as the real matches finish. Watch it resolve, then predict it yourself.
+> See the live bracket - link in bio 👇
+
+`#WorldCup2026 #knockouts #bracket #footballtok #predictions`
+
+**3. 12:30pm — Video 1 (R32 predictions, hero) · sticker #6**
+> My Round of 32 bracket is locked. All 16 ties called.
+> Netherlands v Morocco is the one keeping me up. Screenshot it, then beat me - South Africa v Canada kicks us off tonight.
+> Think you can call it better? Free league in bio 👇
+
+`#WorldCup2026 #R32 #footballpredictions #southafrica #canada`
+
+**4. 10:15pm — Reaction (South Africa v Canada FT) · sticker #2 · pick one**
+> **(a) Called it:** Called it. ✅ One down, fifteen to go. South Africa v Canada went exactly how I read it. Brazil v Japan is next - my bracket's already in. How's yours holding up? Link in bio 👇
+>
+> **(b) Got it wrong:** Got that one wrong. 🫠 And that's the game. South Africa v Canada didn't read the script - one down, fifteen to go, and I'm not the only bracket taking a hit tonight. Brazil v Japan tomorrow. Beat me by calling it better - link in bio 👇
+
+`#WorldCup2026 #southafrica #canada #r32 #fulltime`
+
+**Pinned comment — drop on all four posts:**
+```
+Predict every World Cup knockout match free - no money, just the call.
+Global league anyone can join 👉 verdocast.com/play?ref=tiktok
+New match drops daily. Beat the crowd.
+```
+
 ## After the launch window — per-round bracket reactions
 Once R32 resolves (early July) and through R16 → QF → SF → Final, run one **bracket reaction** per round (the morning after each round's last tie). Reusable swap-the-blanks format: [`tiktok-bracket-reaction-format.md`](tiktok-bracket-reaction-format.md). Angle: "{teams left} teams left - my bracket vs reality - how's yours holding up?" → drives people back to check their standing.
 

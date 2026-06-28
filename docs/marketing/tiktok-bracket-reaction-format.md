@@ -34,3 +34,20 @@ Run once after **each round resolves** (R32 → R16 → QF → SF → Final). Sa
 
 ## Production tip
 Lock this as a **saved CapCut project** so each round is a 10-minute swap-the-blanks job, not a rebuild. One clean ~24s bracket scroll capture feeds both the "bracket is live" launch video and the first Reaction.
+
+## Bracket-scroll recording spec (one take, reusable)
+Capture this once; it feeds Video 4 ("the bracket is live") and every Reaction.
+
+**Setup:** phone portrait, brightness up, Do Not Disturb on (no banners). Open `verdocast.com/world-cup-2026/knockouts`, scroll to the very top. Start screen recording, capture ~28s (longer than needed so you can trim).
+
+**The single continuous scroll:**
+```
+0:00-0:02  HOLD at top — "Knockout bracket" title + "Round of 32" header
+0:02-0:08  SLOW scroll through the R32 ties (steady, readable)
+0:08-0:12  PAUSE ~2s on a tie with a SCORE / FT (proof it's live)
+0:12-0:16  FASTER scroll through R16 → QF
+0:16-0:20  PAUSE on the FINAL section
+0:20-0:28  HOLD on the Final / lower bracket (your end-card bed)
+```
+
+**In CapCut:** lay the VO over it, trim to ~24s, burn the on-screen text on the matching beats, end card over the 20-28s hold (URL + FREE • NO GAMBLING + sticker #7).
