@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BracketScroll } from "@/components/bracket-scroll";
 import { KickoffLabel } from "@/components/kickoff-label";
-import { bracketOrderOf } from "@/lib/knockout";
+import { bracketOrderOf, KO_FEEDERS } from "@/lib/knockout";
 import { getTeam } from "@/lib/tournament";
 import styles from "@/components/bracket.module.css";
 
@@ -25,14 +25,41 @@ const ROUNDS = [
   { key: "final", label: "Final" },
 ] as const;
 
+const SHORT_STAGE: Record<string, string> = {
+  r32: "R32",
+  r16: "R16",
+  qf: "QF",
+  sf: "SF",
+  final: "Final",
+};
+
+/** Label for an undecided slot: "NED / MAR" if the feeder tie has teams, else
+ * "R16 winner" etc. The slot's winner comes from that feeder match. */
+function feederLabel(
+  feederCode: string | undefined,
+  byCode: Map<string, BracketMatch>,
+): string | null {
+  if (!feederCode) return null;
+  const f = byCode.get(feederCode);
+  if (!f) return null;
+  if (f.home_team && f.away_team) {
+    const a = getTeam(f.home_team)?.code ?? f.home_team;
+    const b = getTeam(f.away_team)?.code ?? f.away_team;
+    return `${a} / ${b}`;
+  }
+  return `${SHORT_STAGE[f.stage] ?? "Match"} winner`;
+}
+
 function TeamRow({
   name,
   score,
   result,
+  feeder,
 }: {
   name: string | null;
   score: number | null;
   result?: "win" | "lose" | null;
+  feeder?: string | null;
 }) {
   const team = name ? getTeam(name) : undefined;
   const resultClass =
@@ -47,14 +74,20 @@ function TeamRow({
         <span className={styles.placeholder} />
       )}
       <span className={`${styles.name} ${name ? "" : styles.tbd}`}>
-        {name ?? "TBD"}
+        {name ?? feeder ?? "TBD"}
       </span>
       {score != null && <span className={styles.score}>{score}</span>}
     </div>
   );
 }
 
-function MatchCard({ m }: { m: BracketMatch }) {
+function MatchCard({
+  m,
+  byCode,
+}: {
+  m: BracketMatch;
+  byCode: Map<string, BracketMatch>;
+}) {
   const live = m.status === "live";
   const finished = m.status === "finished";
   // Highlight the advancing team only on a decided (non-draw) 90-minute result.
@@ -62,6 +95,7 @@ function MatchCard({ m }: { m: BracketMatch }) {
   const decided =
     finished && m.home_score != null && m.away_score != null && m.home_score !== m.away_score;
   const homeWon = decided && m.home_score! > m.away_score!;
+  const feeders = KO_FEEDERS[m.match_code];
   return (
     <div className={styles.match}>
       <Link
@@ -82,11 +116,13 @@ function MatchCard({ m }: { m: BracketMatch }) {
           name={m.home_team}
           score={m.home_score}
           result={decided ? (homeWon ? "win" : "lose") : null}
+          feeder={feederLabel(feeders?.[0], byCode)}
         />
         <TeamRow
           name={m.away_team}
           score={m.away_score}
           result={decided ? (homeWon ? "lose" : "win") : null}
+          feeder={feederLabel(feeders?.[1], byCode)}
         />
       </Link>
     </div>
@@ -95,10 +131,12 @@ function MatchCard({ m }: { m: BracketMatch }) {
 
 export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
   const byStage = new Map<string, BracketMatch[]>();
+  const byCode = new Map<string, BracketMatch>();
   for (const m of matches) {
     const arr = byStage.get(m.stage) ?? [];
     arr.push(m);
     byStage.set(m.stage, arr);
+    byCode.set(m.match_code, m);
   }
   for (const arr of byStage.values()) {
     arr.sort((a, b) => bracketOrderOf(a.match_code) - bracketOrderOf(b.match_code));
@@ -117,7 +155,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
                 <div className={styles.title}>{round.label}</div>
                 <div className={styles.body}>
                   {ties.map((m) => (
-                    <MatchCard key={m.match_code} m={m} />
+                    <MatchCard key={m.match_code} m={m} byCode={byCode} />
                   ))}
                 </div>
               </div>
