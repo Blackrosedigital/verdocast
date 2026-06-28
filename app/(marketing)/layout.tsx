@@ -35,6 +35,12 @@ function SiteHeader() {
             Fixtures
           </Link>
           <Link
+            href="/world-cup-2026/knockouts"
+            className="hidden px-2 text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline"
+          >
+            Bracket
+          </Link>
+          <Link
             href="/pricing"
             className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -79,6 +85,9 @@ function SiteFooter() {
           </Link>
           <Link href="/world-cup-2026" className="hover:text-foreground">
             Fixtures
+          </Link>
+          <Link href="/world-cup-2026/knockouts" className="hover:text-foreground">
+            Bracket
           </Link>
           <Link href="/blog" className="hover:text-foreground">
             Blog

@@ -70,6 +70,30 @@ Brand: confident, analytical, lightly editorial - The Athletic, not DraftKings. 
 
 ---
 
+## Video 4 — "The bracket is live"
+**Format:** faceless, screen-recording of `verdocast.com/world-cup-2026/knockouts` scrolling R32 → Final + VO. ~24s. The scroll IS the visual. CTA points at the **bracket page**.
+
+**Hook (0-2s):** "This is every World Cup knockout match - and it's filling in live."
+
+**VOICEOVER (paste into ElevenLabs):**
+> This is the entire World Cup knockout bracket - Round of 32, all the way to the final. And it's live. As each real match finishes, the scores drop in and the winners advance, right here on the page. So you can see the whole road to the final in one scroll. Sixteen ties in the Round of 32, then the sixteens, the quarters, the semis. Some of these are already decided. Most aren't. Watch it resolve match by match - and predict it yourself before the next one kicks off. The bracket's open at verdocast dot com. Group stage is done. This is the part that matters.
+
+| Time | On-screen text | Visual (screen-rec) |
+|---|---|---|
+| 0-2s | "EVERY KNOCKOUT MATCH. LIVE." | top of bracket page, R32 header |
+| 2-7s | "THE BRACKET IS LIVE" (lime) | slow scroll through R32 ties |
+| 7-12s | "SCORES DROP IN AS THEY FINISH" | pause on a resolved tie, advancing team |
+| 12-16s | "R32 → R16 → QF → SF" | faster scroll through rounds |
+| 16-20s | "ALL THE WAY TO THE FINAL" (gold) | land on the Final slot |
+| 20-24s | "verdocast.com/world-cup-2026/knockouts" + "FREE • NO GAMBLING" | lime CTA over the full bracket |
+
+**Caption:** The full World Cup knockout bracket, live - R32 to the final, scores filling in as the real matches finish. Watch it resolve, then predict it yourself. Free, group stage just closed.
+**Hashtags:** #WorldCup2026 #knockouts #bracket #footballtok #predictions
+**Sound:** low-energy "stating facts" beat (same family as Video 1); keep evergreen.
+**Sticker:** `See the live bracket - link in bio` (#7).
+
+---
+
 ## Editor notes
 - Bio/CTA link: `verdocast.com/play?ref=tiktok` (tracked in /admin/stats). The AI voice says only "verdocast dot com slash play".
 - Add **captions to every video** (most TikTok is watched on mute).

@@ -36,6 +36,8 @@ verdocast.com/play?ref=tiktok
 4. `Free global league - link in bio`
 5. `No money. Just bragging rights ↓`
 6. `Beat my bracket - link in bio`
+7. `See the live bracket - link in bio`
+8. `How's your bracket? Check your standing ↓`
 
 Pairing: #6 on Video 1 (predictions); #2/#4 on Video 2 (explainer); #3 on Video 3 (penalty rule).
 
@@ -54,6 +56,7 @@ New match drops daily. Beat the crowd.
 
 ### Saturday 28 Jun — launch day · *South Africa v Canada 8:00pm*
 - **9:00am — Video 2 (PIN it).** Caption: "The whole game in 10 seconds. Knockouts go live today." `#worldcup2026 #predictions #footballtiktok #knockouts #worldcup` · sticker #4.
+- **11:00am — Video 4 "The bracket is live"** (NEW). Screen-rec of the live bracket page. Caption: "The full knockout bracket, live - R32 to the final, filling in as matches finish." `#worldcup2026 #knockouts #bracket #footballtok #predictions` · sticker #7 · CTA → the bracket page.
 - **12:30pm — Video 1 (hero).** Caption: "My calls for all 16 R32 ties. Screenshot it, then beat me. SA v Canada kicks us off tonight." `#worldcup2026 #r32 #footballpredictions #southafrica #canada` · sticker #6.
 - **10:15pm — Reaction (SA v Canada FT).** Caption: "Called it / got that wrong. One down, fifteen to go. Brazil v Japan tomorrow." `#worldcup2026 #southafrica #canada #r32 #fulltime` · sticker #2.
 
@@ -70,6 +73,9 @@ New match drops daily. Beat the crowd.
 > The 2:00am NED v MAR is unwatchable live for a solo founder - treat it as a morning recap, not a live slot.
 
 ---
+
+## After the launch window — per-round bracket reactions
+Once R32 resolves (early July) and through R16 → QF → SF → Final, run one **bracket reaction** per round (the morning after each round's last tie). Reusable swap-the-blanks format: [`tiktok-bracket-reaction-format.md`](tiktok-bracket-reaction-format.md). Angle: "{teams left} teams left - my bracket vs reality - how's yours holding up?" → drives people back to check their standing.
 
 ## The one KPI
 **Link clicks to `/play?ref=tiktok` → completed first prediction (activation rate).** Not views/follows. Track in PostHog: `ref=tiktok` sessions → % submitting ≥1 prediction. **Target 25-40%** in launch week.
