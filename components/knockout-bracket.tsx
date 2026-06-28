@@ -1,3 +1,4 @@
+import { BracketScroll } from "@/components/bracket-scroll";
 import { KickoffLabel } from "@/components/kickoff-label";
 import { getTeam } from "@/lib/tournament";
 import styles from "@/components/bracket.module.css";
@@ -31,13 +32,17 @@ function codeIndex(code: string): number {
 function TeamRow({
   name,
   score,
+  result,
 }: {
   name: string | null;
   score: number | null;
+  result?: "win" | "lose" | null;
 }) {
   const team = name ? getTeam(name) : undefined;
+  const resultClass =
+    result === "win" ? styles.win : result === "lose" ? styles.lose : "";
   return (
-    <div className={styles.team}>
+    <div className={`${styles.team} ${resultClass}`}>
       {team?.flag ? (
         <span className={styles.flag}>{team.flag}</span>
       ) : name ? (
@@ -56,6 +61,11 @@ function TeamRow({
 function MatchCard({ m }: { m: BracketMatch }) {
   const live = m.status === "live";
   const finished = m.status === "finished";
+  // Highlight the advancing team only on a decided (non-draw) 90-minute result.
+  // Ties settled on penalties are a 90-minute draw here, so neither is marked.
+  const decided =
+    finished && m.home_score != null && m.away_score != null && m.home_score !== m.away_score;
+  const homeWon = decided && m.home_score! > m.away_score!;
   return (
     <div className={styles.match}>
       <div className={styles.card}>
@@ -68,8 +78,16 @@ function MatchCard({ m }: { m: BracketMatch }) {
             <KickoffLabel iso={m.kickoff_utc} />
           )}
         </div>
-        <TeamRow name={m.home_team} score={m.home_score} />
-        <TeamRow name={m.away_team} score={m.away_score} />
+        <TeamRow
+          name={m.home_team}
+          score={m.home_score}
+          result={decided ? (homeWon ? "win" : "lose") : null}
+        />
+        <TeamRow
+          name={m.away_team}
+          score={m.away_score}
+          result={decided ? (homeWon ? "lose" : "win") : null}
+        />
       </div>
     </div>
   );
@@ -89,7 +107,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
 
   return (
     <div>
-      <div className={styles.scroll}>
+      <BracketScroll>
         <div className={styles.bracket}>
           {ROUNDS.map((round) => {
             const ties = byStage.get(round.key) ?? [];
@@ -106,7 +124,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
             );
           })}
         </div>
-      </div>
+      </BracketScroll>
 
       {third && (
         <div className="mt-6">

@@ -123,3 +123,12 @@
   font-weight: 700;
   color: var(--text);
 }
+
+/* finished tie: the advancing team stays bold, the eliminated team dims */
+.win .name {
+  color: var(--text);
+  font-weight: 700;
+}
+.lose {
+  opacity: 0.45;
+}
