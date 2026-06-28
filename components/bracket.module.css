@@ -44,12 +44,18 @@
   align-items: center;
 }
 
-/* horizontal stub to the column's right edge (all rounds except the last) */
+/* Connectors form a clean elbow per pair:
+ *   outgoing stub (right of each card) -> vertical line joining the pair ->
+ *   incoming stub (left of the next round's card).
+ * Round = 264px, card = 212px, so the 52px gap splits into two 26px stubs with
+ * the vertical line at the midpoint (238px). */
+
+/* outgoing stub: card right edge to the gap midpoint (all rounds except last) */
 .round:not(:last-child) .match::after {
   content: "";
   position: absolute;
   left: 212px;
-  width: 52px;
+  width: 26px;
   top: 50%;
   height: 2px;
   background: var(--border);
@@ -59,7 +65,7 @@
 .round:not(:last-child) .match:nth-child(odd)::before {
   content: "";
   position: absolute;
-  left: 263px;
+  left: 238px;
   top: 50%;
   width: 2px;
   height: 100%;
@@ -67,12 +73,24 @@
 }
 
 .card {
+  position: relative;
   width: 212px;
   box-sizing: border-box;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
   padding: 10px 12px;
+}
+
+/* incoming stub: gap midpoint into the card's left edge (all rounds except first) */
+.round:not(:first-child) .card::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  width: 26px;
+  top: 50%;
+  height: 2px;
+  background: var(--border);
 }
 
 .kickoff {
