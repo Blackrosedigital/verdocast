@@ -33,6 +33,21 @@ const SHORT_STAGE: Record<string, string> = {
   final: "Final",
 };
 
+/** The team that has advanced from a feeder tie, once it is decided on the
+ * 90-minute result. Null while the tie is unplayed or level (a pen shootout is
+ * a 90-minute draw here, so the winner is unknown from our data). */
+function slotWinner(
+  feederCode: string | undefined,
+  byCode: Map<string, BracketMatch>,
+): string | null {
+  if (!feederCode) return null;
+  const f = byCode.get(feederCode);
+  if (!f || f.status !== "finished") return null;
+  if (f.home_score == null || f.away_score == null) return null;
+  if (f.home_score === f.away_score) return null;
+  return f.home_score > f.away_score ? f.home_team : f.away_team;
+}
+
 /** Label for an undecided slot: "NED / MAR" if the feeder tie has teams, else
  * "R16 winner" etc. The slot's winner comes from that feeder match. */
 function feederLabel(
@@ -96,12 +111,16 @@ function MatchCard({
     finished && m.home_score != null && m.away_score != null && m.home_score !== m.away_score;
   const homeWon = decided && m.home_score! > m.away_score!;
   const feeders = KO_FEEDERS[m.match_code];
+  // Use our resolved team if ingestion has filled it; otherwise advance the
+  // feeder tie's winner the moment it is decided, before the official draw.
+  const homeName = m.home_team ?? slotWinner(feeders?.[0], byCode);
+  const awayName = m.away_team ?? slotWinner(feeders?.[1], byCode);
   return (
     <div className={styles.match}>
       <Link
         href={`/world-cup-2026/match/${m.match_code.toLowerCase()}`}
         className={styles.card}
-        aria-label={`Match details: ${m.home_team ?? "TBD"} versus ${m.away_team ?? "TBD"}`}
+        aria-label={`Match details: ${homeName ?? "TBD"} versus ${awayName ?? "TBD"}`}
       >
         <div className={styles.kickoff}>
           {live ? (
@@ -113,13 +132,13 @@ function MatchCard({
           )}
         </div>
         <TeamRow
-          name={m.home_team}
+          name={homeName}
           score={m.home_score}
           result={decided ? (homeWon ? "win" : "lose") : null}
           feeder={feederLabel(feeders?.[0], byCode)}
         />
         <TeamRow
-          name={m.away_team}
+          name={awayName}
           score={m.away_score}
           result={decided ? (homeWon ? "lose" : "win") : null}
           feeder={feederLabel(feeders?.[1], byCode)}

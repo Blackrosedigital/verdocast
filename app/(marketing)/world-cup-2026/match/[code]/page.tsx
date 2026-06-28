@@ -58,6 +58,18 @@ function tieLabel(code: string | undefined, map: Map<string, KoMatch>): string {
   return "TBD";
 }
 
+/** The team that has advanced from a feeder tie, once decided at 90 minutes. */
+function decidedWinner(
+  code: string | undefined,
+  map: Map<string, KoMatch>,
+): string | null {
+  const f = code ? map.get(code) : undefined;
+  if (!f || f.status !== "finished") return null;
+  if (f.home_score == null || f.away_score == null) return null;
+  if (f.home_score === f.away_score) return null;
+  return f.home_score > f.away_score ? f.home_team : f.away_team;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -136,6 +148,12 @@ export default async function MatchPage({
   const nextStage = next ? KO_STAGE_LABEL[next.stage] : undefined;
   const isFinal = code === "FINAL";
 
+  // Show our resolved team, or advance the feeder tie's winner once decided.
+  const homeName = m.home_team ?? decidedWinner(feeders?.[0], map);
+  const awayName = m.away_team ?? decidedWinner(feeders?.[1], map);
+  const homePath = !homeName ? tieLabel(feeders?.[0], map) : null;
+  const awayPath = !awayName ? tieLabel(feeders?.[1], map) : null;
+
   // Line-ups appear ~40 min before kickoff; only call the API near/at match time
   // to avoid wasting quota on far-future ties. Cached for 5 min by the client.
   const minsToKickoff =
@@ -165,7 +183,7 @@ export default async function MatchPage({
       {/* Hero matchup */}
       <div className="mt-4 rounded-3xl border border-border bg-surface p-8">
         <div className="flex items-center justify-between gap-4">
-          <TeamBlock name={m.home_team} />
+          <TeamBlock name={homeName} />
           <div className="flex flex-col items-center">
             {live && (
               <span className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest text-[color:var(--accent-2)]">
@@ -189,14 +207,23 @@ export default async function MatchPage({
               </span>
             )}
           </div>
-          <TeamBlock name={m.away_team} />
+          <TeamBlock name={awayName} />
         </div>
 
-        {/* Feeder context for unresolved ties */}
-        {feeders && (!m.home_team || !m.away_team) && (
+        {/* Path context for slots still awaiting a winner */}
+        {(homePath || awayPath) && (
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Winner of <strong>{tieLabel(feeders[0], map)}</strong> vs winner of{" "}
-            <strong>{tieLabel(feeders[1], map)}</strong>
+            {homePath && awayPath ? (
+              <>
+                Winner of <strong>{homePath}</strong> vs winner of{" "}
+                <strong>{awayPath}</strong>
+              </>
+            ) : (
+              <>
+                Awaiting the winner of{" "}
+                <strong>{homePath ?? awayPath}</strong>
+              </>
+            )}
           </p>
         )}
       </div>
