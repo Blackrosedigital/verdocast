@@ -24,9 +24,26 @@ function format(iso: string): string {
   return `${label}, ${time}`;
 }
 
-/** Viewer-local "Today, 20:00" / "Tomorrow, 21:30" / "Tue 30 Jun, 02:00". */
-export function KickoffLabel({ iso }: { iso: string }) {
-  const [text, setText] = useState(() => format(iso));
-  useEffect(() => setText(format(iso)), [iso]);
+function formatFull(iso: string): string {
+  const d = new Date(iso);
+  const date = d.toLocaleDateString(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+  const time = d.toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return `${date}, ${time}`;
+}
+
+/**
+ * Viewer-local kickoff. Default: "Today, 20:00" / "Tomorrow, 21:30" /
+ * "Tue 30 Jun, 02:00". With `full`: "Sunday 28 June, 20:00".
+ */
+export function KickoffLabel({ iso, full }: { iso: string; full?: boolean }) {
+  const [text, setText] = useState(() => (full ? formatFull : format)(iso));
+  useEffect(() => setText((full ? formatFull : format)(iso)), [iso, full]);
   return <span suppressHydrationWarning>{text}</span>;
 }

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { BRACKET_ORDER } from "@/lib/knockout";
 import { getAllTeams } from "@/lib/tournament";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://verdocast.com";
@@ -41,5 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...core, ...groups, ...teams, ...posts];
+  const matches: MetadataRoute.Sitemap = [...BRACKET_ORDER, "THIRD"].map(
+    (code) => ({
+      url: `${SITE}/world-cup-2026/match/${code.toLowerCase()}`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.5,
+    }),
+  );
+
+  return [...core, ...groups, ...teams, ...posts, ...matches];
 }

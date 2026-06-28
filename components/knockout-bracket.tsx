@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { BracketScroll } from "@/components/bracket-scroll";
 import { KickoffLabel } from "@/components/kickoff-label";
+import { bracketOrderOf } from "@/lib/knockout";
 import { getTeam } from "@/lib/tournament";
 import styles from "@/components/bracket.module.css";
 
@@ -22,58 +24,6 @@ const ROUNDS = [
   { key: "sf", label: "Semi-finals" },
   { key: "final", label: "Final" },
 ] as const;
-
-// Official FIFA 2026 bracket order, top to bottom. Our match codes are scheduled
-// chronologically (R32_1..16), but the bracket tree pairs them non-sequentially
-// (e.g. R16 match 89 = winners of FIFA matches 74 & 77 = our R32_3 & R32_6).
-// This array lists every tie in the vertical position it occupies in the tree,
-// so adjacent pairs feed the centred match in the next column. Derived from the
-// official feeding map (Wikipedia: 2026 FIFA World Cup knockout stage), mapped to
-// our codes by date + venue. FIFA match number in the comment beside each code.
-const BRACKET_ORDER: Record<string, number> = Object.fromEntries(
-  [
-    // Round of 32
-    "R32_3", // 74
-    "R32_6", // 77
-    "R32_1", // 73
-    "R32_4", // 75
-    "R32_12", // 83
-    "R32_11", // 84
-    "R32_10", // 81
-    "R32_9", // 82
-    "R32_2", // 76
-    "R32_5", // 78
-    "R32_7", // 79
-    "R32_8", // 80
-    "R32_15", // 86
-    "R32_14", // 88
-    "R32_13", // 85
-    "R32_16", // 87
-    // Round of 16
-    "R16_2", // 89
-    "R16_1", // 90
-    "R16_5", // 93
-    "R16_6", // 94
-    "R16_3", // 91
-    "R16_4", // 92
-    "R16_7", // 95
-    "R16_8", // 96
-    // Quarter-finals
-    "QF_1", // 97
-    "QF_2", // 98
-    "QF_3", // 99
-    "QF_4", // 100
-    // Semi-finals
-    "SF_1", // 101
-    "SF_2", // 102
-    // Final
-    "FINAL", // 104
-  ].map((code, i) => [code, i] as const),
-);
-
-function orderOf(code: string): number {
-  return BRACKET_ORDER[code] ?? 999;
-}
 
 function TeamRow({
   name,
@@ -114,7 +64,11 @@ function MatchCard({ m }: { m: BracketMatch }) {
   const homeWon = decided && m.home_score! > m.away_score!;
   return (
     <div className={styles.match}>
-      <div className={styles.card}>
+      <Link
+        href={`/world-cup-2026/match/${m.match_code.toLowerCase()}`}
+        className={styles.card}
+        aria-label={`Match details: ${m.home_team ?? "TBD"} versus ${m.away_team ?? "TBD"}`}
+      >
         <div className={styles.kickoff}>
           {live ? (
             <span style={{ color: "var(--accent-2)" }}>LIVE</span>
@@ -134,7 +88,7 @@ function MatchCard({ m }: { m: BracketMatch }) {
           score={m.away_score}
           result={decided ? (homeWon ? "lose" : "win") : null}
         />
-      </div>
+      </Link>
     </div>
   );
 }
@@ -147,7 +101,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
     byStage.set(m.stage, arr);
   }
   for (const arr of byStage.values()) {
-    arr.sort((a, b) => orderOf(a.match_code) - orderOf(b.match_code));
+    arr.sort((a, b) => bracketOrderOf(a.match_code) - bracketOrderOf(b.match_code));
   }
   const third = byStage.get("third")?.[0];
 
@@ -177,7 +131,10 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Third-place play-off
           </p>
-          <div className="mt-2 max-w-xs rounded-xl border border-border bg-surface p-3">
+          <Link
+            href={`/world-cup-2026/match/${third.match_code.toLowerCase()}`}
+            className="mt-2 block max-w-xs rounded-xl border border-border bg-surface p-3 transition-colors hover:border-border-strong hover:bg-surface-2"
+          >
             <div className="mb-1.5 font-mono text-[11px] text-muted-foreground">
               {third.status === "live" ? (
                 <span style={{ color: "var(--accent-2)" }}>LIVE</span>
@@ -189,7 +146,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
             </div>
             <TeamRow name={third.home_team} score={third.home_score} />
             <TeamRow name={third.away_team} score={third.away_score} />
-          </div>
+          </Link>
         </div>
       )}
     </div>
