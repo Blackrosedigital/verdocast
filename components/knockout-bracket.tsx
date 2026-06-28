@@ -23,10 +23,56 @@ const ROUNDS = [
   { key: "final", label: "Final" },
 ] as const;
 
-/** Numeric suffix of a match code (e.g. "R32_5" -> 5) for canonical ordering. */
-function codeIndex(code: string): number {
-  const n = Number.parseInt(code.split("_")[1] ?? "", 10);
-  return Number.isFinite(n) ? n : 0;
+// Official FIFA 2026 bracket order, top to bottom. Our match codes are scheduled
+// chronologically (R32_1..16), but the bracket tree pairs them non-sequentially
+// (e.g. R16 match 89 = winners of FIFA matches 74 & 77 = our R32_3 & R32_6).
+// This array lists every tie in the vertical position it occupies in the tree,
+// so adjacent pairs feed the centred match in the next column. Derived from the
+// official feeding map (Wikipedia: 2026 FIFA World Cup knockout stage), mapped to
+// our codes by date + venue. FIFA match number in the comment beside each code.
+const BRACKET_ORDER: Record<string, number> = Object.fromEntries(
+  [
+    // Round of 32
+    "R32_3", // 74
+    "R32_6", // 77
+    "R32_1", // 73
+    "R32_4", // 75
+    "R32_12", // 83
+    "R32_11", // 84
+    "R32_10", // 81
+    "R32_9", // 82
+    "R32_2", // 76
+    "R32_5", // 78
+    "R32_7", // 79
+    "R32_8", // 80
+    "R32_15", // 86
+    "R32_14", // 88
+    "R32_13", // 85
+    "R32_16", // 87
+    // Round of 16
+    "R16_2", // 89
+    "R16_1", // 90
+    "R16_5", // 93
+    "R16_6", // 94
+    "R16_3", // 91
+    "R16_4", // 92
+    "R16_7", // 95
+    "R16_8", // 96
+    // Quarter-finals
+    "QF_1", // 97
+    "QF_2", // 98
+    "QF_3", // 99
+    "QF_4", // 100
+    // Semi-finals
+    "SF_1", // 101
+    "SF_2", // 102
+    // Final
+    "FINAL", // 104
+  ].map((code, i) => [code, i] as const),
+);
+
+function orderOf(code: string): number {
+  return BRACKET_ORDER[code] ?? 999;
 }
 
 function TeamRow({
@@ -101,7 +147,7 @@ export function KnockoutBracket({ matches }: { matches: BracketMatch[] }) {
     byStage.set(m.stage, arr);
   }
   for (const arr of byStage.values()) {
-    arr.sort((a, b) => codeIndex(a.match_code) - codeIndex(b.match_code));
+    arr.sort((a, b) => orderOf(a.match_code) - orderOf(b.match_code));
   }
   const third = byStage.get("third")?.[0];
 
