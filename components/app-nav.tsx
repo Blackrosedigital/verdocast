@@ -18,9 +18,14 @@ export interface NavLink {
 export function AppNav({
   links,
   brandColor,
+  homeHref = "/",
 }: {
   links: NavLink[];
   brandColor?: string | null;
+  /** Where the wordmark links. Defaults to "/"; pass an in-app home on
+   * authenticated surfaces so signed-in users aren't dropped on the public
+   * landing (which looks like being logged out). */
+  homeHref?: string;
 }) {
   const pathname = usePathname();
   const style = brandColor
@@ -34,7 +39,7 @@ export function AppNav({
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3">
         <Link
-          href="/"
+          href={homeHref}
           className="font-display text-2xl tracking-wide text-foreground"
         >
           Verdo<span className="text-primary">cast</span>

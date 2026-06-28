@@ -32,7 +32,7 @@ export default async function MyLeaguesPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <AppNav links={[{ href: "/leagues", label: "My leagues" }]} />
+      <AppNav links={[{ href: "/leagues", label: "My leagues" }]} homeHref="/leagues" />
       <main className="mx-auto w-full max-w-3xl px-6 py-12">
         <h1 className="font-display text-5xl tracking-wide text-foreground">
           My leagues

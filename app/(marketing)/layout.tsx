@@ -38,7 +38,7 @@ function SiteHeader() {
             href="/world-cup-2026/knockouts"
             className="hidden px-2 text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline"
           >
-            Bracket
+            Knockout Bracket
           </Link>
           <Link
             href="/pricing"
@@ -87,7 +87,7 @@ function SiteFooter() {
             Fixtures
           </Link>
           <Link href="/world-cup-2026/knockouts" className="hover:text-foreground">
-            Bracket
+            Knockout Bracket
           </Link>
           <Link href="/blog" className="hover:text-foreground">
             Blog

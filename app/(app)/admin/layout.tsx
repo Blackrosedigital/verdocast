@@ -19,7 +19,7 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <AppNav links={links} />
+      <AppNav links={links} homeHref="/admin" />
       <div className="flex-1">{children}</div>
     </div>
   );

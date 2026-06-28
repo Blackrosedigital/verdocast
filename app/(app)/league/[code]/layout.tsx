@@ -25,6 +25,7 @@ export default async function LeagueLayout({
     <div className="flex min-h-screen flex-col">
       <AppNav
         brandColor={league?.brand_color ?? null}
+        homeHref="/leagues"
         links={[
           { href: "/leagues", label: "My leagues" },
           { href: `/league/${code}/predict`, label: "Predictions" },
