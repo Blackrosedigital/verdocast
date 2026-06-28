@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { KickoffLabel } from "@/components/kickoff-label";
+import { MatchLineups } from "@/components/match-lineups";
+import { MatchStats } from "@/components/match-stats";
 import { Button } from "@/components/ui/button";
+import { getLineups, getStatistics } from "@/lib/api-football";
 import { createPublicClient } from "@/lib/db";
 import { BRACKET_ORDER, KO_FEEDERS, KO_FEEDS_INTO, KO_STAGE_LABEL } from "@/lib/knockout";
 import { getMatchByCode, getTeam } from "@/lib/tournament";
@@ -19,6 +22,7 @@ interface KoMatch {
   status: string | null;
   home_score: number | null;
   away_score: number | null;
+  external_id: string | null;
 }
 
 export function generateStaticParams() {
@@ -34,7 +38,7 @@ async function getKnockouts(): Promise<Map<string, KoMatch>> {
     const { data } = await db
       .from("matches")
       .select(
-        "match_code, stage, home_team, away_team, kickoff_utc, venue_city, status, home_score, away_score",
+        "match_code, stage, home_team, away_team, kickoff_utc, venue_city, status, home_score, away_score, external_id",
       )
       .neq("stage", "group");
     for (const m of (data ?? []) as KoMatch[]) map.set(m.match_code, m);
@@ -132,6 +136,19 @@ export default async function MatchPage({
   const nextStage = next ? KO_STAGE_LABEL[next.stage] : undefined;
   const isFinal = code === "FINAL";
 
+  // Line-ups appear ~40 min before kickoff; only call the API near/at match time
+  // to avoid wasting quota on far-future ties. Cached for 5 min by the client.
+  const minsToKickoff =
+    (new Date(m.kickoff_utc).getTime() - Date.now()) / 60_000;
+  const dataWindow =
+    !!m.external_id && (live || finished || minsToKickoff < 120);
+  const [lineups, stats] = dataWindow
+    ? await Promise.all([
+        getLineups(m.external_id as string),
+        getStatistics(m.external_id as string),
+      ])
+    : [null, null];
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Link
@@ -224,16 +241,27 @@ export default async function MatchPage({
         </div>
       )}
 
-      {/* Line-ups & stats (follow-up) */}
-      <div className="mt-6 rounded-2xl border border-dashed border-border bg-surface p-5">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          Line-ups & match stats
-        </p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Confirmed line-ups and in-match stats appear here around kickoff, once
-          the teams are announced.
-        </p>
-      </div>
+      {/* Line-ups & stats */}
+      {lineups && <MatchLineups lineups={lineups} />}
+      {stats && (
+        <MatchStats
+          rows={stats}
+          homeTeam={m.home_team}
+          awayTeam={m.away_team}
+        />
+      )}
+      {!lineups && !stats && (
+        <div className="mt-6 rounded-2xl border border-dashed border-border bg-surface p-5">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            Line-ups & match stats
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {m.home_team && m.away_team
+              ? "Confirmed line-ups appear here around 40 minutes before kickoff, with live match stats once the game is under way."
+              : "Line-ups and stats appear here once the teams are confirmed and the match approaches kickoff."}
+          </p>
+        </div>
+      )}
 
       {/* Predict CTA */}
       <div className="mt-8 flex flex-wrap gap-3">
