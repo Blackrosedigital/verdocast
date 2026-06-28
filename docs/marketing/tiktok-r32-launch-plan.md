@@ -111,6 +111,54 @@ Global league anyone can join 👉 verdocast.com/play?ref=tiktok
 New match drops daily. Beat the crowd.
 ```
 
+## Word-for-word captions — 29-30 Jun (paste-ready)
+
+### Sunday 29 Jun · Brazil v Japan 6:00pm · Germany v Paraguay 9:30pm
+**1. 10:00am — Video 3 (penalty rule) · sticker #3**
+> The scoring rule almost everyone gets wrong on knockout night.
+> A match settled on penalties still counts as a draw here - you call the 90 minutes, not the shootout. Get it right before Brazil v Japan kicks off at 6.
+> Predict free - link in bio 👇
+
+`#WorldCup2026 #penalties #footballtok #predictions #knockoutrules`
+
+**2. 1:00pm — Pre-match, both ties · sticker #1**
+> Two calls locked for Sunday night.
+> Brazil v Japan, 6pm - I've got Brazil 2-1, Japan make them sweat but the front three settle it. Germany v Paraguay, 9:30pm - Germany 3-0, this is where the tournament gets serious for them.
+> Bold? Maybe. Lock yours before kickoff and we'll compare.
+> Your turn. Call the knockouts - link in bio 👇
+
+`#Brazil #Japan #Germany #WorldCup2026 #footballpredictions`
+
+**3. 11:45pm — Reaction, both results · sticker #5 · pick one (fill {score})**
+> **(a) Neutral:** Two more in the books. Brazil v Japan finished {score}, Germany v Paraguay {score} - {one landed / both landed / one got away}. That's the thing about the knockouts: no second leg, no replay, just the call. Big Monday next - three ties, including a 2am one. How's your bracket holding up? Link in bio 👇
+> **(b) Landed:** Called both. ✅ Brazil v Japan {score}, Germany v Paraguay {score} - read them right and the bracket's looking healthy. But the knockouts don't let you get comfortable. Three more Monday. Beat me by calling it better - link in bio 👇
+> **(c) Missed:** Well, that's the knockouts for you. 🫠 Brazil v Japan {score}, Germany v Paraguay {score} - not how I drew it up, and plenty of brackets took a hit tonight. No replay, you just move on. Three ties Monday to put it right. Think you'd have called it better? Link in bio 👇
+
+`#WorldCup2026 #Brazil #Germany #R32 #fulltime`
+
+### Monday 30 Jun · NED v MAR 2:00am · CIV v NOR 6:00pm · FRA v SWE 10:00pm
+**4. 8:30am — Recap, overnight Netherlands v Morocco · sticker #4 · pick one (fill {score})**
+> **(a) Neutral:** While you slept: Netherlands v Morocco finished {score}. {Called it / didn't see that one coming} - and if you missed it live, that's exactly why the bracket exists. One of the ties of the round, settled at 2am. Two more tonight: Ivory Coast v Norway at 6, France v Sweden at 10. How's your bracket looking? Link in bio 👇
+> **(b) Landed:** While you slept: Netherlands v Morocco, {score}. Called it. ✅ One of the trickiest ties on the board and the bracket's still clean. Two more tonight - Ivory Coast v Norway at 6, France v Sweden at 10. Beat me by calling them better - link in bio 👇
+> **(c) Missed:** While you slept: Netherlands v Morocco, {score} - and I got that one wrong. 🫠 Always had it pegged as the banana skin of the round. That's the knockouts. Two more tonight to make it back: Ivory Coast v Norway at 6, France v Sweden at 10. How's your bracket holding up? Link in bio 👇
+
+`#Netherlands #Morocco #WorldCup2026 #R32 #fulltime`
+
+**5. 1:00pm — Pre-match, Ivory Coast v Norway + France v Sweden · sticker #6**
+> Two calls for Monday night - and I'm going against the room on one of them.
+> Ivory Coast v Norway, 6pm - I've got Ivory Coast 2-1. Everyone's written them off, the pace and the home-continent edge say otherwise. France v Sweden, 10pm - France 2-0, too much quality top to bottom.
+> The underdog call is the fun one. Lock yours before kickoff.
+> Think you can call it better? Free league in bio 👇
+
+`#France #Sweden #IvoryCoast #WorldCup2026 #R32`
+
+**6. 12:15am (into 1 Jul) — Reaction, France v Sweden · sticker #2 · pick one (fill {score})**
+> **(a) Neutral:** France v Sweden, {score}. {Did the favourites deliver? / The favourites delivered. / So much for the favourites.} {Called it / got that one wrong} - and that's another R32 night done. No replay, no second leg, just the verdict. The bracket's thinning out fast now. How's yours holding up? Link in bio 👇
+> **(b) Landed:** France v Sweden, {score} - called it. ✅ The favourites did their job and so did the bracket. R32 is nearly wrapped and mine's still standing. Think yours is holding up better? Prove it - link in bio 👇
+> **(c) Missed:** France v Sweden, {score} - did not see that coming. 🫠 The favourites slipped and my bracket felt it. That's knockout football - no replay, you just take it. Reckon you'd have called it better? Link in bio 👇
+
+`#France #Sweden #WorldCup2026 #R32 #fulltime`
+
 ## After the launch window — per-round bracket reactions
 Once R32 resolves (early July) and through R16 → QF → SF → Final, run one **bracket reaction** per round (the morning after each round's last tie). Reusable swap-the-blanks format: [`tiktok-bracket-reaction-format.md`](tiktok-bracket-reaction-format.md). Angle: "{teams left} teams left - my bracket vs reality - how's yours holding up?" → drives people back to check their standing.
 
