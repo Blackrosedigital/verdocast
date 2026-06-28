@@ -1,0 +1,125 @@
+/* Tournament bracket. Rounds are equal-height flex columns; each match is an
+ * equal flex child so its vertical centre sits exactly between its two feeders
+ * in the previous round. Connectors are pseudo-elements:
+ *  - ::after  = horizontal stub from every card to the column's right edge
+ *  - ::before = vertical line (odd matches only) joining a pair, whose midpoint
+ *               lands on the next round's card centre.
+ */
+.scroll {
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.bracket {
+  display: flex;
+  align-items: stretch;
+  min-width: max-content;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+}
+
+.title {
+  padding: 0 0 16px;
+  text-align: center;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.match {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+/* horizontal stub to the column's right edge (all rounds except the last) */
+.round:not(:last-child) .match::after {
+  content: "";
+  position: absolute;
+  left: 212px;
+  width: 52px;
+  top: 50%;
+  height: 2px;
+  background: var(--border);
+}
+
+/* vertical line joining each pair, from this card's centre down to its pair's */
+.round:not(:last-child) .match:nth-child(odd)::before {
+  content: "";
+  position: absolute;
+  left: 263px;
+  top: 50%;
+  width: 2px;
+  height: 100%;
+  background: var(--border);
+}
+
+.card {
+  width: 212px;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 10px 12px;
+}
+
+.kickoff {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.flag {
+  width: 22px;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+}
+
+.placeholder {
+  width: 18px;
+  height: 13px;
+  border-radius: 3px;
+  background: var(--border-strong, #3a3d44);
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.tbd {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.score {
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+  color: var(--text);
+}
