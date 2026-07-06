@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { CanceledBanner } from "@/components/marketing/canceled-banner";
+import { TrustLine } from "@/components/marketing/trust-line";
 import { PricingCard } from "@/components/pricing-card";
 import { Button } from "@/components/ui/button";
 import { ENTERPRISE, PRICING_TIERS } from "@/lib/pricing";
@@ -27,6 +28,7 @@ export default function PricingPage() {
           below are what we&rsquo;ll offer for the knockout rounds - no card
           needed today.
         </p>
+        <TrustLine className="mt-6" />
       </div>
 
       <div className="mx-auto mt-10 max-w-2xl">

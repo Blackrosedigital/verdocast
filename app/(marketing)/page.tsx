@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Faq, FAQ_ITEMS } from "@/components/marketing/faq";
+import { TrustLine } from "@/components/marketing/trust-line";
 import { Button } from "@/components/ui/button";
 import { GROUP_COLOR_LIST, TOURNAMENT } from "@/lib/brand";
 import { PRICING_TIERS } from "@/lib/pricing";
@@ -137,6 +138,7 @@ export default function LandingPage() {
         <p className="mt-3 font-mono text-xs uppercase tracking-widest text-primary">
           Free for the group stage · no card needed
         </p>
+        <TrustLine className="mt-3" />
         <p className="mt-4 text-sm text-muted-foreground">
           Not ready to set one up?{" "}
           <Link href="/play" className="text-primary underline">

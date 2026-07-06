@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { JoinForm } from "@/components/league/join-form";
+import { TrustLine } from "@/components/marketing/trust-line";
 import { createAdminClient } from "@/lib/db";
 import { normalizeEmail, verifyJoin } from "@/lib/sign-url";
 
@@ -85,6 +86,8 @@ export default async function JoinPage({
           referral={ref ?? ""}
         />
       )}
+
+      <TrustLine />
     </main>
   );
 }
