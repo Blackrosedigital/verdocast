@@ -57,6 +57,48 @@ Keep it four lines. Personalise the bracketed bits per brand - swap in the tailo
 - **Football media:** "Same audience, no overlap in offer - a content swap that hands your readers a perk."
 - **Fan experience:** "One ownable headline: the [Brand] final experience for the tournament's best forecaster."
 
+## Named brands to reach out to (UK-focused, brand-safe)
+
+Examples per category - swap in the real partnerships/brand-marketing contact. All chosen to protect the not-gambling, inclusive positioning.
+
+**Food & drink — match-day occasion, voucher rewards (easiest yes)**
+- **Greggs** - beloved, playful, cheeky-social; match-day food. Reward: Greggs vouchers.
+- **Just Eat** - football-sponsorship pedigree, knows this space. Reward: order credit.
+- **Deliveroo** - match-night ordering, ready voucher engine. Reward: credit codes.
+- **Domino's** - football-night staple, does gaming tie-ins. Reward: pizza vouchers.
+- **Innocent Drinks** - playful, inclusive voice that matches ours. Reward: drinks/merch.
+
+**Sports retail — football-native, merch + voucher**
+- **JD Sports** - football-first, young audience. Reward: store vouchers + champion kit.
+- **Pro:Direct Soccer** - pure football retail, engaged core. Reward: boot/kit bundle.
+- **Castore** - challenger brand hungry for reach. Reward: kit voucher.
+- **Sports Direct** - mass reach, value vouchers for the "everyone who plays" tier.
+
+**Drinks / office — owns the B2B lane**
+- **Grind** - office coffee subscriptions, design-led, London. Reward: office coffee drop for the winning workplace league.
+- **Pret A Manger** - office lunch ritual + subscriptions. Reward: Pret vouchers.
+- **Lucozade Sport** - football heritage, hydration. Reward: product + vouchers.
+- **Tenzing / TRIP** - young functional-drinks brands building reach. Reward: product bundles.
+
+**Football media / app — barter over cash**
+- **OneFootball** - huge football app, direct audience overlap, digital perks + cross-promo.
+- **COPA90 / Mundial / Goal** - content brands for cross-promo swaps.
+- **Football365 / The Overlap** - media reach; media-for-reward barter.
+
+**Fan experience — the headline prize**
+- **Seat Unique** - hospitality/tickets marketplace. Reward: matchday hospitality.
+- **Sportsbreaks.com / P1 Travel** - football travel + tickets. Reward: a trip/experience.
+- **StubHub UK** - tickets. Reward: ticket credit for the champion.
+
+**Fintech — brand-safe, NON-CASH reward only**
+- **Monzo / Starling / Chip** - playful, young users, culture campaigns. Reward must be **merch or a charity donation in the winner's name - never cash** (keeps it clearly not gambling).
+
+### Hit these five first
+**Greggs · Just Eat · JD Sports · OneFootball · Grind** - an easiest-yes voucher, a football-native retailer, an audience-overlap barter, and our B2B office lane. If two of five reply, we have a launchable reward layer.
+
+### Finding the contact
+Search LinkedIn for "Brand Partnerships Manager / Sponsorship Manager / Brand Marketing [Brand]", or the brand's `partnerships@` / press inbox. For challenger brands (Castore, Tenzing, TRIP, Grind) the marketing lead is often reachable directly - move on those first; they say yes faster than the majors.
+
 ## How to run it
 1. Pull the real decision-maker (brand/partnerships/marketing lead) per target - LinkedIn or the brand's partnerships inbox.
 2. Send the tailored email with the one-pager attached; personalise the first line.
