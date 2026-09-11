@@ -117,7 +117,9 @@ Unchanged & reused as-is: `organizations`, `members`, `scoring_rules` (per-leagu
 - **Phase 3 — first new competition:** create `Premier League` competition + `2026/27` season, ingest fixtures via API-Football, allow league creation bound to a season (the `/start` flow gains a competition picker).
 - **Phase 4 — recurring billing + scale:** Stripe subscriptions (B5), `league_standings` cache (B6) when scale warrants.
 
-All DB changes go via numbered migrations applied in the Supabase SQL Editor (the local service-role key is stale, so writes go through the editor).
+All DB changes go via numbered migrations in `supabase/migrations/`, applied with `pnpm db:push`.
+
+> **Corrected 11 Sep 2026:** this previously said the service-role key was stale and writes had to go through the Supabase SQL Editor. The service-role key is fine (REST reads/writes work); it is the **`DATABASE_URL` password** that is rejected (`28P01`), which is why DDL can't be pushed from the repo. 0001–0005 were applied by hand in the editor as a result — so the schema is current but `schema_migrations` doesn't exist. Run `scripts/bootstrap-migration-log.sql` once before the first `pnpm db:push`.
 
 ## B5. Live ingestion & reconciliation
 - A cron (extend `jobs/ingest-results`) polls API-Football **per active season** (those with `status='active'`), not a fixed tournament. Map each provider fixture by `provider_fixture_id` and **upsert idempotently** (write only on change).

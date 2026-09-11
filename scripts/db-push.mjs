@@ -1,8 +1,13 @@
 // Apply SQL migrations in supabase/migrations/ to the database in DATABASE_URL.
 //
-// Idempotent: each migration's version (the filename prefix before the first
-// "_") is recorded in a `schema_migrations` table and skipped on re-run. Each
-// migration runs in its own transaction, so a failure rolls back cleanly.
+// Idempotent: each migration's version (its filename minus ".sql") is recorded
+// in a `schema_migrations` table and skipped on re-run. Each migration runs in
+// its own transaction, so a failure rolls back cleanly.
+//
+// The version is the WHOLE filename, not the numeric prefix: we have two 0003
+// migrations (0003_league_prizes, 0003_rls), and keying on the prefix made the
+// second one collide with the first and get silently skipped as "already
+// applied".
 //
 // Usage:  node --env-file=.env.local scripts/db-push.mjs
 // (We have no Supabase CLI / psql locally; this is the lightweight stand-in.)
@@ -26,7 +31,7 @@ if (!connectionString) {
 const client = new pg.Client({ connectionString });
 
 function versionOf(filename) {
-  return filename.split("_")[0];
+  return filename.replace(/\.sql$/, "");
 }
 
 async function main() {
