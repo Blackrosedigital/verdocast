@@ -116,6 +116,21 @@ export function PredictionRow({
     </div>
   );
 
+  // A national side is marked by its flag; a club by its colour, because club
+  // crests are trademarked (docs/season-launch-plan.md).
+  const TeamMark = ({ flag, color }: { flag: string; color?: string | null }) => {
+    if (flag) return <span className="text-lg leading-none">{flag}</span>;
+    if (color)
+      return (
+        <span
+          aria-hidden
+          className="inline-block size-3 shrink-0 rounded-sm"
+          style={{ backgroundColor: color }}
+        />
+      );
+    return null;
+  };
+
   const HomeTeam = (
     <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
       <span className="hidden font-mono text-[10px] text-muted-foreground sm:inline">
@@ -124,13 +139,13 @@ export function PredictionRow({
       <span className="truncate text-sm font-medium text-foreground">
         {match.homeTeam}
       </span>
-      <span className="text-lg leading-none">{match.homeFlag}</span>
+      <TeamMark flag={match.homeFlag} color={match.homeColor} />
     </div>
   );
 
   const AwayTeam = (
     <div className="flex min-w-0 flex-1 items-center gap-2">
-      <span className="text-lg leading-none">{match.awayFlag}</span>
+      <TeamMark flag={match.awayFlag} color={match.awayColor} />
       <span className="truncate text-sm font-medium text-foreground">
         {match.awayTeam}
       </span>
@@ -140,8 +155,9 @@ export function PredictionRow({
     </div>
   );
 
-  // Group pill (A-L) for group games; a gold stage badge (R32/QF/Final) for
-  // knockouts (which have no group letter).
+  // A gold stage badge (R32/QF/Final) for knockouts, a group pill (A-L) for
+  // group games, and nothing at all for league fixtures — a gameweek has
+  // neither, and GroupPill renders a "?" placeholder when given null.
   const groupOrStage = match.stageLabel ? (
     <span
       title={match.stageLabel}
@@ -150,9 +166,9 @@ export function PredictionRow({
     >
       {match.stageLabel}
     </span>
-  ) : (
+  ) : match.groupLetter ? (
     <GroupPill letter={match.groupLetter} />
-  );
+  ) : null;
 
   // ---- Locked row (kickoff passed) ----
   if (match.locked) {
@@ -200,7 +216,7 @@ export function PredictionRow({
   const dot = DOT[state];
   return (
     <div className="flex items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-4">
-      <GroupPill letter={match.groupLetter} />
+      {groupOrStage}
       {TimeCol}
       {HomeTeam}
       <div className="flex shrink-0 items-center gap-1.5">

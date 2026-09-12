@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
 import { KnockoutCountdown } from "@/components/knockout-countdown";
+import { MatchdayHeader } from "@/components/matchday-header";
 import { PredictCoachMark } from "@/components/predict-coach-mark";
 import {
   PredictionsGrid,
@@ -12,6 +13,8 @@ import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
+import { loadMatchdayView, matchdayUnitLabel } from "@/lib/matchday";
+import { formatMatchdayRange, pickDefaultMatchday } from "@/lib/season";
 import { getTeam } from "@/lib/tournament";
 
 export const dynamic = "force-dynamic";
@@ -31,16 +34,19 @@ const STAGE_LABEL: Record<string, string | null> = {
 
 export default async function PredictPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ code: string }>;
+  searchParams: Promise<{ md?: string }>;
 }) {
   const { code } = await params;
+  const { md } = await searchParams;
   const user = await requireUser(`/league/${code}/predict`);
   const admin = createAdminClient();
 
   const { data: league } = await admin
     .from("leagues")
-    .select("id, name, brand_color")
+    .select("id, name, brand_color, season_id, start_matchday")
     .eq("join_code", code)
     .is("deleted_at", null)
     .maybeSingle();
@@ -71,6 +77,80 @@ export default async function PredictPage({
         <Link href="/" className="text-sm text-muted-foreground underline">
           Back to home
         </Link>
+      </main>
+    );
+  }
+
+  // A league bound to a season with matchdays (Premier League gameweeks,
+  // Champions League league-phase matchdays) gets the weekly view: one
+  // matchday at a time, defaulting to the next one still open. The World Cup
+  // keeps the original all-fixtures view below — a tournament you fill in once
+  // and a season you return to 38 times want different shapes.
+  const matchdayView = await loadMatchdayView({
+    leagueId: league.id,
+    seasonId: league.season_id,
+    startMatchday: league.start_matchday,
+    memberId: member.id,
+    requestedMatchday: md ?? null,
+  });
+
+  if (matchdayView.isMatchdaySeason && matchdayView.current && matchdayView.season) {
+    const { season, current, state, fixtures } = matchdayView;
+    const unitLabel = matchdayUnitLabel(season.competitionKind);
+    const predicted = fixtures.filter((f) => f.prediction).length;
+    const defaultMatchday = pickDefaultMatchday({
+      matchdays: matchdayView.matchdays,
+      startMatchday: matchdayView.startMatchday,
+    });
+
+    return (
+      <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {league.name} ·{" "}
+              <DisplayNameForm code={code} initialName={member.display_name ?? ""} />
+            </p>
+            <h1 className="mt-2 truncate font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+              {season.competitionName}
+            </h1>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {season.seasonLabel}
+            </p>
+          </div>
+          <div className="mt-2 shrink-0">
+            <ShareButton
+              text={`Join my ${season.competitionName} prediction league "${league.name}" on Verdocast ⚽ Free to play:`}
+              url={`${SITE_URL}/league/${code}/join`}
+              label="Invite"
+              variant="secondary"
+            />
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <MatchdayHeader
+            leagueCode={code}
+            unitLabel={unitLabel}
+            matchday={current.matchday}
+            totalMatchdays={season.totalMatchdays}
+            dateRange={formatMatchdayRange(current)}
+            deadlineIso={current.firstKickoff}
+            predicted={predicted}
+            total={fixtures.length}
+            state={state!}
+            prevMatchday={matchdayView.prevMatchday}
+            nextMatchday={matchdayView.nextMatchday}
+            startMatchday={matchdayView.startMatchday}
+            currentMatchday={defaultMatchday}
+          />
+        </div>
+
+        <ScoringLegend className="mt-6" />
+
+        <div className="mt-8">
+          <PredictionsGrid leagueCode={code} matches={fixtures} />
+        </div>
       </main>
     );
   }

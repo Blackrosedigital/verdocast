@@ -42,7 +42,7 @@ export async function submitPrediction(input: {
 
   const { data: league } = await admin
     .from("leagues")
-    .select("id")
+    .select("id, season_id, start_matchday")
     .eq("join_code", leagueCode)
     .maybeSingle();
   if (!league) {
@@ -63,15 +63,45 @@ export async function submitPrediction(input: {
     };
   }
 
-  const { data: match } = await admin
-    .from("matches")
-    .select("kickoff_utc")
+  // Read from `fixtures`, not the `matches` view: that view is filtered to the
+  // World Cup season, so a Premier League or Champions League fixture is not
+  // in it at all.
+  const { data: fixture } = await admin
+    .from("fixtures")
+    .select("kickoff_utc, season_id, matchday")
     .eq("id", matchId)
     .maybeSingle();
-  if (!match) {
+  if (!fixture) {
     return { ok: false, error: "Match not found.", code: "not_found" };
   }
-  if (new Date(match.kickoff_utc).getTime() <= Date.now()) {
+
+  // The fixture must belong to the season this league is playing. Without this
+  // a crafted request could attach a prediction from another competition
+  // entirely — the client picks the fixture id, so it cannot be trusted.
+  if (league.season_id && fixture.season_id !== league.season_id) {
+    return {
+      ok: false,
+      error: "That match isn’t part of this league’s season.",
+      code: "wrong_season",
+    };
+  }
+
+  // Fixtures before the league's window are shown read-only and score nothing,
+  // so a prediction on one is meaningless — reject it rather than store a row
+  // that can never earn a point.
+  if (
+    league.start_matchday != null &&
+    fixture.matchday != null &&
+    fixture.matchday < league.start_matchday
+  ) {
+    return {
+      ok: false,
+      error: "That match is from before your league started.",
+      code: "before_league_start",
+    };
+  }
+
+  if (new Date(fixture.kickoff_utc).getTime() <= Date.now()) {
     return {
       ok: false,
       error: "Predictions are locked — this match has kicked off.",

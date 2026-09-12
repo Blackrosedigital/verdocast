@@ -9,12 +9,17 @@ export interface PredictMatch {
   kickoffUtc: string;
   homeTeam: string;
   awayTeam: string;
+  /** Flag emoji for national sides; "" for clubs, which use colour instead. */
   homeFlag: string;
   awayFlag: string;
   homeCode: string;
   awayCode: string;
-  venue: string;
-  venueCity: string;
+  /** Club colour, used where there is no flag. Crests are trademarked, so club
+   *  identity is colour + name (docs/season-launch-plan.md). */
+  homeColor?: string | null;
+  awayColor?: string | null;
+  venue: string | null;
+  venueCity: string | null;
   groupLetter: string | null;
   /** Knockout stage badge (e.g. "R32", "QF", "Final"); null for group games. */
   stageLabel: string | null;
