@@ -1,257 +1,223 @@
 import { createAdminClient } from "@/lib/db";
-import { applyMatchResult } from "@/lib/results";
-import type { Enums } from "@/types/db";
+import {
+  mapProviderStatus,
+  mapRound,
+  ninetyMinuteScore,
+} from "@/lib/provider-football";
+import { applyFixtureResult } from "@/lib/results";
 
 /**
- * Polls API-Football for World Cup 2026 fixtures and updates our matches:
- * status, scores, and (on first transition to finished) prediction scoring.
+ * Poll API-Football for every ACTIVE season and update our fixtures: status,
+ * scores, kickoff changes, and — on a fixture's first transition to finished —
+ * prediction scoring.
  *
- * Matching is resilient: pin by external_id once known; otherwise match by the
- * unordered team pair (+ date when available). Scores are oriented to OUR
- * home/away (the API's home/away can differ from our seed) so a swapped fixture
- * never records reversed scores.
+ * Season-driven, not tournament-driven: adding a competition is a row in
+ * `seasons`, not a code change. A season with `status = 'complete'` (the World
+ * Cup) is never polled again.
+ *
+ * Fixtures are matched by `provider_fixture_id` alone. That is a deliberate
+ * simplification over the World Cup version of this job, which had to match on
+ * normalised team-name pairs and resolve the bracket by kickoff ordering —
+ * necessary only because the WC was seeded from static JSON with no provider
+ * ids. Everything seeded by scripts/seed-season.ts carries its provider id
+ * from the start, so name matching, alias tables and ordering heuristics are
+ * all gone.
+ *
+ * Fixtures the provider knows about but we don't are INSERTED when they belong
+ * to a stage we track. That is how the Champions League knockout bracket
+ * arrives: those ties don't exist until the January draw, and this job picks
+ * them up on the next poll without anyone re-running the seeder.
  */
 
 const API_BASE = "https://v3.football.api-sports.io";
-const WORLD_CUP_LEAGUE_ID = 1; // FIFA World Cup
-const SEASON = 2026;
+
+export interface SeasonIngestSummary {
+  competition: string;
+  season: string;
+  fixtures: number;
+  updated: number;
+  inserted: number;
+  finished: number;
+  scored: number;
+  skipped: number;
+}
 
 export interface IngestSummary {
   ok: boolean;
   reason?: string;
+  seasons: SeasonIngestSummary[];
   fixtures: number;
   updated: number;
   finished: number;
   scored: number;
   unmatched: number;
-  resolved: number; // knockout fixtures whose teams were filled in this run
-}
-
-function mapStatus(short: string): Enums<"match_status"> {
-  if (["FT", "AET", "PEN"].includes(short)) return "finished";
-  if (["1H", "2H", "HT", "ET", "BT", "P", "LIVE", "INT", "SUSP"].includes(short))
-    return "live";
-  if (["PST", "CANC", "ABD", "AWD", "WO"].includes(short)) return "postponed";
-  return "scheduled";
-}
-
-/**
- * Map API-Football's `league.round` to our knockout stage. Group rounds and
- * unknowns return null. Order matters: "Quarter-finals" / "Semi-finals" /
- * "3rd Place Final" all contain "final", so they're checked before plain Final.
- */
-function stageFromRound(round: string): Enums<"match_stage"> | null {
-  const r = round.toLowerCase();
-  if (r.includes("round of 32")) return "r32";
-  if (r.includes("round of 16")) return "r16";
-  if (r.includes("quarter")) return "qf";
-  if (r.includes("semi")) return "sf";
-  if (r.includes("3rd place") || r.includes("third place")) return "third";
-  if (r.includes("final")) return "final";
-  return null;
-}
-
-// API team name -> our canonical (normalised) team name, for spelling diffs.
-const NAME_ALIASES: Record<string, string> = {
-  usa: "unitedstates",
-  turkey: "turkiye",
-  cotedivoire: "ivorycoast",
-  republicofireland: "ireland",
-  korearepublic: "southkorea",
-  congodr: "drcongo",
-  czechrepublic: "czechia",
-  bosniaherzegovina: "bosniaandherzegovina",
-  capeverdeislands: "capeverde",
-};
-
-function normalizeTeam(name: string): string {
-  const base = name
-    .normalize("NFKD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
-  return NAME_ALIASES[base] ?? base;
-}
-
-function pairKey(a: string, b: string): string {
-  return [a, b].sort().join("~");
 }
 
 interface ApiFixture {
-  fixture: { id: number; date: string; status: { short: string } };
+  fixture: {
+    id: number;
+    date: string;
+    status: { short: string };
+    venue?: { name: string | null; city: string | null } | null;
+  };
   league: { round: string };
-  teams: { home: { name: string }; away: { name: string } };
+  teams: { home: { id: number; name: string }; away: { id: number; name: string } };
   goals: { home: number | null; away: number | null };
-  // Score at 90 minutes; we score knockout predictions on this (extra time /
-  // penalties don't count). Equals `goals` for matches that don't go to ET.
-  score: { fulltime: { home: number | null; away: number | null } };
+  score: { fulltime: { home: number | null; away: number | null } | null };
 }
 
-interface Target {
-  id: string;
-  homeNorm: string | null;
-}
+const EMPTY = { seasons: [], fixtures: 0, updated: 0, finished: 0, scored: 0, unmatched: 0 };
 
 export async function ingestResults(): Promise<IngestSummary> {
-  const empty = {
-    fixtures: 0,
-    updated: 0,
-    finished: 0,
-    scored: 0,
-    unmatched: 0,
-    resolved: 0,
-  };
   const key = process.env.API_FOOTBALL_KEY;
-  if (!key) return { ok: false, reason: "API_FOOTBALL_KEY not set", ...empty };
-
-  let fixtures: ApiFixture[];
-  try {
-    const res = await fetch(
-      `${API_BASE}/fixtures?league=${WORLD_CUP_LEAGUE_ID}&season=${SEASON}`,
-      { headers: { "x-apisports-key": key } },
-    );
-    const json = (await res.json()) as { response?: ApiFixture[] };
-    fixtures = json.response ?? [];
-  } catch {
-    return { ok: false, reason: "fetch_failed", ...empty };
-  }
+  if (!key) return { ok: false, reason: "API_FOOTBALL_KEY not set", ...EMPTY };
 
   const admin = createAdminClient();
-  const { data: matches } = await admin
-    .from("matches")
-    .select("id, kickoff_utc, home_team, away_team, external_id, stage");
 
-  const byExternalId = new Map<string, Target>();
-  const byDatePair = new Map<string, Target>();
-  const byPair = new Map<string, Target>();
-  // Canonical display name keyed by normalised name — used to translate API team
-  // names (e.g. "Turkey") to our spelling (e.g. "Türkiye") when resolving the
-  // knockout bracket.
-  const canonicalByNorm = new Map<string, string>();
-  for (const m of matches ?? []) {
-    const homeNorm = m.home_team ? normalizeTeam(m.home_team) : null;
-    const awayNorm = m.away_team ? normalizeTeam(m.away_team) : null;
-    const target: Target = { id: m.id, homeNorm };
-    if (m.external_id) byExternalId.set(m.external_id, target);
-    if (m.home_team && homeNorm) canonicalByNorm.set(homeNorm, m.home_team);
-    if (m.away_team && awayNorm) canonicalByNorm.set(awayNorm, m.away_team);
-    if (homeNorm && awayNorm) {
-      const pair = pairKey(homeNorm, awayNorm);
-      byDatePair.set(`${m.kickoff_utc.slice(0, 10)}|${pair}`, target);
-      byPair.set(pair, target);
-    }
+  const { data: seasons } = await admin
+    .from("seasons")
+    .select(
+      "id, label, provider_season_id, competitions!inner(name, provider_competition_id)",
+    )
+    .eq("status", "active");
+
+  if (!seasons || seasons.length === 0) {
+    return { ok: true, reason: "no active seasons", ...EMPTY };
   }
 
-  // ---- Resolve the knockout bracket -------------------------------------
-  // Fill teams on our knockout rows (seeded with null teams) as the API fills in
-  // each round. Idempotent: skips rows already pinned by external_id, and once a
-  // row is resolved its external_id excludes it next run. Group rows are never
-  // touched (they already have teams). Scoring of resolved fixtures happens on a
-  // subsequent run via the external_id match below.
-  let resolved = 0;
-  const ourKoByStage = new Map<string, { id: string; kickoff: string }[]>();
-  for (const m of matches ?? []) {
-    if (m.stage !== "group" && !m.home_team && !m.external_id) {
-      const arr = ourKoByStage.get(m.stage) ?? [];
-      arr.push({ id: m.id, kickoff: m.kickoff_utc });
-      ourKoByStage.set(m.stage, arr);
-    }
-  }
-  if (ourKoByStage.size > 0) {
-    const apiKoByStage = new Map<
-      string,
-      { extId: string; date: string; home: string; away: string }[]
-    >();
-    for (const fx of fixtures) {
-      const stage = stageFromRound(fx.league.round);
-      if (!stage) continue;
-      const extId = String(fx.fixture.id);
-      if (byExternalId.has(extId)) continue; // already pinned to a row
-      const home = canonicalByNorm.get(normalizeTeam(fx.teams.home.name));
-      const away = canonicalByNorm.get(normalizeTeam(fx.teams.away.name));
-      if (!home || !away) continue; // teams not drawn / not recognised yet
-      const arr = apiKoByStage.get(stage) ?? [];
-      arr.push({ extId, date: fx.fixture.date, home, away });
-      apiKoByStage.set(stage, arr);
-    }
-    for (const [stage, rows] of ourKoByStage) {
-      const apiRows = (apiKoByStage.get(stage) ?? []).sort((a, b) =>
-        a.date.localeCompare(b.date),
-      );
-      const slots = rows.sort((a, b) => a.kickoff.localeCompare(b.kickoff));
-      const n = Math.min(slots.length, apiRows.length);
-      for (let i = 0; i < n; i++) {
-        const { error } = await admin
-          .from("matches")
-          .update({
-            home_team: apiRows[i]!.home,
-            away_team: apiRows[i]!.away,
-            kickoff_utc: apiRows[i]!.date,
-            external_id: apiRows[i]!.extId,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", slots[i]!.id);
-        if (!error) resolved += 1;
-      }
-    }
-  }
-
-  let updated = 0;
-  let finished = 0;
-  let scored = 0;
+  const perSeason: SeasonIngestSummary[] = [];
   let unmatched = 0;
 
-  for (const fx of fixtures) {
-    const extId = String(fx.fixture.id);
-    const apiHomeNorm = normalizeTeam(fx.teams.home.name);
-    const apiAwayNorm = normalizeTeam(fx.teams.away.name);
-    const pair = pairKey(apiHomeNorm, apiAwayNorm);
+  for (const season of seasons) {
+    // The embed is typed as an array by the client even though !inner on a
+    // to-one relation yields a single row.
+    const competition = Array.isArray(season.competitions)
+      ? season.competitions[0]
+      : season.competitions;
+    const leagueId = competition?.provider_competition_id;
+    const providerSeason = season.provider_season_id;
+    const name = competition?.name ?? "unknown";
 
-    const target =
-      byExternalId.get(extId) ??
-      byDatePair.get(`${fx.fixture.date.slice(0, 10)}|${pair}`) ??
-      byPair.get(pair);
-    if (!target) {
-      unmatched += 1;
+    if (!leagueId || !providerSeason) {
+      perSeason.push({
+        competition: name, season: season.label,
+        fixtures: 0, updated: 0, inserted: 0, finished: 0, scored: 0, skipped: 0,
+      });
       continue;
     }
 
-    // Score on the 90-minute result: prefer score.fulltime for finished games
-    // (extra time / penalties don't count); fall back to live goals otherwise.
-    const status = mapStatus(fx.fixture.status.short);
-    const ft = fx.score?.fulltime;
-    const srcHome =
-      status === "finished" && ft && ft.home != null ? ft.home : fx.goals.home;
-    const srcAway =
-      status === "finished" && ft && ft.away != null ? ft.away : fx.goals.away;
-
-    // Orient to our home/away (the API's can differ from our seed).
-    const swapped =
-      target.homeNorm !== null && target.homeNorm !== apiHomeNorm;
-    const homeScore = swapped ? srcAway : srcHome;
-    const awayScore = swapped ? srcHome : srcAway;
-
-    const outcome = await applyMatchResult(admin, {
-      matchId: target.id,
-      status,
-      homeScore,
-      awayScore,
-      externalId: extId,
-    });
-    if (outcome.updated) updated += 1;
-    if (outcome.newlyFinished) {
-      finished += 1;
-      scored += outcome.scored;
+    let apiFixtures: ApiFixture[];
+    try {
+      const res = await fetch(
+        `${API_BASE}/fixtures?league=${leagueId}&season=${providerSeason}`,
+        { headers: { "x-apisports-key": key }, cache: "no-store" },
+      );
+      const json = (await res.json()) as { response?: ApiFixture[] };
+      apiFixtures = json.response ?? [];
+    } catch {
+      // One provider hiccup must not abandon the other active seasons.
+      perSeason.push({
+        competition: name, season: season.label,
+        fixtures: 0, updated: 0, inserted: 0, finished: 0, scored: 0, skipped: 0,
+      });
+      continue;
     }
+
+    const { data: ours } = await admin
+      .from("fixtures")
+      .select("id, provider_fixture_id, status")
+      .eq("season_id", season.id);
+    const byProviderId = new Map(
+      (ours ?? [])
+        .filter((f) => f.provider_fixture_id)
+        .map((f) => [f.provider_fixture_id as string, f]),
+    );
+
+    // Team ids for this season, so a newly drawn knockout tie can be inserted
+    // without another provider call.
+    const { data: teamRows } = await admin
+      .from("teams")
+      .select("id, provider_team_id")
+      .not("provider_team_id", "is", null);
+    const teamByProviderId = new Map(
+      (teamRows ?? []).map((t) => [t.provider_team_id as string, t.id]),
+    );
+
+    const summary: SeasonIngestSummary = {
+      competition: name, season: season.label,
+      fixtures: 0, updated: 0, inserted: 0, finished: 0, scored: 0, skipped: 0,
+    };
+
+    for (const fx of apiFixtures) {
+      const mapped = mapRound(fx.league.round);
+      if (!mapped) {
+        summary.skipped += 1;
+        continue;
+      }
+      summary.fixtures += 1;
+
+      const providerId = String(fx.fixture.id);
+      const status = mapProviderStatus(fx.fixture.status.short);
+      const { home, away } = ninetyMinuteScore(fx, status);
+      const existing = byProviderId.get(providerId);
+
+      if (!existing) {
+        // New to us — a knockout tie created by a draw, or a fixture added
+        // after the season was seeded.
+        const homeTeamId = teamByProviderId.get(String(fx.teams.home.id)) ?? null;
+        const awayTeamId = teamByProviderId.get(String(fx.teams.away.id)) ?? null;
+        const { error } = await admin.from("fixtures").insert({
+          season_id: season.id,
+          stage: mapped.stage,
+          matchday: mapped.matchday,
+          home_team_id: homeTeamId,
+          away_team_id: awayTeamId,
+          kickoff_utc: fx.fixture.date,
+          venue: fx.fixture.venue?.name ?? null,
+          venue_city: fx.fixture.venue?.city ?? null,
+          status,
+          home_score: home,
+          away_score: away,
+          provider_fixture_id: providerId,
+        });
+        if (error) unmatched += 1;
+        else summary.inserted += 1;
+        continue;
+      }
+
+      // A postponement moves the kickoff, which re-opens the prediction window
+      // through the existing lockdown trigger. Written separately from the
+      // result because applyFixtureResult deliberately owns only status/score.
+      await admin
+        .from("fixtures")
+        .update({ kickoff_utc: fx.fixture.date })
+        .eq("id", existing.id)
+        .neq("kickoff_utc", fx.fixture.date);
+
+      const outcome = await applyFixtureResult(admin, {
+        matchId: existing.id,
+        status,
+        homeScore: home,
+        awayScore: away,
+        externalId: providerId,
+      });
+      if (outcome.updated) summary.updated += 1;
+      if (outcome.newlyFinished) {
+        summary.finished += 1;
+        summary.scored += outcome.scored;
+      }
+    }
+
+    perSeason.push(summary);
   }
 
   return {
     ok: true,
-    fixtures: fixtures.length,
-    updated,
-    finished,
-    scored,
+    seasons: perSeason,
+    fixtures: perSeason.reduce((n, s) => n + s.fixtures, 0),
+    updated: perSeason.reduce((n, s) => n + s.updated, 0),
+    finished: perSeason.reduce((n, s) => n + s.finished, 0),
+    scored: perSeason.reduce((n, s) => n + s.scored, 0),
     unmatched,
-    resolved,
   };
 }

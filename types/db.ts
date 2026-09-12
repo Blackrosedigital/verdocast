@@ -109,6 +109,8 @@ export type Database = {
           qualify_count: number;
           is_demo: boolean;
           deleted_at: string | null;
+          season_id: string | null;
+          start_matchday: number | null;
           created_at: string;
           updated_at: string;
         };
@@ -127,6 +129,8 @@ export type Database = {
           qualify_count?: number;
           is_demo?: boolean;
           deleted_at?: string | null;
+          season_id?: string | null;
+          start_matchday?: number | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -145,6 +149,8 @@ export type Database = {
           qualify_count?: number;
           is_demo?: boolean;
           deleted_at?: string | null;
+          season_id?: string | null;
+          start_matchday?: number | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -303,10 +309,238 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
+            // Named for the column, which kept its name through 0007; the
+            // constraint now points at `fixtures` (matches is a view over it).
             foreignKeyName: "predictions_match_id_fkey";
             columns: ["match_id"];
             isOneToOne: false;
-            referencedRelation: "matches";
+            referencedRelation: "fixtures";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      competitions: {
+        Row: {
+          id: string;
+          sport: string;
+          name: string;
+          short_name: string | null;
+          slug: string;
+          kind: string;
+          country: string | null;
+          logo_url: string | null;
+          provider: string;
+          provider_competition_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          sport?: string;
+          name: string;
+          short_name?: string | null;
+          slug: string;
+          kind: string;
+          country?: string | null;
+          logo_url?: string | null;
+          provider?: string;
+          provider_competition_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          sport?: string;
+          name?: string;
+          short_name?: string | null;
+          slug?: string;
+          kind?: string;
+          country?: string | null;
+          logo_url?: string | null;
+          provider?: string;
+          provider_competition_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      seasons: {
+        Row: {
+          id: string;
+          competition_id: string;
+          label: string;
+          starts_on: string | null;
+          ends_on: string | null;
+          status: string;
+          total_matchdays: number | null;
+          provider_season_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          competition_id: string;
+          label: string;
+          starts_on?: string | null;
+          ends_on?: string | null;
+          status?: string;
+          total_matchdays?: number | null;
+          provider_season_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          competition_id?: string;
+          label?: string;
+          starts_on?: string | null;
+          ends_on?: string | null;
+          status?: string;
+          total_matchdays?: number | null;
+          provider_season_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "seasons_competition_id_fkey";
+            columns: ["competition_id"];
+            isOneToOne: false;
+            referencedRelation: "competitions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      teams: {
+        Row: {
+          id: string;
+          sport: string;
+          name: string;
+          short_code: string | null;
+          slug: string;
+          country: string | null;
+          primary_color: string | null;
+          secondary_color: string | null;
+          crest_url: string | null;
+          flag_emoji: string | null;
+          provider: string;
+          provider_team_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          sport?: string;
+          name: string;
+          short_code?: string | null;
+          slug: string;
+          country?: string | null;
+          primary_color?: string | null;
+          secondary_color?: string | null;
+          crest_url?: string | null;
+          flag_emoji?: string | null;
+          provider?: string;
+          provider_team_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          sport?: string;
+          name?: string;
+          short_code?: string | null;
+          slug?: string;
+          country?: string | null;
+          primary_color?: string | null;
+          secondary_color?: string | null;
+          crest_url?: string | null;
+          flag_emoji?: string | null;
+          provider?: string;
+          provider_team_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      fixtures: {
+        Row: {
+          id: string;
+          season_id: string;
+          stage: string;
+          matchday: number | null;
+          group_label: string | null;
+          home_team_id: string | null;
+          away_team_id: string | null;
+          matchup: string | null;
+          home_source_fixture_id: string | null;
+          away_source_fixture_id: string | null;
+          kickoff_utc: string;
+          venue: string | null;
+          venue_city: string | null;
+          status: Database["public"]["Enums"]["match_status"];
+          home_score: number | null;
+          away_score: number | null;
+          result: string | null;
+          provider_fixture_id: string | null;
+          code: string | null;
+          finalised_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          season_id: string;
+          stage: string;
+          matchday?: number | null;
+          group_label?: string | null;
+          home_team_id?: string | null;
+          away_team_id?: string | null;
+          matchup?: string | null;
+          home_source_fixture_id?: string | null;
+          away_source_fixture_id?: string | null;
+          kickoff_utc: string;
+          venue?: string | null;
+          venue_city?: string | null;
+          status?: Database["public"]["Enums"]["match_status"];
+          home_score?: number | null;
+          away_score?: number | null;
+          result?: string | null;
+          provider_fixture_id?: string | null;
+          code?: string | null;
+          finalised_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          season_id?: string;
+          stage?: string;
+          matchday?: number | null;
+          group_label?: string | null;
+          home_team_id?: string | null;
+          away_team_id?: string | null;
+          matchup?: string | null;
+          home_source_fixture_id?: string | null;
+          away_source_fixture_id?: string | null;
+          kickoff_utc?: string;
+          venue?: string | null;
+          venue_city?: string | null;
+          status?: Database["public"]["Enums"]["match_status"];
+          home_score?: number | null;
+          away_score?: number | null;
+          result?: string | null;
+          provider_fixture_id?: string | null;
+          code?: string | null;
+          finalised_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "fixtures_season_id_fkey";
+            columns: ["season_id"];
+            isOneToOne: false;
+            referencedRelation: "seasons";
             referencedColumns: ["id"];
           },
         ];
