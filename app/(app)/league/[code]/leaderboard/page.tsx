@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { DisplayNameForm } from "@/components/display-name-form";
 import { KnockoutCountdown } from "@/components/knockout-countdown";
 import { Leaderboard } from "@/components/leaderboard";
+import { SeasonStandings } from "@/components/season-standings";
 import { ScoringLegend } from "@/components/scoring-legend";
 import { ShareButton } from "@/components/share-button";
 import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/db";
-import { getLeaderboard } from "@/lib/leaderboard";
+import { getLeaderboard, getSeasonLeaderboard } from "@/lib/leaderboard";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +17,13 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default async function LeaderboardPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ code: string }>;
+  searchParams: Promise<{ md?: string }>;
 }) {
   const { code } = await params;
+  const { md } = await searchParams;
   const user = await requireUser(`/league/${code}/leaderboard`);
 
   const admin = createAdminClient();
@@ -65,6 +69,92 @@ export default async function LeaderboardPage({
   const rows = result.data.rows;
   const myIndex = me ? rows.findIndex((r) => r.member_id === me.id) : -1;
   const total = rows.length;
+
+  // A league bound to a season with matchdays gets the two-dimension table:
+  // season-to-date plus this matchday. World Cup leagues keep the flat
+  // all-time leaderboard below.
+  const seasonResult = await getSeasonLeaderboard(
+    code,
+    md ? Number(md) : null,
+  );
+  const seasonData = seasonResult.ok ? seasonResult.data : null;
+
+  if (seasonData) {
+    // The per-matchday average earns its column only when members have
+    // genuinely played different amounts — a late joiner, not someone who
+    // missed one week. A spread of one is noise; two or more is a real gap.
+    const played = seasonData.season.map((r) => r.matchdaysPlayed);
+    const spread = played.length ? Math.max(...played) - Math.min(...played) : 0;
+
+    return (
+      <main style={brandStyle} className="mx-auto max-w-3xl px-6 py-12">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {league.name}
+            </p>
+            <h1 className="mt-2 truncate font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+              {seasonData.competitionName}
+            </h1>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {seasonData.seasonLabel}
+              {seasonData.startMatchday != null && (
+                <>
+                  {" · from "}
+                  {seasonData.unitLabel.toLowerCase()} {seasonData.startMatchday}
+                </>
+              )}
+            </p>
+          </div>
+          <div className="mt-2 shrink-0">
+            <ShareButton
+              text={`Join my ${seasonData.competitionName} prediction league "${league.name}" on Verdocast ⚽ Free to play:`}
+              url={`${SITE_URL}/league/${code}/join`}
+              label="Share / Invite"
+            />
+          </div>
+        </div>
+
+        {me && (
+          <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            You&rsquo;re playing as{" "}
+            <DisplayNameForm code={code} initialName={me.display_name ?? ""} />
+          </p>
+        )}
+
+        <div className="mt-6">
+          {seasonData.scored ? (
+            <SeasonStandings
+              leagueCode={code}
+              unitLabel={seasonData.unitLabel}
+              matchday={seasonData.matchday}
+              matchdays={seasonData.matchdays}
+              season={seasonData.season}
+              thisMatchday={seasonData.thisMatchday}
+              meMemberId={me?.id ?? null}
+              showNormaliser={spread >= 2}
+            />
+          ) : (
+            <div className="rounded-xl border border-border bg-surface px-4 py-6 text-center">
+              <p className="text-foreground">
+                No {seasonData.unitLabel.toLowerCase()} has been played yet.
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                The table fills in once{" "}
+                {seasonData.unitLabel.toLowerCase()} {seasonData.startMatchday ?? 1} is
+                settled.
+              </p>
+              <Button asChild className="mt-4">
+                <Link href={`/league/${code}/predict`}>Make your predictions</Link>
+              </Button>
+            </div>
+          )}
+        </div>
+
+        <ScoringLegend className="mt-6" />
+      </main>
+    );
+  }
 
   const joinUrl = `${SITE_URL}/league/${code}/join`;
   const standingsUrl = `${SITE_URL}/league/${code}/standings`;

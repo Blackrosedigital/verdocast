@@ -568,6 +568,20 @@ export type Database = {
           },
         ];
       };
+      matchday_points: {
+        Row: {
+          league_id: string | null;
+          member_id: string | null;
+          display_name: string | null;
+          season_id: string | null;
+          matchday: number | null;
+          points: number | null;
+          scored: number | null;
+          exact_scores: number | null;
+          predictions: number | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       [_ in never]: never;
