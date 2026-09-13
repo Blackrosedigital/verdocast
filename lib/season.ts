@@ -106,6 +106,33 @@ export function resolveMatchday(opts: {
   return opts.matchdays.some((m) => m.matchday === n) ? n : fallback;
 }
 
+/**
+ * The matchday a NEW league should start scoring from: the first one nothing
+ * has kicked off in yet.
+ *
+ * Stricter than "has a fixture left to predict" on purpose. A league starting
+ * halfway through a gameweek is internally fair — every member misses the same
+ * games — but it opens on "you can predict 5 of 10", which is a poor first
+ * impression for a product someone is trying for the first time.
+ *
+ * Distinct from pickDefaultMatchday, which answers a different question: where
+ * a RETURNING member lands. Mid-gameweek is exactly right there, because
+ * per-match locking leaves the rest of the week open to them.
+ *
+ * Returns null when every matchday has started — a season with nothing left to
+ * join.
+ */
+export function firstFullyOpenMatchday(
+  matchdays: MatchdaySummary[],
+  now: Date = new Date(),
+): number | null {
+  const iso = now.toISOString();
+  const open = matchdays
+    .filter((m) => m.firstKickoff > iso)
+    .sort((a, b) => a.matchday - b.matchday);
+  return open[0]?.matchday ?? null;
+}
+
 export interface MatchdayState {
   /** Nothing in this matchday has kicked off yet. */
   upcoming: boolean;

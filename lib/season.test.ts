@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  firstFullyOpenMatchday,
   formatMatchdayRange,
   matchdayState,
   pickDefaultMatchday,
@@ -175,5 +176,40 @@ describe("formatMatchdayRange", () => {
     expect(out).toContain("Aug");
     expect(out).toMatch(/Sep/);
     expect(out).toMatch(/^Sun 30 Aug – Tue 1 Sep/);
+  });
+});
+
+describe("firstFullyOpenMatchday", () => {
+  const matchdays = summariseMatchdays(SEASON);
+
+  it("skips a matchday that has already started", () => {
+    // Mid-MD2: its Tuesday game has kicked off, Wednesday's has not. A new
+    // league should not open on "predict 1 of 2".
+    const now = new Date("2026-10-14T09:00:00Z");
+    expect(firstFullyOpenMatchday(matchdays, now)).toBe(3);
+  });
+
+  it("picks the next matchday when the previous one is done", () => {
+    const now = new Date("2026-09-20T00:00:00Z");
+    expect(firstFullyOpenMatchday(matchdays, now)).toBe(2);
+  });
+
+  it("picks the first matchday before a season starts", () => {
+    const now = new Date("2026-08-01T00:00:00Z");
+    expect(firstFullyOpenMatchday(matchdays, now)).toBe(1);
+  });
+
+  it("returns null once every matchday has started", () => {
+    const now = new Date("2027-06-01T00:00:00Z");
+    expect(firstFullyOpenMatchday(matchdays, now)).toBeNull();
+    expect(firstFullyOpenMatchday([], now)).toBeNull();
+  });
+
+  // The contrast that matters: a returning member lands mid-gameweek, a new
+  // league does not start there.
+  it("differs from the returning-member default mid-matchday", () => {
+    const now = new Date("2026-10-14T09:00:00Z");
+    expect(pickDefaultMatchday({ matchdays, startMatchday: 1, now })).toBe(2);
+    expect(firstFullyOpenMatchday(matchdays, now)).toBe(3);
   });
 });

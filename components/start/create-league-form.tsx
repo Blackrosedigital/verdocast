@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { CompetitionPicker } from "@/components/start/competition-picker";
+import type { JoinableCompetition } from "@/lib/competitions";
 import { createFreeLeague } from "@/lib/free";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,9 +15,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
-export function CreateLeagueForm({ defaultOrgName }: { defaultOrgName: string }) {
+export function CreateLeagueForm({
+  defaultOrgName,
+  competitions,
+}: {
+  defaultOrgName: string;
+  competitions: JoinableCompetition[];
+}) {
   const [orgName, setOrgName] = useState(defaultOrgName);
   const [leagueName, setLeagueName] = useState("");
+  // Default to the first competition, which listJoinableCompetitions orders by
+  // whichever starts soonest — the one someone can act on this week.
+  const [competition, setCompetition] = useState<string | null>(
+    competitions.find((c) => c.startMatchday != null)?.competitionSlug ?? null,
+  );
   const [pending, startTransition] = useTransition();
   const { toast } = useToast();
 
@@ -24,10 +37,15 @@ export function CreateLeagueForm({ defaultOrgName }: { defaultOrgName: string })
       toast({ title: "Add a company/group name and a league name." });
       return;
     }
+    if (competitions.length > 0 && !competition) {
+      toast({ title: "Pick a competition for your league." });
+      return;
+    }
     startTransition(async () => {
       const result = await createFreeLeague({
         orgName: orgName.trim(),
         leagueName: leagueName.trim(),
+        ...(competition ? { competition } : {}),
       });
       if (result && !result.ok) {
         toast({
@@ -67,6 +85,18 @@ export function CreateLeagueForm({ defaultOrgName }: { defaultOrgName: string })
             onChange={(e) => setOrgName(e.target.value)}
           />
         </div>
+        {competitions.length > 0 && (
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-foreground">
+              Competition
+            </span>
+            <CompetitionPicker
+              competitions={competitions}
+              value={competition}
+              onChange={setCompetition}
+            />
+          </div>
+        )}
         <div className="space-y-2">
           <label
             htmlFor="leagueName"
@@ -77,7 +107,7 @@ export function CreateLeagueForm({ defaultOrgName }: { defaultOrgName: string })
           <Input
             id="leagueName"
             value={leagueName}
-            placeholder="The Office World Cup"
+            placeholder="The Office XI"
             onChange={(e) => setLeagueName(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && submit()}
           />

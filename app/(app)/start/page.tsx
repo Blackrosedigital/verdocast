@@ -3,17 +3,19 @@ import Link from "next/link";
 import { LoginForm } from "@/components/auth/login-form";
 import { CreateLeagueForm } from "@/components/start/create-league-form";
 import { getUser } from "@/lib/auth";
+import { listJoinableCompetitions } from "@/lib/competitions";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Start free - Verdocast",
   description:
-    "Create a free World Cup 2026 prediction league for your office or group. Free for the group stage.",
+    "Create a free Premier League or Champions League prediction league for your office or group. Free to play.",
 };
 
 export default async function StartPage() {
   const user = await getUser();
+  const competitions = user ? await listJoinableCompetitions() : [];
   const defaultOrgName = user?.email
     ? (() => {
         const domain = user.email.split("@")[1]?.split(".")[0] ?? "";
@@ -32,7 +34,10 @@ export default async function StartPage() {
       </Link>
 
       {user ? (
-        <CreateLeagueForm defaultOrgName={defaultOrgName} />
+        <CreateLeagueForm
+          defaultOrgName={defaultOrgName}
+          competitions={competitions}
+        />
       ) : (
         <div className="w-full max-w-sm text-center">
           <p className="font-mono text-xs uppercase tracking-widest text-primary">
