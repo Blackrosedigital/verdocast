@@ -1,6 +1,10 @@
 import { render } from "@react-email/render";
 import { Resend } from "resend";
 import { InvitationEmail } from "@/emails/invitation";
+import {
+  MatchdayReminderEmail,
+  type MatchdayReminderEmailProps,
+} from "@/emails/matchday-reminder";
 import { ReminderEmail } from "@/emails/reminder";
 
 /**
@@ -40,6 +44,34 @@ export async function sendInvitation(
       from: FROM,
       to,
       subject: `${leagueName} — World Cup 2026 Predictor: you're invited`,
+      html,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "send_failed" };
+  }
+}
+
+/**
+ * The weekly matchday nudge. Specific by design — which matchday, when it
+ * locks, how many picks are missing — because across 38 gameweeks a vague
+ * recurring email is one people mute.
+ */
+export async function sendMatchdayReminder(
+  to: string,
+  props: MatchdayReminderEmailProps,
+): Promise<SendResult> {
+  const resend = getResend();
+  if (!resend) return { ok: false, skipped: true };
+
+  try {
+    const html = await render(MatchdayReminderEmail(props));
+    const outstanding = Math.max(0, props.total - props.predicted);
+    const { error } = await resend.emails.send({
+      from: FROM,
+      to,
+      subject: `${props.unitLabel} ${props.matchday} locks ${props.deadline} — ${outstanding} pick${outstanding === 1 ? "" : "s"} missing`,
       html,
     });
     if (error) return { ok: false, error: error.message };

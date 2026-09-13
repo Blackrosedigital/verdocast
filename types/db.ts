@@ -462,6 +462,48 @@ export type Database = {
         };
         Relationships: [];
       };
+      matchday_reminders: {
+        Row: {
+          id: string;
+          league_id: string;
+          member_id: string;
+          matchday: number;
+          outstanding: number;
+          sent_at: string;
+        };
+        Insert: {
+          id?: string;
+          league_id: string;
+          member_id: string;
+          matchday: number;
+          outstanding?: number;
+          sent_at?: string;
+        };
+        Update: {
+          id?: string;
+          league_id?: string;
+          member_id?: string;
+          matchday?: number;
+          outstanding?: number;
+          sent_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "matchday_reminders_league_id_fkey";
+            columns: ["league_id"];
+            isOneToOne: false;
+            referencedRelation: "leagues";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "matchday_reminders_member_id_fkey";
+            columns: ["member_id"];
+            isOneToOne: false;
+            referencedRelation: "members";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       fixtures: {
         Row: {
           id: string;
