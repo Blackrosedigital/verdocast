@@ -1,6 +1,8 @@
 # Mid-season launch — Premier League + Champions League
 
-**Status:** active build plan. Supersedes the July "Premier League launch" plan, which assumed we would ship for PL Gameweek 1 in mid-August. We didn't — the repo has been untouched since 21 July. This re-cut treats **mid-season entry as the product's normal state**, not a patch, and covers **two competitions**: the Premier League and the Champions League.
+**Status: MVP COMPLETE (13 September 2026).** Phases 1-4 are built, tested and committed - multi-competition data model, matchday predict view, season + matchday leaderboards, matchday reminder email, competition picker. Both seasons are seeded and ingesting live. What remains before 13 October is verification and the deferred depth below, not core build.
+
+**Status when written:** active build plan. Supersedes the July "Premier League launch" plan, which assumed we would ship for PL Gameweek 1 in mid-August. We didn't — the repo has been untouched since 21 July. This re-cut treats **mid-season entry as the product's normal state**, not a patch, and covers **two competitions**: the Premier League and the Champions League.
 
 Pairs with the architecture blueprint [`tech-foundation.md`](tech-foundation.md) (competitions/seasons/fixtures model + phased migration) and the revenue thesis [`strategy-expansion.md`](strategy-expansion.md). [`CLAUDE.md`](../CLAUDE.md) stays authoritative for tech.
 
@@ -118,3 +120,29 @@ Defer past launch: recurring billing (launch free), streaks/badges, recap emails
 Four and a half weeks, solo, for a data-model migration plus a new prediction surface plus two seeded competitions. The migration is the risk: it is the irreversible part and it is first, which is correct. If week 3 slips, the thing to cut is the PL surface — launch UCL-only for MD2 and add PL a week later. What must not be cut is the data foundation, because rushing it is the one mistake that can't be undone later in the season.
 
 **Sources for the calendar:** [UEFA — 2026/27 Champions League dates & format](https://www.uefa.com/uefachampionsleague/news/02a6-20d57cfcd03e-407c22a7f465-1000--2026-27-champions-league-teams-dates-draws-format-final/) · [UEFA — league phase fixtures](https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/) · [Premier League — all 380 fixtures for 2026/27](https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-202627-premier-league-season) · [Wikipedia — 2026–27 Premier League](https://en.wikipedia.org/wiki/2026%E2%80%9327_Premier_League)
+
+
+---
+
+## Built (13 September 2026)
+
+| Phase | State |
+|---|---|
+| 1. Data foundation | Done - migrations 0006-0008, both seasons seeded, ingestion polls per active season |
+| 2. Matchday predict | Done - matchday-scoped view, per-match lock, deadline countdown, navigation, club colours |
+| 3. Leaderboards + reminder | Done - migrations 0009-0010, season + matchday tables with movement, weekly email |
+| 4. Competition picker | Done - `/start` binds a league to a season and start matchday |
+| 5. Differentiators | Deferred: streaks, badges, recap emails, Slack/Teams, recurring billing, white-label |
+
+### Decisions made during the build
+
+- **`leagues.start_matchday`** is enforced in three places: predictions are rejected outside the window, points are never written for it, and standings exclude it. A prediction outside the window stays **null**, not zero.
+- **Where a new league starts** (first fully-unplayed matchday) is a different rule from **where a returning member lands** (earliest matchday still open). Both are tested against the same season so the contrast is pinned.
+- **Ingestion never retroactively scores** a fixture it missed. The World Cup has one such case (GROUP_J_2, three unscored predictions, which would move a league winner); repairing it is an explicit decision, not a side effect of polling. Left as-is by choice.
+- **`matches` is now a compatibility view** over `fixtures` with `INSTEAD OF` triggers. Temporary - delete it when the World Cup read paths move.
+
+### Open before launch
+
+- Nobody has visually checked the predict, leaderboard or `/start` pages. Data layers are tested; the pages compile.
+- No live reminder email has been sent - only dry runs.
+- UCL knockout fixtures do not exist at the provider until the January draw. Ingestion will insert them automatically.

@@ -6,12 +6,15 @@ This file is the architectural contract for the Verdocast codebase. Claude Code 
 
 ## Product
 
-**Verdocast** is a B2B SaaS that lets companies run World Cup 2026 prediction leagues for their employees, with a consumer tournament pass and an editorial subscription riding the same backend.
+**Verdocast** is a football prediction league product: companies and groups run branded leagues, members predict scores, a leaderboard tracks them.
 
-- Primary customer: HR / People / Internal-Comms manager. They pay once for the tournament, share a join link, employees predict the 72 group-stage matches, a leaderboard tracks scores.
-- Tournament dates: 11 June – 19 July 2026.
+It began as a single World Cup 2026 tournament product and is now **multi-competition and season-shaped**. That shift is the single most important thing to understand about this codebase — see [`docs/season-launch-plan.md`](docs/season-launch-plan.md).
+
+- **Live competitions:** Premier League 2026/27 (38 gameweeks) and UEFA Champions League 2026/27 (8 league-phase matchdays, then knockout). The World Cup 2026 is complete and preserved as historical data.
+- **The shape that matters:** the World Cup was *predict 72 games once*. A league season is *predict ~10 games every week for 38 weeks*. Everything is built for the returning weekly user — default to the current matchday, per-matchday leaderboards, a weekly reminder.
+- **Mid-season entry is the normal state, not an edge case.** A league scores from its own `start_matchday`, not from matchday 1. A company buying in February gets a fair league starting in February.
+- Primary customer: HR / People / Internal-Comms manager. Consumer leagues are free to play; monetisation is B2B, premium and sponsorship.
 - Brand voice: confident, analytical, slightly editorial. Closer to The Athletic than to DraftKings. The name is *verdict* + *forecast*: decisive prediction.
-- The product evolves three pricing surfaces from one backend: B2B office leagues, a £4.99 consumer tournament pass, and a £5/month editorial subscription.
 
 ## Tech stack (locked for v1)
 
@@ -22,7 +25,7 @@ This file is the architectural contract for the Verdocast codebase. Claude Code 
 - **shadcn/ui** + Tailwind for components. Install components on demand via the shadcn CLI; don't manually write what shadcn provides.
 - **Zod** for runtime validation at every API boundary.
 - **PostHog** for product analytics, **Sentry** for error tracking.
-- **API-Football** (`api-football.com`) for live results during the tournament. Free tier for development, paid tier (~£30/mo) before tournament starts.
+- **API-Football** (`api-football.com`) for fixtures and live results. Paid Pro plan — flat cost regardless of how many competitions are added, which is why it was standardised on.
 
 ## Brand tokens
 
@@ -76,34 +79,51 @@ components/
   leaderboard.tsx
   ...
 jobs/
-  ingest-results.ts     # Polls API-Football, writes match results
-  score-predictions.ts  # Runs after a match finishes
+  ingest-results.ts            # Polls API-Football per ACTIVE SEASON
+  send-matchday-reminders.ts   # The weekly nudge
 data/
-  tournament-2026.json  # Static tournament data
+  tournament-2026.json  # World Cup source data; teams now live in the DB
+scripts/
+  db-push.mjs                  # Applies migrations (no Supabase CLI here)
+  seed-season.mjs              # Pulls a season's teams + fixtures
+  create-season-league.mjs     # Makes a league from the CLI
 supabase/
   migrations/           # SQL migrations (numbered, append-only)
-  seed.sql              # Tournament data seed
 types/
-  index.ts              # Shared TypeScript types
+  db.ts                 # Hand-maintained: no local Supabase to generate from
 ```
+
+Key season modules: `lib/season.ts` (pure matchday logic), `lib/matchday.ts` (predict view), `lib/league-standings.ts` (pure ranking + movement), `lib/reminders.ts` (who to email), `lib/competitions.ts` (what's joinable).
 
 ## Data model (canonical)
 
-See `supabase/migrations/0001_initial.sql` (from `schema.sql`). Tables:
+Migrations are numbered and append-only in `supabase/migrations/`, applied with `pnpm db:push`. The multi-competition model landed in 0006–0010.
 
-- **organizations** — a company that bought a license. Has one Stripe customer.
-- **licenses** — a Stripe purchase. Tier defines `max_members` cap. Has `expires_at` (= tournament end + 90 day grace).
-- **leagues** — an org can have multiple leagues. Each has a unique `join_code` like `MIGHTY-LIONS`.
-- **members** — employees, identified by email. Unique per league.
-- **matches** — the 104 tournament matches (group stage in v1; knockouts stored but predictions disabled).
-- **predictions** — one member's predicted score for one match. Unique (member, match). Editable until kickoff.
-- **scores** — derived, cached on the prediction row as `points_earned`.
+- **competitions** — a timeless competition (Premier League, UEFA Champions League, FIFA World Cup). Carries the provider's league id.
+- **seasons** — a concrete edition (`2026/27`). `status` of `active` is what the ingestion job and the competition picker read; nothing is hardcoded per competition.
+- **teams** — clubs and national sides. Rendered as **colour + name**; crests are trademarked, so `crest_url` is stored but not displayed.
+- **fixtures** — one row per fixture. `matchday` is the gameweek (PL 1–38) or league-phase matchday (UCL 1–8), and is null for knockout ties and every World Cup fixture. `stage` is text, not an enum, because one column carries league seasons, the Swiss league phase and knockout rounds alike.
+- **organizations / licenses / leagues / members** — unchanged, except `leagues.season_id` and `leagues.start_matchday`.
+- **predictions** — one member's predicted score for one fixture. **The column is still named `match_id`** and points at `fixtures(id)`; renaming it would touch every call site at once, so it rides along when those move.
+- **matchday_points** — view, per member per matchday. Feeds both leaderboards.
+- **matchday_reminders** — one row per reminder sent. Its unique constraint is the double-send guard.
+
+> **`matches` is a VIEW, not a table.** Migration 0007 moved the World Cup into `fixtures` and left `matches` behind as a compatibility view over the World Cup season, writable through `INSTEAD OF` triggers. It is a temporary shim for the World Cup read paths and the tests that write to it. **Build nothing new on it** — new code reads `fixtures`. Fixture ids were preserved from match ids, so the two are interchangeable for World Cup rows.
 
 ### Critical invariants
-- A `member` can only predict matches before `kickoff_utc`.
-- `points_earned` is computed once and only once, when match `status` transitions to `finished`. Never recompute on read.
+- A `member` can only predict fixtures before `kickoff_utc`. Enforced in a Postgres trigger AND in application code.
+- A prediction is only valid for a fixture in the league's own season, at or after the league's `start_matchday`. Checked server-side — the client chooses the fixture id and cannot be trusted with it.
+- **Points are only earned from `start_matchday` onward.** Earlier fixtures are visible, read-only and score nothing. Enforced where points are written (`lib/results.ts`) and again when standings are built.
+- A prediction outside the league's window is left **null**, not zero: "outside your window" is a different fact from "you scored nothing".
+- `points_earned` is computed once, when a fixture transitions to `finished`. Never recompute on read. Ingestion will *not* retroactively score a fixture it missed — that repair is explicit, never a side effect of polling.
 - A `league` cannot have more than its license's `max_members` members. Enforce on insert.
-- A `prediction` cannot be created/updated after the match's `kickoff_utc`. Enforce in a Postgres trigger AND in application code.
+
+## Jobs
+
+- **`jobs/ingest-results.ts`** — polls API-Football per **active season** (never a hardcoded competition), matching fixtures by `provider_fixture_id`. Inserts fixtures it doesn't have yet, which is how the UCL knockout bracket arrives after the January draw. Cron: every 5 minutes.
+- **`jobs/send-matchday-reminders.ts`** — one reminder per member per matchday, in the 24h before it locks. Cron: hourly. Supports `?dry=1`.
+- **`scripts/seed-season.mjs`** — pulls a season's teams and fixtures from the provider. Idempotent.
+- **`lib/provider-football.ts`** — shared round/status/score mapping, so the seeder and the ingest job cannot drift. Note the trap it guards: the provider calls the August *qualifying* play-off `"Play-offs"` and February's *knockout* play-off `"Knockout Round Play-offs"`.
 
 ## Scoring rules (default)
 
@@ -142,7 +162,8 @@ Stored as JSONB in `leagues.scoring_rules` so Enterprise customers can be custom
 
 ## Testing
 
-- **Vitest** for unit tests. `lib/scoring.ts` and `lib/tournament.ts` MUST have 100% test coverage.
+- **Vitest** for unit tests. `lib/scoring.ts` and `lib/tournament.ts` MUST have 100% test coverage. The same bar applies to the pure season modules — `lib/season.ts`, `lib/league-standings.ts`, `lib/reminders.ts` — where a bug is a member shown points they never earned, or emailed at the wrong time.
+- DB-backed tests hit a **real** database via the service role. They create their own throwaway competition/season/fixtures rather than touching the seeded PL/UCL data, and must tear down in an order that respects `ON DELETE RESTRICT` on `fixtures.home_team_id` — competitions (cascading to fixtures) before teams.
 - **Playwright** for one end-to-end happy path: admin buys license → creates league → invites member → member predicts → match scored → leaderboard updates.
 - Skip "perfect" test coverage elsewhere. Pre-launch this is a speed game.
 
@@ -153,21 +174,19 @@ Stored as JSONB in `leagues.scoring_rules` so Enterprise customers can be custom
 - Leaderboard polling: every 30s during a live match, every 5min otherwise.
 - Postgres queries on the leaderboard view: < 50ms p99 for a league of 250 members.
 
-## What ships in v1 (MVP cut line)
+## Current state
 
-After PR 8 you have a working demo. After PR 10 you have a sellable product. Anything past PR 10 is post-launch.
+The mid-season launch MVP is complete: multi-competition data model, matchday predict view, season + matchday leaderboards, matchday reminder email, competition picker. Target is **Champions League matchday 2, 13 October 2026**.
 
-## What is explicitly v2
+## What is explicitly deferred
 
-- Knockout-stage predictions (R32 onward; needs draw logic)
-- Custom scoring rule editor UI
-- League branding (logo upload, custom colour) UI (DB columns exist; UI is post-launch)
-- Slack / Microsoft Teams integration
-- Native mobile apps
-- Multi-tournament support (this is a single-tournament product)
-- Top-scorer / yellow-card tiebreakers
-- Group-of-Death / "wildcard" predictions
+- Streaks, badges, and the post-matchday recap email
+- Custom scoring rule editor UI — note `matchday_points.exact_scores` and the `leaderboard` view both hardcode 5 points for an exact score, so they need fixing together when it ships
+- League branding UI (DB columns exist)
+- Slack / Microsoft Teams integration — the clearest B2B differentiator
+- Recurring billing (Stripe subscriptions, season-anchored). Launch is free to play
+- White-label, native apps, multi-sport
 
 ## When in doubt
 
-Default to: **whatever ships fastest while not boxing us in for v2.** This is a 17-day sprint, not a 6-month project.
+Default to: **whatever serves the returning weekly user.** This is a season-long product now — something visited 38 times, not filled in once. Ask whether a change makes the weekly loop better; that is the thing retention rests on.
